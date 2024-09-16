@@ -62,17 +62,19 @@ const WatchVideos = () => {
       buttonText: "Auto Beginner",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
     {
       videoUrl: "https://www.youtube.com/embed/video2",
       title: "Video Title 2",
       Vediotitle: "Video Title 2 with a background image",
-    
+
       buttonText: "Beginner",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
     {
       videoUrl: "https://www.youtube.com/embed/video2",
@@ -81,40 +83,43 @@ const WatchVideos = () => {
       buttonText: "Premium",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
     {
       videoUrl: "https://www.youtube.com/embed/video2",
       title: "Video Title 2",
       Vediotitle: "Video Title 2 with a background image",
-   //   description: "Description for Video 2",
-   buttonText: "Auto Beginner",
+      //   description: "Description for Video 2",
+      buttonText: "Auto Beginner",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
     {
       videoUrl: "https://www.youtube.com/embed/video2",
       title: "Video Title 2",
       Vediotitle: "Video Title 2 with a background image",
-     // description: "Description for Video 2",
-     buttonText: "Premium",
+      // description: "Description for Video 2",
+      buttonText: "Premium",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
     {
       videoUrl: "https://www.youtube.com/embed/video2",
       title: "Video Title 2",
       Vediotitle: "Video Title 2 with a background image",
-    //  description: "Description for Video 2",
+      //  description: "Description for Video 2",
       buttonText: "Beginner",
       videoDuration: "10:30",
       backgroundImage: "image2.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum."
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel turpis a odio fringilla egestas. Integer non justo sit amet nunc varius fermentum.",
     },
   ];
-  
 
   return (
     <Container>
@@ -136,9 +141,9 @@ const WatchVideos = () => {
               </IconButton>
             </Link>
             <Link to="/watch-videos">
-            <IconButton color="primary">
-              <DensitySmallIcon />
-            </IconButton>
+              <IconButton color="primary">
+                <DensitySmallIcon />
+              </IconButton>
             </Link>
           </Box>
         </Grid>
@@ -340,19 +345,19 @@ const WatchVideos = () => {
           )}
         </Grid>
         <Grid container spacing={4}>
-        {videoData.map((video, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <YoutubeCard
-              videoUrl={video.videoUrl}
-              title={video.title}
-              Vediotitle={video.Vediotitle}
-              description={video.description}
-              buttonText={video.buttonText}
-              videoDuration={video.videoDuration}
-              backgroundImage={video.backgroundImage}
-            />
-          </Grid>
-        ))}
+          {videoData.map((video, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <YoutubeCard
+                videoUrl={video.videoUrl}
+                title={video.title}
+                Vediotitle={video.Vediotitle}
+                description={video.description}
+                buttonText={video.buttonText}
+                videoDuration={video.videoDuration}
+                backgroundImage={video.backgroundImage}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Container>

@@ -20,7 +20,7 @@ const YoutubeCard = ({
         flexDirection: "column",
         justifyContent: "space-between",
         boxShadow: 3,
-       
+
         position: "relative",
         overflow: "hidden",
         // backgroundImage: `url(${backgroundImage})`,
@@ -57,10 +57,10 @@ const YoutubeCard = ({
             padding: "8px",
             borderBottomRightRadius: "4px",
             zIndex: 1,
-            maxWidth: "calc(100% - 16px)", 
+            maxWidth: "calc(100% - 16px)",
           }}
         >
-          <Typography component="div" noWrap style={{fontSize:"10px"}}>
+          <Typography component="div" noWrap style={{ fontSize: "10px" }}>
             {title}
           </Typography>
         </Box>
@@ -118,7 +118,7 @@ const YoutubeCard = ({
             WebkitLineClamp: 3,
             textOverflow: "ellipsis",
             whiteSpace: "normal",
-            marginTop:'4px'
+            marginTop: "4px",
           }}
         >
           {description}
