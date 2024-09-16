@@ -88,11 +88,9 @@ const Progress = () => {
           </Paper>
         </Grid>
 
-        {/* Daily Goals Section */}
         <Grid item xs={12} md={4}>
           <Paper elevation={3} style={{ padding: "16px", height: "100%" }}>
             <Typography variant="h6">Daily Goals</Typography>
-            {/* Placeholder for future Daily Goals */}
           </Paper>
         </Grid>
       </Grid>
