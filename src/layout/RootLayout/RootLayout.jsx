@@ -31,7 +31,7 @@ const RootLayout = () => {
       <StyledRoot>
         <TopBar onOpenNav={() => setOpen(true)} />
         <Nav openNav={open} onCloseNav={() => setOpen(false)} />
-        <Main>
+        <Main style={{ margin: 50 }}>
           <Outlet />
         </Main>
       </StyledRoot>

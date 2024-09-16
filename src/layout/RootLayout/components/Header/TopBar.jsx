@@ -3,25 +3,10 @@ import {
   Toolbar,
   styled,
   Typography,
-  Stack,
   Avatar,
   Box,
-  Menu,
-  MenuItem,
-  Container,
-  Divider,
-  List,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
-  Button,
   IconButton,
-  TextField,
-  InputAdornment,
-  OutlinedInput,
-  InputLabel,
-  FormControl,
-  Badge,
+  useTheme,
 } from "@mui/material";
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
@@ -29,6 +14,8 @@ import { useLocation, useNavigate } from "react-router";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { Link } from "react-router-dom";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchInput from "./SearchInput";
 //   import { logOut } from "../../../../../store/actions/adminActions";
 const NAV_WIDTH = 280;
 
@@ -38,9 +25,10 @@ const HEADER_DESKTOP = 62;
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   // ...bgBlur({color: theme.palette.primary.main}),
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.typography.allVariants.color,
   [theme.breakpoints.up("lg")]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
+    padding: "19px 0",
   },
 }));
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -56,6 +44,7 @@ const TopBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [openNotifications, setOpenNotifications] = useState(false);
@@ -82,13 +71,7 @@ const TopBar = () => {
           <Typography
             sx={{ color: "#000000", fontWeight: 800, fontSize: "1.5rem" }}
           >
-            {location.pathname == "/admin/dashboard"
-              ? "Dashboard"
-              : location.pathname == "/admin/leaderboard"
-              ? "LeaderBoard"
-              : location.pathname == "/admin/order"
-              ? "Orders"
-              : "Dashboard"}
+            <SearchInput />
           </Typography>
           <Box>
             {/* <FormControl sx={{ m: 1, width:'400px'}} variant="outlined">
@@ -135,19 +118,22 @@ const TopBar = () => {
               </IconButton>
             </Box>
           </Stack> */}
-          <Box>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <IconButton component={Link} to="/notifications">
-              <NotificationsActiveIcon
-                sx={{ color: "#e2e2e2", fontSize: "30px" }}
-              />
+              <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+                <PersonIcon sx={{ color: "#e2e2e2" }} />
+              </Avatar>
             </IconButton>
-            <Button
-              variant="contained"
-              color="secondary"
-              // onClick={() => dispatch(logOut())}
+            <Typography
+              sx={{
+                fontWeight: 700,
+                color: theme.palette.primary.main,
+                fontFamily: "Poppins",
+                fontSize: "22px",
+              }}
             >
-              Log Out
-            </Button>
+              My Profile
+            </Typography>
           </Box>
         </StyledToolbar>
       </StyledRoot>

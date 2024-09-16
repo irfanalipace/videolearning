@@ -1,7 +1,11 @@
-import React from "react";
+import TrendingSeries from "./TrendingSeries";
 
 const WatchSeries = () => {
-  return <div>WatchSeries</div>;
+  return (
+    <div >
+      <TrendingSeries />
+    </div>
+  );
 };
 
 export default WatchSeries;
