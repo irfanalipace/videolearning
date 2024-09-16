@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { styled, alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Button,
@@ -13,28 +13,21 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+
 import SettingsIcon from "@mui/icons-material/Settings";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import GolfCourseIcon from "@mui/icons-material/GolfCourse";
 import { makeStyles } from "@mui/styles";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import clsx from "clsx";
 import useResponsive from "../../../../components/hooks/useResponsive";
 
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import LegendToggleIcon from "@mui/icons-material/LegendToggle";
+
 const NAV_WIDTH = 280;
-const StyledAccount = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(2, 2.5),
-  borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: alpha(theme.palette.grey[500], 0.12),
-}));
 const useStyles = makeStyles((theme) => ({
   selected: {
-    background: "#fff",
-    borderRadius: 10,
+    background: "#FFFFFF59",
   },
   icon: {
     marginLeft: "auto",
@@ -47,25 +40,25 @@ export default function Nav({ openNav, onCloseNav }) {
     {
       id: 1,
       title: "Watch Videos",
-      icon: <DashboardIcon />,
+      icon: <PlayCircleIcon />,
       to: "/watch-videos",
     },
     {
       id: 11,
       title: "Watch Series",
-      icon: <ManageAccountsIcon />,
+      icon: <SmartDisplayIcon />,
       to: "/watch-series",
     },
     {
       id: 22,
       title: "Watch Library",
-      icon: <GolfCourseIcon />,
+      icon: <LibraryBooksIcon />,
       to: "/watch-library",
     },
     {
       id: 23,
       title: "Progress",
-      icon: <ChatBubbleIcon />,
+      icon: <LegendToggleIcon />,
       to: "/progress",
     },
     {
@@ -74,12 +67,6 @@ export default function Nav({ openNav, onCloseNav }) {
       icon: <SettingsIcon />,
       // to: "/admin/new-invoices",
     },
-    {
-      id: 3,
-      title: "Signout",
-      icon: <ExitToAppIcon />,
-      // to: "/admin/approved-by-admin",
-    },
   ];
   const location = useLocation();
   const [dOpen, setDopen] = React.useState(false);
@@ -87,6 +74,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const isDesktop = useResponsive("up", "lg");
   const classes = useStyles();
   const theme = useTheme();
+  const { palette } = theme;
   React.useEffect(() => {
     const matchingItem = ListData.find((item) => item.to === location.pathname);
     if (matchingItem) {
@@ -114,24 +102,27 @@ export default function Nav({ openNav, onCloseNav }) {
         },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
+      <Box
+        sx={{
+          py: "12px",
+          display: "inline-flex",
+          bgcolor: palette.typography.allVariants.color,
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Box sx={{ display: "flex" }}>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ mt: 1.5, fontSize: "1.5rem", fontWeight: "bold" }}
-          >
-            Pocker Game
-          </Typography>
+          <img src={"/Logo.jpg"} />
         </Box>
       </Box>
-      <Box sx={{ p: 2 }}>
+      <Box>
         <List component="nav">
           {ListData.map((val) => {
             return (
               <>
                 <ListItem
-                  key={val}
+                  key={val.id}
                   disablePadding
                   className={clsx(classes.root, {
                     [classes.selected]: selectedIndex === val.id,
@@ -144,6 +135,8 @@ export default function Nav({ openNav, onCloseNav }) {
                     selected={selectedIndex === val.id}
                     onClick={(event) => handleListItemClick(event, val.id)}
                     sx={{
+                      color: palette.typography.allVariants,
+                      p: 2,
                       "&:hover": {
                         borderRadius: "10px",
                       },
@@ -151,16 +144,19 @@ export default function Nav({ openNav, onCloseNav }) {
                   >
                     <ListItemIcon
                       sx={{
-                        color: selectedIndex === val.id ? "#000" : "#fff",
+                        ml: 2,
+                        color: palette.typography.allVariants,
                       }}
                     >
                       {val.icon}
                     </ListItemIcon>
                     <ListItemText
-                      primary={val.title}
                       sx={{
-                        color: selectedIndex === val.id ? "#000" : "#fff",
+                        fontFamily: "Poppins",
+                        fontWeight: selectedIndex === val.id ? 700 : 500,
+                        fontSize: "16px",
                       }}
+                      primary={val.title}
                     />
                   </ListItemButton>
                 </ListItem>
