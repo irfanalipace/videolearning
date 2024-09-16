@@ -15,7 +15,7 @@ const YoutubeCard = ({
     <Card
       sx={{
         width: "100%",
-        height: "390px",
+        height: "394px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -118,6 +118,7 @@ const YoutubeCard = ({
             WebkitLineClamp: 3,
             textOverflow: "ellipsis",
             whiteSpace: "normal",
+            marginTop:'4px'
           }}
         >
           {description}

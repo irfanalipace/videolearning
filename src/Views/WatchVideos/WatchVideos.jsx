@@ -135,9 +135,11 @@ const WatchVideos = () => {
                 <DashboardIcon />
               </IconButton>
             </Link>
+            <Link to="/watch-videos">
             <IconButton color="primary">
               <DensitySmallIcon />
             </IconButton>
+            </Link>
           </Box>
         </Grid>
 
