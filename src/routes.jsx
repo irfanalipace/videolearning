@@ -7,6 +7,7 @@ import WatchLibrary from "./Views/WatchLibrary/WatchLibrary";
 import Library from "./Views/Library/Library";
 import Settings from "./Views/Settings/Settings";
 import Progress from "./Views/Progress/Progress";
+import Bignner from "./Views/WatchVideos/Bignner";
 
 export default function Router() {
   let element = useRoutes([
@@ -19,6 +20,7 @@ export default function Router() {
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },
+        { path: "bignners", element: <Bignner /> },
         { path: "settings", element: <Settings /> },
       ],
     },

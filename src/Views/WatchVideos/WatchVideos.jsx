@@ -1,19 +1,43 @@
 import React, { useState } from "react";
-import { Box, Typography, Container, Grid, IconButton, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
-import DensitySmallIcon from '@mui/icons-material/DensitySmall';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { IoFilterSharp } from "react-icons/io5"; // Import your filter icon
-
+import {
+  Box,
+  Typography,
+  Container,
+  Grid,
+  IconButton,
+  FormControl,
+  ListItemText,
+  Checkbox,
+  ListItem,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+} from "@mui/material";
+import DensitySmallIcon from "@mui/icons-material/DensitySmall";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { IoFilterSharp } from "react-icons/io5";
+import YoutubeCard from "./YoutubeCard";
+import image from "../../assets/picture/image1.png";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const WatchVideos = () => {
   const [showFilters, setShowFilters] = useState(false);
-
-  // Dropdown state
-  const [sortBy, setSortBy] = useState("");
-  const [level, setLevel] = useState("");
-  const [country, setCountry] = useState("");
-  const [guide, setGuide] = useState("");
-  const [topic, setTopic] = useState("");
-  const [sound, setSound] = useState("");
+  const navigate = useNavigate();
+  const [level, setLevel] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
+  const [guide, setGuide] = useState([]);
+  const [topic, setTopic] = useState([]);
+  const [sound, setSound] = useState([]);
+  const [sortBy, setSortBy] = useState([]);
+  const handleToggle = (value, setter, selectedItems) => {
+    setter(
+      selectedItems.includes(value)
+        ? selectedItems.filter((item) => item !== value)
+        : [...selectedItems, value]
+    );
+  };
 
   const handleApplyFilters = () => {
     setShowFilters(true);
@@ -29,25 +53,94 @@ const WatchVideos = () => {
     setSound("");
   };
 
+  const videoData = [
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+    {
+      videoUrl: "https://www.youtube.com/embed/video2",
+      title: "Video Title 2",
+      Vediotitle: "Video Title 2 with a background image",
+      description: "Description for Video 2",
+      buttonText: "Watch Now",
+      videoDuration: "10:30",
+      backgroundImage: "image2.jpg",
+    },
+  ];
+
   return (
     <Container>
-      <Grid container alignItems="center" justifyContent="space-between" sx={{ padding: "7px" }}>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ padding: "7px" }}
+      >
         <Grid item xs={6}>
           <Typography variant="h6">Watch Video</Typography>
         </Grid>
 
         <Grid item xs={6}>
           <Box display="flex" justifyContent="flex-end">
-            <IconButton color="primary">
-              <DashboardIcon />
-            </IconButton>
+            <Link to="/bignners">
+              <IconButton color="primary">
+                <DashboardIcon />
+              </IconButton>
+            </Link>
             <IconButton color="primary">
               <DensitySmallIcon />
             </IconButton>
           </Box>
         </Grid>
 
-        <Grid container spacing={4} alignItems="center" sx={{marginTop:"0px"}}>
+        <Grid
+          container
+          spacing={4}
+          alignItems="center"
+          sx={{ marginTop: "0px", marginBottom: "12px" }}
+        >
           {showFilters ? (
             <Grid item xs={12}>
               <Box
@@ -57,14 +150,13 @@ const WatchVideos = () => {
                 gap={2}
                 flexWrap="nowrap"
                 sx={{
-                  overflowX: "auto", 
+                  overflowX: "auto",
                   "& > *": {
-                    flexBasis: "150px", 
+                    flexBasis: "150px",
                     flexGrow: 1,
                   },
                 }}
               >
-             
                 <FormControl fullWidth>
                   <InputLabel id="sort-by-label">Sort By</InputLabel>
                   <Select
@@ -73,62 +165,119 @@ const WatchVideos = () => {
                     label="Sort By"
                     onChange={(e) => setSortBy(e.target.value)}
                   >
-                    <MenuItem value="date">Date</MenuItem>
-                    <MenuItem value="popularity">Popularity</MenuItem>
+                    <MenuItem value="roundam"> Random</MenuItem>
+                    <MenuItem>New </MenuItem>
+                    <MenuItem>Old </MenuItem>
+                    <MenuItem>Easy </MenuItem>
+                    <MenuItem>Hard </MenuItem>
+                    <MenuItem>Short </MenuItem>
+                    <MenuItem>Long </MenuItem>
                   </Select>
                 </FormControl>
-
                 <FormControl fullWidth>
                   <InputLabel id="level-label">Levels</InputLabel>
                   <Select
                     labelId="level-label"
+                    multiple
                     value={level}
-                    label="Levels"
                     onChange={(e) => setLevel(e.target.value)}
+                    renderValue={(selected) => selected.join(", ")}
                   >
-                    <MenuItem value="beginner">Beginner</MenuItem>
-                    <MenuItem value="intermediate">Intermediate</MenuItem>
-                    <MenuItem value="advanced">Advanced</MenuItem>
+                    <MenuItem value="Superbeginner">
+                      <Checkbox checked={level.includes("Superbeginner")} />
+                      <ListItemText primary="Superbeginner" />
+                    </MenuItem>
+                    <MenuItem value="Beginner">
+                      <Checkbox checked={level.includes("Beginner")} />
+                      <ListItemText primary="Beginner" />
+                    </MenuItem>
+                    <MenuItem value="Intermediate">
+                      <Checkbox checked={level.includes("Intermediate")} />
+                      <ListItemText primary="Intermediate" />
+                    </MenuItem>
+                    <MenuItem value="Advanced">
+                      <Checkbox checked={level.includes("Advanced")} />
+                      <ListItemText primary="Advanced" />
+                    </MenuItem>
                   </Select>
                 </FormControl>
 
+                {/* Countries */}
                 <FormControl fullWidth>
                   <InputLabel id="country-label">Countries</InputLabel>
                   <Select
                     labelId="country-label"
-                    value={country}
-                    label="Countries"
-                    onChange={(e) => setCountry(e.target.value)}
+                    multiple
+                    value={selectedCountries}
+                    onChange={(e) => setSelectedCountries(e.target.value)}
+                    renderValue={(selected) => selected.join(", ")}
                   >
-                    <MenuItem value="USA">USA</MenuItem>
-                    <MenuItem value="Canada">Canada</MenuItem>
-                    <MenuItem value="UK">UK</MenuItem>
+                    <MenuItem value="Argentina">
+                      <Checkbox
+                        checked={selectedCountries.includes("Argentina")}
+                      />
+                      <ListItemText primary="Argentina" />
+                    </MenuItem>
+                    <MenuItem value="Bolivia">
+                      <Checkbox
+                        checked={selectedCountries.includes("Bolivia")}
+                      />
+                      <ListItemText primary="Bolivia" />
+                    </MenuItem>
+                    <MenuItem value="Chile">
+                      <Checkbox checked={selectedCountries.includes("Chile")} />
+                      <ListItemText primary="Chile" />
+                    </MenuItem>
                   </Select>
                 </FormControl>
 
+                {/* Guides */}
                 <FormControl fullWidth>
                   <InputLabel id="guide-label">Guides</InputLabel>
                   <Select
                     labelId="guide-label"
+                    multiple
                     value={guide}
-                    label="Guides"
                     onChange={(e) => setGuide(e.target.value)}
+                    renderValue={(selected) => selected.join(", ")}
                   >
-                    <MenuItem value="guide1">Guide 1</MenuItem>
-                    <MenuItem value="guide2">Guide 2</MenuItem>
+                    <MenuItem value="Argentina">
+                      <Checkbox checked={guide.includes("Argentina")} />
+                      <ListItemText primary="Argentina" />
+                    </MenuItem>
+                    <MenuItem value="Bolivia">
+                      <Checkbox checked={guide.includes("Bolivia")} />
+                      <ListItemText primary="Bolivia" />
+                    </MenuItem>
+                    <MenuItem value="Chile">
+                      <Checkbox checked={guide.includes("Chile")} />
+                      <ListItemText primary="Chile" />
+                    </MenuItem>
                   </Select>
                 </FormControl>
 
+                {/* Topics */}
                 <FormControl fullWidth>
                   <InputLabel id="topic-label">Topics</InputLabel>
                   <Select
                     labelId="topic-label"
+                    multiple
                     value={topic}
-                    label="Topics"
                     onChange={(e) => setTopic(e.target.value)}
+                    renderValue={(selected) => selected.join(", ")}
                   >
-                    <MenuItem value="topic1">Topic 1</MenuItem>
-                    <MenuItem value="topic2">Topic 2</MenuItem>
+                    <MenuItem value="Argentina">
+                      <Checkbox checked={topic.includes("Argentina")} />
+                      <ListItemText primary="Argentina" />
+                    </MenuItem>
+                    <MenuItem value="Bolivia">
+                      <Checkbox checked={topic.includes("Bolivia")} />
+                      <ListItemText primary="Bolivia" />
+                    </MenuItem>
+                    <MenuItem value="Chile">
+                      <Checkbox checked={topic.includes("Chile")} />
+                      <ListItemText primary="Chile" />
+                    </MenuItem>
                   </Select>
                 </FormControl>
 
@@ -137,11 +286,16 @@ const WatchVideos = () => {
                   <Select
                     labelId="sound-label"
                     value={sound}
-                    label="Sound"
                     onChange={(e) => setSound(e.target.value)}
                   >
-                    <MenuItem value="on">On</MenuItem>
-                    <MenuItem value="off">Off</MenuItem>
+                    <MenuItem value="on">
+                      <Checkbox checked={sound.includes("on")} />
+                      <ListItemText primary="On" />
+                    </MenuItem>
+                    <MenuItem value="off">
+                      <Checkbox checked={sound.includes("off")} />
+                      <ListItemText primary="Off" />
+                    </MenuItem>
                   </Select>
                 </FormControl>
 
@@ -159,7 +313,7 @@ const WatchVideos = () => {
                   onClick={handleApplyFilters}
                   sx={{ padding: "14px" }}
                 >
-                  <IoFilterSharp style={{ marginRight: "0.4rem" }} /> Apply
+                  <FilterAltIcon style={{ marginRight: "0.4rem" }} /> Apply
                 </Button>
               </Box>
             </Grid>
@@ -171,11 +325,26 @@ const WatchVideos = () => {
                   sx={{ fontWeight: 600 }}
                   onClick={handleApplyFilters}
                 >
-                  <IoFilterSharp style={{ marginRight: "0.4rem" }} /> Apply
+                  <FilterAltIcon style={{ marginRight: "0.4rem" }} /> Apply
                 </Button>
               </Box>
             </Grid>
           )}
+        </Grid>
+        <Grid container spacing={4}>
+          {videoData.map((video, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <YoutubeCard
+                videoUrl="https://www.youtube.com/embed/example"
+                title="Sample Video Title"
+                Vediotitle="Sample Video Title a video with a background image on a card"
+                description="To display a video with a background image on a card, you can use the backgroundImage CSS property for the card container and ensure the video iframe is positioned"
+                buttonText="Watch Now"
+                videoDuration="12:14"
+                backgroundImage={image}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Container>
