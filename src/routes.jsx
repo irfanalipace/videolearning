@@ -7,6 +7,8 @@ import WatchLibrary from "./Views/WatchLibrary/WatchLibrary";
 import Library from "./Views/Library/Library";
 import Settings from "./Views/Settings/Settings";
 import Progress from "./Views/Progress/Progress";
+import WatchSeriesTwo from "./Views/WatchSeriesTwo/WatchSeries";
+import WatchSeriesSecondScreen from "./Views/WatchSeriesSecondScreen";
 
 export default function Router() {
   let element = useRoutes([
@@ -16,6 +18,11 @@ export default function Router() {
       children: [
         { path: "watch-videos", element: <WatchVideos /> },
         { path: "watch-series", element: <WatchSeries /> },
+        { path: "watch-series-two", element: <WatchSeriesTwo /> },
+        {
+          path: "watch-series-phase-two",
+          element: <WatchSeriesSecondScreen />,
+        },
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },
