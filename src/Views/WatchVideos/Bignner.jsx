@@ -24,8 +24,8 @@ const Bignner = () => {
       videoUrl: "https://www.youtube.com/embed/video1",
       title: "Beginner Video",
       Vediotitle: "Beginner Video with background",
-      description: "Beginner level video description",
-      buttonText: "Watch Now",
+      description: "Advanced level video description Advanced level video description Advanced level video description",
+      buttonText: "Beginner",
       videoDuration: "10:30",
       backgroundImage: "image1.jpg",
       level: "Beginner",
@@ -34,8 +34,8 @@ const Bignner = () => {
       videoUrl: "https://www.youtube.com/embed/video2",
       title: "Advanced Video",
       Vediotitle: "Advanced Video with background",
-      description: "Advanced level video description",
-      buttonText: "Watch Now",
+      description: "Advanced level video description Advanced level video description Advanced level video description",
+      buttonText: "Advance",
       videoDuration: "15:45",
       backgroundImage: "image2.jpg",
       level: "Advanced",
@@ -44,8 +44,8 @@ const Bignner = () => {
       videoUrl: "https://www.youtube.com/embed/video3",
       title: "Early Intermediate Video",
       Vediotitle: "Early Intermediate Video with background",
-      description: "Early Intermediate level video description",
-      buttonText: "Watch Now",
+      description: "Advanced level video description Advanced level video description Advanced level video description",
+      buttonText: " Early Beginner",
       videoDuration: "12:14",
       backgroundImage: "image3.jpg",
       level: "Early Intermediate",
@@ -121,71 +121,21 @@ const Bignner = () => {
                 },
               }}
             >
-              {/* Buttons for Levels */}
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#E3E3E3",
-                  color: "#000",
-                  padding: "10px",
-                  fontSize: "11px",
-                }}
-                onClick={() => handleSelectLevel("Absolute Beginner")}
-              >
-                Absolute Beginner
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#E3E3E3",
-                  color: "#000",
-                  padding: "10px",
-                  fontSize: "11px",
-                }}
-                onClick={() => handleSelectLevel("Beginner")}
-              >
-                Beginner
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#E3E3E3",
-                  color: "#000",
-                  padding: "10px",
-                  fontSize: "11px",
-                }}
-                onClick={() => handleSelectLevel("Early Intermediate")}
-              >
-                Early Intermediate
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#E3E3E3",
-                  color: "#000",
-                  padding: "10px",
-                  fontSize: "11px",
-                }}
-                onClick={() => handleSelectLevel("High Intermediate")}
-              >
-                High Intermediate
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#E3E3E3",
-                  color: "#000",
-                  padding: "10px",
-                  fontSize: "11px",
-                }}
-                onClick={() => handleSelectLevel("Advanced")}
-              >
-                Advanced
-              </Button>
+              {["Absolute Beginner", "Beginner", "Early Intermediate", "High Intermediate", "Advanced"].map((level) => (
+                <Button
+                  key={level}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: selectedLevel === level ? "#0294D3" : "#E3E3E3",
+                    color: selectedLevel === level ? "#FFF" : "#000",
+                    padding: "10px",
+                    fontSize: "11px",
+                  }}
+                  onClick={() => handleSelectLevel(level)}
+                >
+                  {level}
+                </Button>
+              ))}
 
               <Button
                 variant="contained"
@@ -198,7 +148,7 @@ const Bignner = () => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {filteredVideos.map((video, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <YoutubeCard
