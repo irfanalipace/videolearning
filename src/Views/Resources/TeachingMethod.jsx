@@ -16,12 +16,9 @@ const UnderlinedTypography = styled(Typography)(({ theme }) => ({
 const TeachingMethod = () => {
   return (
     <Container maxWidth="lg">
-    
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <UnderlinedTypography>
-          Teaching Methods
-          </UnderlinedTypography>
+          <UnderlinedTypography>Teaching Methods</UnderlinedTypography>
 
           <Typography variant="body1">
             Lorem ipsum dolor sit amet consectetur. Blandit orci ullacorper ac
@@ -46,11 +43,19 @@ const TeachingMethod = () => {
           <StyledImage src={aboutimage} alt="About Us Image" />
         </Grid>
 
-
-        <Button sx={{background:"#000000", color:"white", padding:'5px', margin:"20px", width:"150px", height:"50px"}}>Contact Us</Button>
+        <Button
+          sx={{
+            background: "#000000",
+            color: "white",
+            padding: "5px",
+            margin: "20px",
+            width: "150px",
+            height: "50px",
+          }}
+        >
+          Contact Us
+        </Button>
       </Grid>
-
-     
     </Container>
   );
 };
