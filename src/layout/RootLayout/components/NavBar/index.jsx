@@ -104,7 +104,7 @@ export default function Nav({ openNav, onCloseNav }) {
     >
       <Box
         sx={{
-          py: "12px",
+          py: "3px",
           display: "inline-flex",
           bgcolor: palette.typography.allVariants.color,
           width: "100%",

@@ -28,7 +28,7 @@ const StyledRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.typography.allVariants.color,
   [theme.breakpoints.up("lg")]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
-    padding: "19px 0",
+    padding: "10px 0",
   },
 }));
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({

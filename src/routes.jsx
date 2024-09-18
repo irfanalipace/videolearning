@@ -11,6 +11,8 @@ import Bignner from "./Views/WatchVideos/Bignner";
 import NoVideo from "./Views/WatchLibrary/NoVideo";
 import VideoList from "./Views/WatchLibrary/VideoList";
 import MySeriesList from "./Views/WatchLibrary/MySeriesList";
+import WatchSeriesTwo from "./Views/WatchSeriesTwo/WatchSeries";
+import WatchSeriesSecondScreen from "./Views/WatchSeriesSecondScreen";
 
 export default function Router() {
   let element = useRoutes([
@@ -23,6 +25,11 @@ export default function Router() {
         { path: "no-vedio", element: <NoVideo /> },
         { path: "vedio-list", element: <VideoList /> },
         { path: "series-list", element: <MySeriesList /> },
+        { path: "watch-series-two", element: <WatchSeriesTwo /> },
+        {
+          path: "watch-series-phase-two",
+          element: <WatchSeriesSecondScreen />,
+        },
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },

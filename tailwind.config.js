@@ -10,6 +10,13 @@ export default {
         secondary: "#64748B",
         searchField: "#F1F5F9",
         white: "#FFFFFF",
+        transparentCooking: "#9F9F9F80",
+        selectBg: "#D9D9D999",
+        recent: "#DADADA99",
+        recentBorder: "#AEAEAE",
+        paginationButtonBorder: "#737579",
+        recommendationBorder:"#82828233",
+        recommendedVideo:"#E2E2E2"
       },
     },
     plugins: [],
