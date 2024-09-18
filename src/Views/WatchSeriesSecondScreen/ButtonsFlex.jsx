@@ -1,3 +1,7 @@
+import { IoMdEye } from "react-icons/io";
+import { HiDocumentText } from "react-icons/hi";
+import { FiDownload } from "react-icons/fi";
+
 const ButtonsFlex = () => {
   return (
     <div className="flex flex-col gap-5">
@@ -8,15 +12,18 @@ const ButtonsFlex = () => {
         </h1>
         <div className="grid grid-cols-3 gap-3">
           <button className="bg-bluePrimary/30 p-3 rounded-md flex items-center gap-1 justify-center font-semibold text-sm">
-            <img src="/eye.jpg" alt="" />
+            {/* <img src="/eye-icon.jpg" alt="" /> */}
+            <IoMdEye className="w-5 h-5 object-cover" />
             <span>Marked as Watched</span>
           </button>
           <button className="bg-bluePrimary/30 p-3 rounded-md flex items-center gap-1 justify-center font-semibold text-sm">
-            <img src="/addList.jpg" alt="" />
+            {/* <img src="/addList.jpg" alt="" /> */}
+            <HiDocumentText className="w-5 h-5 object-cover" />
             <span>Add to My List</span>
           </button>
           <button className="bg-bluePrimary/30 p-3 rounded-md flex items-center gap-1 justify-center font-semibold text-sm">
-            <img src="/download.jpg" alt="" />
+            {/* <img src="/download.jpg" alt="" /> */}
+            <FiDownload className="w-5 h-5 object-cover" />
             <span>Download</span>
           </button>
         </div>

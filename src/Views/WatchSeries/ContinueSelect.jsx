@@ -1,3 +1,5 @@
+import ContinueSlider from "../../components/ContinueSlider/ContinueSlider";
+
 const ContinueSelect = () => {
   return (
     <div className="flex items-center justify-between">
@@ -5,7 +7,8 @@ const ContinueSelect = () => {
         <h1 className="text-black font-bold text-[20px] font-poppins">
           Continue Watching
         </h1>
-        <img src="/continue-bar.jpg" alt="" />
+        {/* <img src="/continue-bar.jpg" alt="" /> */}
+        <ContinueSlider />
       </div>
       <select
         className="bg-selectBg p-3 rounded-lg text-transparentCooking font-semibold"

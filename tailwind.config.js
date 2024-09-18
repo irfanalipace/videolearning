@@ -15,8 +15,9 @@ export default {
         recent: "#DADADA99",
         recentBorder: "#AEAEAE",
         paginationButtonBorder: "#737579",
-        recommendationBorder:"#82828233",
-        recommendedVideo:"#E2E2E2"
+        recommendationBorder: "#82828233",
+        recommendedVideo: "#E2E2E2",
+        headerInput: "#ECECEC66",
       },
     },
     plugins: [],

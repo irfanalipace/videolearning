@@ -1,4 +1,28 @@
+import { useRef, useState } from "react";
+import clsx from "clsx";
+
 const RecentDownloadWatch = () => {
+  const [isFocused, setIsFocused] = useState(false);
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <div className="flex flex-col gap-4 bg-recent rounded-lg w-full p-2">
       {/* recent download */}
@@ -12,18 +36,23 @@ const RecentDownloadWatch = () => {
       <div className="h-[320px] relative contain bg-cover bg-center rounded-xl cursor-pointer transition-all duration-300">
         {/* Background video */}
         <video
-          autoPlay
-          loop
-          muted
+          ref={videoRef}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          controls
+          tabIndex="0"
           className="absolute inset-0 w-full h-full object-cover rounded-xl"
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
+        ></video>
+        <div
+          className={clsx(
+            "absolute w-full rounded-xl bg-black/50 h-full flex flex-col justify-end pl-5 pb-10 gap-2 text-white transition-opacity duration-300",
+            {
+              "opacity-0": isFocused,
+              "opacity-100": !isFocused,
+            }
+          )}
         >
-          <source
-            src="https://www.w3schools.com/html/mov_bbb.mp4" // Example random online video
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute w-full rounded-xl bg-black/50 h-full flex flex-col justify-end pl-5 pb-10 gap-2 text-white">
           <h1 className=" font-bold text-md  font-poppins">
             Cooking Colombian Dishes
           </h1>

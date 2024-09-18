@@ -1,48 +1,16 @@
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-import { useTheme } from "@mui/styles";
 
 export default function SearchInput() {
-  const { palette } = useTheme();
-
   return (
-    <Paper
-      component="form"
-      sx={{ display: "flex", alignItems: "center", width: 400 }}
-    >
-      <InputBase
-        sx={{
-          ml: 1,
-          flex: 1,
-          backgroundColor: palette.backgroundColor.searchField,
-          padding: 0,
-          borderRadiusTopRight: "6px",
-          borderRadiusBottomRight: "6px",
-          boxShadow: 0,
-          text: palette.text.secondary,
-          fontWeight: 700,
-        }}
+    <div className="flex items-center bg-gray-100 rounded-lg w-full min-w-[420px] h-[47px] shadow-md overflow-hidden">
+      <input
+        type="text"
         placeholder="Search your specific videos..."
-        inputProps={{ "aria-label": "search google maps" }}
+        className="px-4 py-2 h-full bg-headerInput focus:outline-none w-full text-secondary text-sm text-medium"
       />
-      <IconButton
-        type="button"
-        sx={{
-          backgroundColor: palette.text.primary,
-          color: palette.typography.allVariants.color,
-          borderRadius: 0,
-          borderRadiusTopRight: "6px",
-          borderRadiusBottomRight: "6px",
-        }}
-        aria-label="search"
-      >
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+      <button className="bg-black text-white px-4  h-full">
+        <SearchIcon className="text-xl" />
+      </button>
+    </div>
   );
 }

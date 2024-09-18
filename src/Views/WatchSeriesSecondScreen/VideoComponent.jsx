@@ -24,7 +24,7 @@ const VideoPlayer = () => {
       ></video>
 
       {/* Play/Pause button */}
-      <div className="absolute bottom-6 left-4 flex items-center space-x-4">
+      {/* <div className="absolute bottom-6 left-4 flex items-center space-x-4">
         <button
           onClick={handlePlayPause}
           className="text-white bg-black/50 p-2 rounded-full focus:outline-none"
@@ -61,14 +61,7 @@ const VideoPlayer = () => {
             </svg>
           )}
         </button>
-
-        {/* Time and Fullscreen Button */}
-        <div className="flex items-center text-white">
-          <span className="text-sm">0:51</span>
-          <span className="mx-2">/</span>
-          <span className="text-sm">2:31:48</span>
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 };

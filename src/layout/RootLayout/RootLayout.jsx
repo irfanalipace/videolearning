@@ -1,12 +1,16 @@
 import { Drawer, styled } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import TopBar from "./components/Header/TopBar";
 import { Outlet } from "react-router";
 import Nav from "./components/NavBar";
+import NewHeader from "./components/Header/NewHeader";
+import NewNavbar from "./components/NavBar/NewNavbar";
+
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 const StyledRoot = styled("div")({
   display: "flex",
+  flexDirection: "column",
   minHeight: "100%",
   overflow: "hidden",
 });
@@ -24,17 +28,23 @@ const Main = styled("div")(({ theme }) => ({
   },
 }));
 const RootLayout = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
 
   return (
-    <div>
-      <StyledRoot>
-        <TopBar onOpenNav={() => setOpen(true)} />
-        <Nav openNav={open} onCloseNav={() => setOpen(false)} />
-        <Main style={{ margin: 50 }}>
-          <Outlet />
-        </Main>
-      </StyledRoot>
+    <div className="relative flex  h-screen overflow-hidden min-w-screen">
+      {/* <TopBar onOpenNav={() => setOpen(true)} /> */}
+      <NewHeader open={open} toggleOpen={toggleOpen} />
+
+      {/* <Nav openNav={open} onCloseNav={() => setOpen(false)} /> */}
+      <NewNavbar open={open} onCloseNav={() => setOpen(false)} />
+
+      <div className="w-screen md:w-h-[calc(100vh-280px)] overflow-y-auto h-[calc(100vh-12px)] py-28 px-16">
+        <Outlet />
+      </div>
     </div>
   );
 };

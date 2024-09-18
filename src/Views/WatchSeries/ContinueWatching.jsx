@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import ContinueSelect from "./ContinueSelect";
 
 const ContinueWatching = () => {
+  const navigate = useNavigate();
   const watchingArray = [
     { image: "/blond-girl.jpg", title: "Trying Colombia’s..." },
     { image: "/ice-cream.jpg", title: "Lets try these tiny cocu..." },
@@ -41,7 +43,10 @@ const ContinueWatching = () => {
               {/* buttons  */}
 
               <div className="flex items-center justify-between pr-9">
-                <button className="bg-bluePrimary rounded-3xl p-3 text-white">
+                <button
+                  className="bg-bluePrimary rounded-3xl p-3 text-white"
+                  onClick={() => navigate("/watch-series-phase-two")}
+                >
                   Watch Now
                 </button>
 

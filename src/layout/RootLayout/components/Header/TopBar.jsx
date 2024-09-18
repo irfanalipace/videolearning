@@ -17,6 +17,8 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchInput from "./SearchInput";
 //   import { logOut } from "../../../../../store/actions/adminActions";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
+
 const NAV_WIDTH = 280;
 
 const HEADER_MOBILE = 54;
@@ -46,10 +48,6 @@ const TopBar = () => {
   const location = useLocation();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const [openNotifications, setOpenNotifications] = useState(false);
-  const notificationsRef = useRef(null);
-  const notifications = [];
 
   const handleAvatarClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -65,16 +63,15 @@ const TopBar = () => {
     setOpenNotifications(false);
   };
   return (
-    <div>
-      <StyledRoot>
-        <StyledToolbar>
-          <Typography
-            sx={{ color: "#000000", fontWeight: 800, fontSize: "1.5rem" }}
-          >
-            <SearchInput />
-          </Typography>
-          <Box>
-            {/* <FormControl sx={{ m: 1, width:'400px'}} variant="outlined">
+    <StyledRoot>
+      <StyledToolbar>
+        <Typography
+          sx={{ color: "#000000", fontWeight: 800, fontSize: "1.5rem" }}
+        >
+          <SearchInput />
+        </Typography>
+        <Box>
+          {/* <FormControl sx={{ m: 1, width:'400px'}} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password"> Search</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -89,9 +86,9 @@ const TopBar = () => {
             sx={{borderRadius:'10px', background:'#f7f7f7'}}
           />
         </FormControl>  */}
-          </Box>
-          <Box />
-          {/* <Stack
+        </Box>
+        <Box />
+        {/* <Stack
           direction="row"
           alignItems="center"
           spacing={{
@@ -104,7 +101,7 @@ const TopBar = () => {
             ref={notificationsRef}
             >
               <Badge badgeContent={102}  color="primary">
-              <NotificationsNoneIcon sx={{color:'#bc9000', fontSize:'2rem'}} /> 
+              <NotificationsNoneIcon sx={{color:'#bc9000', fontSize:'2rem'}} />
               </Badge>
             </IconButton>
             <Box sx={{display:'flex', alignItems:'center'}}>
@@ -118,26 +115,25 @@ const TopBar = () => {
               </IconButton>
             </Box>
           </Stack> */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <IconButton component={Link} to="/notifications">
-              <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-                <PersonIcon sx={{ color: "#e2e2e2" }} />
-              </Avatar>
-            </IconButton>
-            <Typography
-              sx={{
-                fontWeight: 700,
-                color: theme.palette.primary.main,
-                fontFamily: "Poppins",
-                fontSize: "22px",
-              }}
-            >
-              My Profile
-            </Typography>
-          </Box>
-        </StyledToolbar>
-      </StyledRoot>
-    </div>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <IconButton component={Link} to="/notifications">
+            <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+              <PersonIcon sx={{ color: "#e2e2e2" }} />
+            </Avatar>
+          </IconButton>
+          <Typography
+            sx={{
+              fontWeight: 700,
+              color: theme.palette.primary.main,
+              fontFamily: "Poppins",
+              fontSize: "22px",
+            }}
+          >
+            My Profile
+          </Typography>
+        </Box>
+      </StyledToolbar>
+    </StyledRoot>
   );
 };
 
