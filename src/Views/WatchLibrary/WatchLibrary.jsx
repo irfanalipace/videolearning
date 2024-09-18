@@ -25,7 +25,7 @@ const items = [
   },
   {
     name: "History of Video",
-    path: "/bignners",
+    path: "/watch-history",
     icon: <HistoryIcon fontSize="small" />,
   },
 ];

@@ -13,6 +13,11 @@ import VideoList from "./Views/WatchLibrary/VideoList";
 import MySeriesList from "./Views/WatchLibrary/MySeriesList";
 import WatchSeriesTwo from "./Views/WatchSeriesTwo/WatchSeries";
 import WatchSeriesSecondScreen from "./Views/WatchSeriesSecondScreen";
+import WatchHistory from "./Views/WatchLibrary/WatchHistory";
+import Notification from "./layout/RootLayout/components/Notification";
+import FAQ from "./Views/Resources/FAQ";
+import AboutUs from "./Views/Resources/AboutUs";
+import TeachingMethod from "./Views/Resources/TeachingMethod";
 
 export default function Router() {
   let element = useRoutes([
@@ -20,16 +25,21 @@ export default function Router() {
       path: "/",
       element: <RootLayout />,
       children: [
-        { path: "watch-videos", element: <WatchVideos /> },
+        { path: "/", element: <WatchVideos /> },
         { path: "watch-series", element: <WatchSeries /> },
         { path: "no-vedio", element: <NoVideo /> },
         { path: "vedio-list", element: <VideoList /> },
         { path: "series-list", element: <MySeriesList /> },
         { path: "watch-series-two", element: <WatchSeriesTwo /> },
+        { path: "watch-history", element: <WatchHistory /> },
+        { path: "notifications", element: <Notification />},
+        { path: "resources/about-us", element: <AboutUs />},
         {
           path: "watch-series-phase-two",
           element: <WatchSeriesSecondScreen />,
         },
+        { path: "resources/faq", element: <FAQ /> },
+        { path: "resources/teaching-method", element: <TeachingMethod /> },
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },
