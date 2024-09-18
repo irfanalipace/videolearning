@@ -219,7 +219,7 @@ export default function Nav({ openNav, onCloseNav }) {
                               textAlign: "left",
                               fontFamily: "Poppins",
                               fontSize: "14px",
-                              marginLeft: "60px",
+                              marginLeft: "54px",
                             }}
                             primary={subItem.title}
                           />
