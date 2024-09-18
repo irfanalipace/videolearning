@@ -16,6 +16,7 @@ import WatchSeriesSecondScreen from "./Views/WatchSeriesSecondScreen";
 import WatchHistory from "./Views/WatchLibrary/WatchHistory";
 import Notification from "./layout/RootLayout/components/Notification";
 import FAQ from "./Views/Resources/FAQ";
+import AboutUs from "./Views/Resources/AboutUs";
 
 export default function Router() {
   let element = useRoutes([
@@ -31,11 +32,12 @@ export default function Router() {
         { path: "watch-series-two", element: <WatchSeriesTwo /> },
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification />},
+        { path: "resources/about-us", element: <AboutUs />},
         {
           path: "watch-series-phase-two",
           element: <WatchSeriesSecondScreen />,
         },
-        { path: "resources", element: <FAQ /> },
+        { path: "resources/faq", element: <FAQ /> },
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },
