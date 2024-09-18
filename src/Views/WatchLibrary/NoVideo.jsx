@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
-import image from "../../assets/picture/Dataimage.png";
+import image from "../../assets/picture/item1.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 const NoVideo = () => {
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const NoVideo = () => {
         style={{ maxWidth: "100%", height: "auto" }}
       />
       <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-        There is No Video content
+      You Dont’t have Downloading Yet
       </Typography>
       <Box sx={{ width: "50%" }}>
         <Typography variant="body1" sx={{ mb: 4 }}>

@@ -41,7 +41,7 @@ export default function Nav({ openNav, onCloseNav }) {
       id: 1,
       title: "Watch Videos",
       icon: <PlayCircleIcon />,
-      to: "/watch-videos",
+      to: "/",
     },
     {
       id: 11,
@@ -60,6 +60,12 @@ export default function Nav({ openNav, onCloseNav }) {
       title: "Progress",
       icon: <LegendToggleIcon />,
       to: "/progress",
+    },
+    {
+      id: 24,
+      title: "Resources",
+      icon: <LegendToggleIcon />,
+      to: "/resources",
     },
     {
       id: 2,

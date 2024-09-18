@@ -80,7 +80,7 @@ const Bignner = () => {
       >
         <Grid item xs={6}>
           <Box display="flex" alignItems="center">
-            <Link to="watch-videos" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Box display="flex" alignItems="center">
                 <ArrowBackIcon />
                 <Typography sx={{ color: "#0294D3", marginLeft: 1 }}>

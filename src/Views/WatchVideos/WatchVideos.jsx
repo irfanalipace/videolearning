@@ -140,7 +140,7 @@ const WatchVideos = () => {
                 <DashboardIcon />
               </IconButton>
             </Link>
-            <Link to="/watch-videos">
+            <Link to="/">
               <IconButton color="primary">
                 <DensitySmallIcon />
               </IconButton>
