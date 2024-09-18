@@ -1,7 +1,7 @@
 import TrendingSeries from "./TrendingSeries";
 
-const WatchSeries = () => {
+const WatchSeriesTwo = () => {
   return <TrendingSeries />;
 };
 
-export default WatchSeries;
+export default WatchSeriesTwo;
