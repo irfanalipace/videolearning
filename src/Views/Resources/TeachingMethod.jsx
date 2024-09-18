@@ -47,7 +47,7 @@ const TeachingMethod = () => {
         </Grid>
 
 
-        <Button sx={{background:"#000000", color:"white", padding:'5px', margin:"20px", width:"150px", height:"50px"}}>Contact</Button>
+        <Button sx={{background:"#000000", color:"white", padding:'5px', margin:"20px", width:"150px", height:"50px"}}>Contact Us</Button>
       </Grid>
 
      
