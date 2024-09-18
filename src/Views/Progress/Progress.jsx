@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Typography, Paper } from "@mui/material";
+import { Grid, Box, Typography, Paper , Button} from "@mui/material";
 import {
   BarChart,
   Bar,
@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 
 const data = [
   { level: "Level 1", inputHours: 150, knownWords: 400 },
@@ -89,10 +90,20 @@ const Progress = () => {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <Paper elevation={3} style={{ padding: "16px", height: "100%" }}>
-            <Typography variant="h6">Daily Goals</Typography>
-          </Paper>
-        </Grid>
+        <Paper elevation={3} style={{ padding: '16px', height: '100%' }}>
+          <Typography variant="h6">Daily Goals</Typography>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            style={{ height: '150px', marginTop:"44px" }} 
+          >
+            <CircularProgressWithLabel size={150} progress={85} strokeWidth={8} primaryColor="#3f51b5" />
+          </Box>
+          <Button sx={{background:"#0294D3", color:"white", marginTop:"45px", width:"100%"}}>Change Daily Goals Time</Button>
+        </Paper>
+      </Grid>
+      
       </Grid>
     </Box>
   );
