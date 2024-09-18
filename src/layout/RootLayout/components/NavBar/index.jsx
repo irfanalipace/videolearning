@@ -73,6 +73,11 @@ export default function Nav({ openNav, onCloseNav }) {
           title: "About Us",
           to: "/resources/about-us",
         },
+        {
+          id: 242,
+          title: "Teaching Method",
+          to: "/resources/teaching-method",
+        },
       ],
     },
     {
