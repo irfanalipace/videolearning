@@ -18,9 +18,13 @@ import Notification from "./layout/RootLayout/components/Notification";
 import FAQ from "./Views/Resources/FAQ";
 import AboutUs from "./Views/Resources/AboutUs";
 import TeachingMethod from "./Views/Resources/TeachingMethod";
+import PremiumMembership from "./Views/Auth/PremiumMembership";
+import SignIn from "./Views/Auth/SignIn";
 
 export default function Router() {
   let element = useRoutes([
+    { path: "/subscriptions", element: <PremiumMembership /> },
+    { path: "/sign-in", element: <SignIn /> },
     {
       path: "/",
       element: <RootLayout />,

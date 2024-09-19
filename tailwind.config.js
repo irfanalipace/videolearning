@@ -18,6 +18,13 @@ export default {
         recommendationBorder: "#82828233",
         recommendedVideo: "#E2E2E2",
         headerInput: "#ECECEC66",
+        offBackground: "#E9E9E9",
+        offText: "#5A5A5A",
+        offBorder: "#D8D8D859",
+        lightBrown: "#A6A6A6",
+        lightBrowText:"#8B8B8B",
+        signText:"#666687",
+        signInputBorder:"#DCDCE4"
       },
     },
     plugins: [],
