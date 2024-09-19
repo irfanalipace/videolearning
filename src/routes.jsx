@@ -25,15 +25,15 @@ export default function Router() {
       path: "/",
       element: <RootLayout />,
       children: [
-        { path: "/", element: <WatchVideos /> },
+        { path: "/watch-videos", element: <WatchVideos /> },
         { path: "watch-series", element: <WatchSeries /> },
         { path: "no-vedio", element: <NoVideo /> },
         { path: "vedio-list", element: <VideoList /> },
         { path: "series-list", element: <MySeriesList /> },
         { path: "watch-series-two", element: <WatchSeriesTwo /> },
         { path: "watch-history", element: <WatchHistory /> },
-        { path: "notifications", element: <Notification />},
-        { path: "resources/about-us", element: <AboutUs />},
+        { path: "notifications", element: <Notification /> },
+        { path: "resources/about-us", element: <AboutUs /> },
         {
           path: "watch-series-phase-two",
           element: <WatchSeriesSecondScreen />,
