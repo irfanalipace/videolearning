@@ -2,9 +2,8 @@ import { Drawer, styled } from "@mui/material";
 import React, { useState } from "react";
 import TopBar from "./components/Header/TopBar";
 import { Outlet } from "react-router";
-import Nav from "./components/NavBar";
 import NewHeader from "./components/Header/NewHeader";
-import NewNavbar from "./components/NavBar/NewNavbar";
+import Navbar from "./components/NavBar";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -39,8 +38,7 @@ const RootLayout = () => {
       {/* <TopBar onOpenNav={() => setOpen(true)} /> */}
       <NewHeader open={open} toggleOpen={toggleOpen} />
 
-      {/* <Nav openNav={open} onCloseNav={() => setOpen(false)} /> */}
-      <NewNavbar open={open} onCloseNav={() => setOpen(false)} />
+      <Navbar open={open} onCloseNav={() => setOpen(false)} />
 
       <div className="w-screen md:w-h-[calc(100vh-280px)] overflow-y-auto h-[calc(100vh-12px)] py-28 px-16">
         <Outlet />

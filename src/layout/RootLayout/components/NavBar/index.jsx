@@ -1,43 +1,47 @@
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
-import {
-  Box,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-} from "@mui/material";
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import SettingsIcon from "@mui/icons-material/Settings";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import LegendToggleIcon from "@mui/icons-material/LegendToggle";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import useResponsive from "../../../../components/hooks/useResponsive";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import clsx from "clsx";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 
-const NAV_WIDTH = 280;
+import { RxCross2 } from "react-icons/rx";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Nav({ openNav, onCloseNav }) {
+const Navbar = ({ open, onCloseNav }) => {
+  const [selectedId, setSelectedId] = useState(1);
+  const [selectedSubItem, setSelectedSubItem] = useState(0);
+  const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
+
   const location = useLocation();
-  const [dOpen, setDopen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const [openSubItems, setOpenSubItems] = React.useState(false);
-  const isDesktop = useResponsive("up", "lg");
-  const theme = useTheme();
-  const { palette } = theme;
+
+  const selectedItemClick = (item) => {
+    setSelectedId(item.id);
+    setSelectedSubItem(0);
+    if (item.subItems) {
+      setIsSubMenuVisible(!isSubMenuVisible);
+    }
+  };
+
+  useEffect(() => {
+    const matchingItem = ListData.find((item) => item.to === location.pathname);
+    if (matchingItem) {
+      setSelectedId(matchingItem.id);
+    }
+  }, [location.pathname]);
 
   const ListData = [
     {
       id: 1,
       title: "Watch Videos",
       icon: <PlayCircleIcon />,
-      to: "/",
+      to: "/watch-videos",
     },
     {
       id: 11,
@@ -61,7 +65,7 @@ export default function Nav({ openNav, onCloseNav }) {
       id: 24,
       title: "Resources",
       icon: <AssessmentIcon />,
-      to: "/resources",
+      to: "/",
       subItems: [
         {
           id: 241,
@@ -74,7 +78,7 @@ export default function Nav({ openNav, onCloseNav }) {
           to: "/resources/about-us",
         },
         {
-          id: 242,
+          id: 243,
           title: "Teaching Method",
           to: "/resources/teaching-method",
         },
@@ -84,195 +88,80 @@ export default function Nav({ openNav, onCloseNav }) {
       id: 2,
       title: "Settings",
       icon: <SettingsIcon />,
+      // to: "/admin/new-invoices",
     },
   ];
-
-  React.useEffect(() => {
-    const matchingItem = ListData.find((item) => item.to === location.pathname);
-    if (matchingItem) {
-      setSelectedIndex(matchingItem.id);
-      if (matchingItem.id === 24) {
-        setOpenSubItems(true);
-      }
-    }
-  }, [location.pathname]);
-
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setDopen(false);
-  };
-
-  const handleSubItemClick = (event, id) => {
-    setSelectedIndex(id);
-    setOpenSubItems(false);
-  };
-
-  const handleResourcesClick = () => {
-    setOpenSubItems(!openSubItems);
-  };
-
-  const renderContent = (
-    <Box
-      sx={{
-        height: 1,
-        "& .simplebar-content": {
-          height: 1,
-          display: "flex",
-          flexDirection: "column",
-        },
-      }}
-    >
-      <Box
-        sx={{
-          py: "3px",
-          display: "inline-flex",
-          bgcolor: palette.typography.allVariants.color,
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Box sx={{ display: "flex" }}>
-          <img src={"/Logo.jpg"} />
-        </Box>
-      </Box>
-      <Box>
-        <List component="nav">
-          {ListData.map((val) => (
-            <div key={val.id}>
-              <ListItem
-                disablePadding
-                component={val.subItems ? "div" : Link}
-                to={val.subItems ? undefined : val.to}
-                sx={{
-                  mb: 2,
-                  backgroundColor:
-                    selectedIndex === val.id ? "#FFFFFF59" : "transparent",
-                }}
-              >
-                <ListItemButton
-                  selected={selectedIndex === val.id}
-                  onClick={(event) =>
-                    val.subItems
-                      ? handleResourcesClick()
-                      : handleListItemClick(event, val.id)
-                  }
-                  sx={{
-                    color: palette.typography.allVariants,
-                    p: 2,
-                    "&:hover": {
-                      borderRadius: "10px",
-                    },
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      ml: 2,
-                      color: palette.typography.allVariants,
-                    }}
-                  >
-                    {val.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    sx={{
-                      fontFamily: "Poppins",
-                      fontWeight: selectedIndex === val.id ? 700 : 500,
-                      fontSize: "16px",
-                    }}
-                    primary={val.title}
-                  />
-                  {val.subItems ? (
-                    openSubItems ? (
-                      <ExpandLess />
-                    ) : (
-                      <ExpandMore />
-                    )
-                  ) : null}
-                </ListItemButton>
-              </ListItem>
-              {val.subItems && (
-                <Collapse in={openSubItems} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {val.subItems.map((subItem) => (
-                      <ListItem
-                        key={subItem.id}
-                        disablePadding
-                        component={Link}
-                        to={subItem.to}
-                      >
-                        <ListItemButton
-                          sx={{
-                            pl: 4,
-                            display: "flex",
-                            justifyContent: "center",
-                            color: palette.typography.allVariants,
-                            "&:hover": {
-                              borderRadius: "10px",
-                            },
-                          }}
-                          onClick={(event) =>
-                            handleSubItemClick(event, subItem.id)
-                          }
-                        >
-                          <ListItemText
-                            sx={{
-                              textAlign: "left",
-                              fontFamily: "Poppins",
-                              fontSize: "14px",
-                              marginLeft: "54px",
-                            }}
-                            primary={subItem.title}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                </Collapse>
-              )}
-            </div>
-          ))}
-        </List>
-      </Box>
-      <Box sx={{ flexGrow: 1 }} />
-    </Box>
-  );
-
   return (
-    <Box
-      component="nav"
-      sx={{
-        flexShrink: { lg: 0 },
-        width: { lg: NAV_WIDTH },
-      }}
-    >
-      {isDesktop ? (
-        <Drawer
-          open
-          variant="permanent"
-          PaperProps={{
-            sx: {
-              width: NAV_WIDTH,
-              bgcolor: theme.palette.primary.main,
-              borderRightStyle: "dashed",
-            },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      ) : (
-        <Drawer
-          open={openNav}
-          onClose={onCloseNav}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          PaperProps={{
-            sx: { width: NAV_WIDTH },
-          }}
-        >
-          {renderContent}
-        </Drawer>
+    <div
+      className={clsx(
+        "relative  left-0  w-[280px] flex flex-col pt-10 gap-3 bg-primary h-[calc(100vh-12px)] z-10 duration-300 overflow-x-hidden overflow-y-auto",
+        {
+          "fixed  left-0 top-[72px] lg:top-[92px]": open,
+          "fixed top-0 left-[-100%] lg:top-[92px]  md:left-0": !open,
+        }
       )}
-    </Box>
+    >
+      {/* <RxCross2
+        onClick={onCloseNav}
+        className=" md:hidden w-[158px] h-[25px] absolute -right-8 top-2 cursor-pointer transition-all duration-300 text-white font-semibold"
+      /> */}
+      {ListData?.map((list, index) => (
+        <div key={index}>
+          <Link
+            to={list.to}
+            onClick={() => selectedItemClick(list)}
+            className={clsx(
+              "hover:bg-white/40 p-3 relative font-medium text-white text-[16px] flex items-center pl-10 gap-2 duration-300 cursor-pointer",
+              {
+                "bg-white/40": !selectedSubItem && selectedId === list.id,
+              }
+            )}
+          >
+            {!!list.subItems &&
+              (isSubMenuVisible ? (
+                <MdOutlineKeyboardArrowUp
+                  size={19}
+                  className="absolute top-1/2 -translate-y-1/2 right-3"
+                />
+              ) : (
+                <MdOutlineKeyboardArrowDown
+                  size={19}
+                  className="absolute top-1/2 -translate-y-1/2 right-3"
+                />
+              ))}
+            {list.icon}
+            {list.title}
+          </Link>
+
+          {!!list.subItems && (
+            <div
+              className={clsx("mt-2 flex flex-col gap-2 w-full", {
+                " opacity-100 flex flex-col": isSubMenuVisible,
+                " opacity-0 hidden": !isSubMenuVisible,
+              })}
+            >
+              {list.subItems.map((subItem) => (
+                <div key={subItem.id} className="flex justify-end pr-6 ">
+                  <Link
+                    to={subItem.to}
+                    onClick={() => setSelectedSubItem(subItem.id)}
+                    className={clsx(
+                      "hover:bg-white/30 p-2  w-[70%] font-medium text-white text-[14px]  duration-300 cursor-pointer",
+                      {
+                        "bg-white/30": selectedSubItem === subItem.id,
+                      }
+                    )}
+                  >
+                    {subItem.title}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
-}
+};
+
+export default Navbar;
