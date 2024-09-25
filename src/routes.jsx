@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom/dist";
+import { useRoutes, Navigate } from "react-router-dom/dist"; // Import Navigate
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
@@ -23,16 +23,19 @@ import SignIn from "./Views/Auth/SignIn";
 import OtpAuthentications from "./Views/Auth/OtpAuthenticaions";
 import VerifyEmail from "./Views/Auth/VerifyEmail";
 import AuthticationSuccess from "./Views/Auth/AuthticationSuccess";
+import Signup from "./Views/Auth/Signup";
 
 export default function Router() {
   let element = useRoutes([
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
+    { path: "/sign-up", element: <Signup /> },
     {
       path: "/",
       element: <RootLayout />,
       children: [
-        { path: "/watch-videos", element: <WatchVideos /> },
+        { path: "/", element: <Navigate to="/watch-videos" replace /> },
+        { path: "watch-videos", element: <WatchVideos /> },
         { path: "watch-series", element: <WatchSeries /> },
         { path: "no-vedio", element: <NoVideo /> },
         { path: "vedio-list", element: <VideoList /> },
