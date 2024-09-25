@@ -20,6 +20,9 @@ import AboutUs from "./Views/Resources/AboutUs";
 import TeachingMethod from "./Views/Resources/TeachingMethod";
 import PremiumMembership from "./Views/Auth/PremiumMembership";
 import SignIn from "./Views/Auth/SignIn";
+import OtpAuthentications from "./Views/Auth/OtpAuthenticaions";
+import VerifyEmail from "./Views/Auth/VerifyEmail";
+import AuthticationSuccess from "./Views/Auth/AuthticationSuccess";
 
 export default function Router() {
   let element = useRoutes([
@@ -38,6 +41,9 @@ export default function Router() {
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification /> },
         { path: "resources/about-us", element: <AboutUs /> },
+        { path: "otp-authentication", element: <OtpAuthentications /> },
+        { path: "verify-email", element: <VerifyEmail /> },
+        { path: "auth-success", element: <AuthticationSuccess /> },
         {
           path: "watch-series-phase-two",
           element: <WatchSeriesSecondScreen />,
