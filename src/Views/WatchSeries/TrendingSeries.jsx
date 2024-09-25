@@ -4,7 +4,7 @@ import RecentDownloadWatch from "./RecentDownload&Watch";
 import PaginationButton from "./PaginationButton";
 const TrendingSeries = () => {
   return (
-    <div className="grid grid-cols-12 gap-6">
+    <div className="grid grid-cols-12 gap-3">
       <div className="col-span-9">
         <div className="flex flex-col gap-6 w-full">
           <CookingColombian />

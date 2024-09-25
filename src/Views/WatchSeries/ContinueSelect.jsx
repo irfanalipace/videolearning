@@ -11,7 +11,7 @@ const ContinueSelect = () => {
         <ContinueSlider />
       </div>
       <select
-        className="bg-selectBg p-3 rounded-lg text-transparentCooking font-semibold"
+        className="bg-selectBg p-3 rounded-lg text-black font-semibold"
         name=""
         id=""
       >
