@@ -158,7 +158,13 @@ const PreSubscriptions = () => {
               Lorem ipsum dolor sit amet elit lorem lorem ipsum dolor sit amet  {benefit}
             </Typography>
           ))}
-        </Paper>
+          {selectedPlan === 'monthly' && (
+          <Button sx={{background:"#0294D3", color:"white", width:"100%", padding:"7px", marginTop:"4px"}}>Try for Free</Button>
+          )}
+          {selectedPlan === 'yearly' && (
+            <Button sx={{background:"#0294D3", color:"white", width:"100%", padding:"7px", marginTop:"4px"}}>Purchase</Button>
+            )}
+          </Paper>
       </Box>
     </Box>
   );
