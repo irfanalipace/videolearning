@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Typography, Paper } from "@mui/material";
+import { Container, Grid, Typography, Paper, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import aboutimage from "../../assets/picture/aboutus1.png";
 import aboutimage2 from "../../assets/picture/aboutus2.png";
@@ -9,8 +9,8 @@ const UnderlinedTypography = styled(Typography)(({ theme }) => ({
   display: "inline-block",
   color: "#0294D3",
   fontWeight: "bold",
-  fontSize: "20px",
-  paddingBottom: "20px",
+  fontSize: "18px",
+  paddingBottom: "15px",
   "&::after": {
     content: '""',
     position: "absolute",
@@ -32,9 +32,9 @@ const UnderlinedTypography = styled(Typography)(({ theme }) => ({
 
 const AboutUs = () => {
   return (
-    <Container maxWidth="lg">
-      <Typography variant="h5" align="left" gutterBottom>
-        About Us
+    <Box maxWidth="lg">
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
+        Contact Us
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
@@ -92,7 +92,7 @@ const AboutUs = () => {
           </Typography>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

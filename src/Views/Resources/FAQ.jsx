@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   useTheme,
+  Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -19,7 +20,7 @@ const FAQ = () => {
   };
 
   return (
-    <Container>
+    <Box>
       <Grid
         container
         alignItems="center"
@@ -27,8 +28,8 @@ const FAQ = () => {
         sx={{ padding: "16px 0" }}
       >
         <Grid item xs={12}>
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 3 }}>
-            FAQ
+          <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
+            FAQ'S
           </Typography>
         </Grid>
 
@@ -45,7 +46,7 @@ const FAQ = () => {
               sx={{
                 backgroundColor:
                   expanded === "panel1"
-                    ? theme.palette.primary.main
+                    ? theme.palette.secondary.main
                     : "#E2E2E2",
                 color: expanded === "panel1" ? "#fff" : "inherit",
               }}
@@ -81,7 +82,7 @@ const FAQ = () => {
               sx={{
                 backgroundColor:
                   expanded === "panel2"
-                    ? theme.palette.primary.main
+                    ? theme.palette.secondary.main
                     : "#E2E2E2",
                 color: expanded === "panel2" ? "#fff" : "inherit",
               }}
@@ -117,7 +118,7 @@ const FAQ = () => {
               sx={{
                 backgroundColor:
                   expanded === "panel3"
-                    ? theme.palette.primary.main
+                    ? theme.palette.secondary.main
                     : "#E2E2E2",
                 color: expanded === "panel3" ? "#fff" : "inherit",
               }}
@@ -153,7 +154,7 @@ const FAQ = () => {
               sx={{
                 backgroundColor:
                   expanded === "panel4"
-                    ? theme.palette.primary.main
+                    ? theme.palette.secondary.main
                     : "#E2E2E2",
                 color: expanded === "panel4" ? "#fff" : "inherit",
               }}
@@ -176,7 +177,7 @@ const FAQ = () => {
           </Accordion>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

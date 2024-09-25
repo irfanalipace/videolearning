@@ -94,10 +94,10 @@ const Navbar = ({ open, onCloseNav }) => {
   return (
     <div
       className={clsx(
-        "relative  left-0  w-[280px] flex flex-col pt-10 gap-3 bg-primary h-[calc(100vh-12px)] z-10 duration-300 overflow-x-hidden overflow-y-auto",
+        "relative left-0 w-[280px] flex flex-col pt-10 gap-3 bg-primary h-[calc(100vh-12px)] z-10 duration-300 overflow-x-hidden overflow-y-auto", // Added 'overflow-y-auto' for Y-axis scrolling
         {
-          "fixed  left-0 top-[72px] lg:top-[92px]": open,
-          "fixed top-0 left-[-100%] lg:top-[92px]  md:left-0": !open,
+          "fixed left-0 top-[72px] lg:top-[92px]": open,
+          "fixed top-0 left-[-100%] lg:top-[92px] md:left-0": !open,
         }
       )}
     >
@@ -146,7 +146,7 @@ const Navbar = ({ open, onCloseNav }) => {
                     to={subItem.to}
                     onClick={() => setSelectedSubItem(subItem.id)}
                     className={clsx(
-                      "hover:bg-white/30 p-2  w-[70%] font-medium text-white text-[14px]  duration-300 cursor-pointer",
+                      "hover:bg-white/30 p-2 w-[70%] font-medium text-white text-[14px] duration-300 cursor-pointer",
                       {
                         "bg-white/30": selectedSubItem === subItem.id,
                       }
