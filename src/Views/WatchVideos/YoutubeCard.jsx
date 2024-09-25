@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Box, Typography, Card, CardContent, Button } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
@@ -131,6 +130,7 @@ const YoutubeCard = ({
           variant="contained"
           size="small"
           style={{ width: "100%", padding: "6px" }}
+          color="secondary"
         >
           {buttonText}
         </Button>
