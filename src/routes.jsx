@@ -24,12 +24,14 @@ import OtpAuthentications from "./Views/Auth/OtpAuthenticaions";
 import VerifyEmail from "./Views/Auth/VerifyEmail";
 import AuthticationSuccess from "./Views/Auth/AuthticationSuccess";
 import Signup from "./Views/Auth/Signup";
+import Price from "./Views/Payment/Price";
 
 export default function Router() {
   let element = useRoutes([
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
+    { path: "/price", element: <Price /> },
     {
       path: "/",
       element: <RootLayout />,
