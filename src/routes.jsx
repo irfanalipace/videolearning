@@ -24,6 +24,8 @@ import OtpAuthentications from "./Views/Auth/OtpAuthenticaions";
 import VerifyEmail from "./Views/Auth/VerifyEmail";
 import AuthticationSuccess from "./Views/Auth/AuthticationSuccess";
 import Signup from "./Views/Auth/Signup";
+import VedioPlateform from "./Views/Resources/VedioPlateform";
+import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 
 export default function Router() {
   let element = useRoutes([
@@ -53,6 +55,8 @@ export default function Router() {
         },
         { path: "resources/faq", element: <FAQ /> },
         { path: "resources/teaching-method", element: <TeachingMethod /> },
+        { path: "resources/vedio-plateform", element: <VedioPlateform /> },
+        { path: "resources/subscriptions", element: <PreSubscriptions /> },
         { path: "watch-library", element: <WatchLibrary /> },
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },

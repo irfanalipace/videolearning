@@ -3,7 +3,7 @@ import { Container, Grid, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import aboutimage from "../../assets/picture/image25.png";
 import aboutimage2 from "../../assets/picture/aboutus2.png";
-
+import { useNavigate } from "react-router-dom";
 const UnderlinedTypography = styled(Typography)(({ theme }) => ({
   position: "relative",
   display: "inline-block",
@@ -14,6 +14,11 @@ const UnderlinedTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const TeachingMethod = () => {
+const navigate=useNavigate();
+  const handleNavigate = () => {
+    navigate("/resources/vedio-plateform")
+  }
+
   return (
     <Container maxWidth="lg">
       <Grid container spacing={3}>
@@ -52,6 +57,7 @@ const TeachingMethod = () => {
             width: "150px",
             height: "50px",
           }}
+          onClick={handleNavigate}
         >
           Contact Us
         </Button>
