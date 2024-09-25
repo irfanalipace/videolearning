@@ -24,18 +24,18 @@ const StatisticsCard = ({ title, value, description, bg = "" }) => (
   <Paper
     elevation={3}
     style={{
-      padding: "16px",
+      padding: "3px",
       textAlign: "center",
       background: bg ? bg : "",
       color: bg ? "#fff" : "",
       borderRadius: "10px",
     }}
   >
-    <Typography variant="h6">{title}</Typography>
-    <Typography variant="h4" style={{ color: "#1e88e5" }}>
+    <Typography variant="h6" sx={{ fontSize: '14px' }}>{title}</Typography>
+    <Typography variant="h5" style={{ color: "black", }}>
       {value}
     </Typography>
-    <Typography variant="subtitle1">{description}</Typography>
+    <Typography variant="subtitle1" sx={{ fontSize: '14px' }}>{description}</Typography>
   </Paper>
 );
 
@@ -59,7 +59,7 @@ const Progress = () => {
         <Grid item xs={12} md={4}>
           <StatisticsCard
             title="Video Watching Time"
-            value="28"
+            value="28 Minutes"
             description="Minutes Watched"
             bg="#063E5F"
           />
@@ -67,14 +67,14 @@ const Progress = () => {
         <Grid item xs={12} md={4}>
           <StatisticsCard
             title="Videos"
-            value="3"
+            value="3 Hours"
             description="Watched Videos"
           />
         </Grid>
         <Grid item xs={12} md={4}>
           <StatisticsCard
             title="Practiced Days"
-            value="2"
+            value="2 Video"
             description="Days You Practiced"
           />
         </Grid>

@@ -56,12 +56,12 @@ const CookingColombian = () => {
 
         <div className="flex items-center justify-between">
           {/* buttons flex */}
-          <section className="flex items-center gap-5">
-            <button className="flex items-center rounded-lg gap-2 px-5 py-3 bg-bluePrimary">
+          <section className="flex items-center gap-2">
+            <button className="flex items-center rounded-lg gap-2 px-2 py-2 bg-bluePrimary">
               <PlayCircleIcon />
               <span className="text-[14px] font-semibold">Watch Now</span>
             </button>
-            <button className="flex items-center rounded-lg bg-transparentCooking gap-2 px-5 py-3">
+            <button className="flex items-center rounded-lg bg-transparentCooking gap-2 px-2 py-2">
               <LibraryBooksIcon />
               <span className="text-[14px] font-semibold">Add To List</span>
             </button>
@@ -89,7 +89,7 @@ const CookingColombian = () => {
                 alt=""
               />
               <button className="bg-bluePrimary text-white absolute top-1 -right-5 w-9 h-9 rounded-full">
-                <ArrowForwardIosIcon className="" />
+                <ArrowForwardIosIcon className="text-black" />
               </button>
             </div>
           </div>

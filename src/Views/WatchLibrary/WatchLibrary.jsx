@@ -58,7 +58,7 @@ const WatchLibrary = () => {
             variant="body1"
             sx={{ fontWeight: "600", display: "flex", alignItems: "center" }}
           >
-            <span style={{ fontSize: "16px", marginRight: "8px" }}>
+            <span style={{ fontSize: "16px", marginRight: "8px", color: '#0294D3' }}>
               {item.icon}
             </span>
             {item.name}
