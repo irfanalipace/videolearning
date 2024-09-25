@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignIn = () => {
+const Signup = () => {
   return (
     <div>
       <div className="flex h-screen items-center gap-7 justify-center">
@@ -29,8 +29,18 @@ const SignIn = () => {
               placeholder="e.g hamzayasin499@gmail.com"
             />
           </div>
+          <div className="flex flex-col gap-2">
+            <span className="text-black text-sm md:text-[16px] font-semibold">
+              Password
+            </span>
+            <input
+              type="text"
+              className="px-[10px] py-4 border-[1px] border-signInputBorder rounded-[7px] focus:outline-none"
+              placeholder="********"
+            />
+          </div>
           <button className="bg-bluePrimary text-white font-bold py-3 rounded-[7px] text-sm md:text-[16px]">
-            Sign In
+            Sign Up
           </button>
           <div>
             <p className="text-[#808080] text-center mt-4">
@@ -51,4 +61,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Signup;
