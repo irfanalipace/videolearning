@@ -26,12 +26,14 @@ import AuthticationSuccess from "./Views/Auth/AuthticationSuccess";
 import Signup from "./Views/Auth/Signup";
 import VedioPlateform from "./Views/Resources/VedioPlateform";
 import PreSubscriptions from "./Views/Resources/PreSubscriptions";
+import Price from "./Views/Payment/Price";
 
 export default function Router() {
   let element = useRoutes([
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
+    { path: "/price", element: <Price /> },
     {
       path: "/",
       element: <RootLayout />,
