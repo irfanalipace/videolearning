@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState, useRef } from 'react';
 
 const PaymentDetails = ({ goToNext }) => {
@@ -80,10 +81,13 @@ const PaymentDetails = ({ goToNext }) => {
     );
 };
 
-const ConfirmPin = ({ goToPrevious }) => {
+const ConfirmPin = ({ goToPrevious, goToNext }) => {
     const [pin, setPin] = useState(["", "", "", ""]);
     const inputRefs = useRef([]);
-
+    const handleConfirmPayment = () => {
+        // Perform payment confirmation logic here (if any), then move to step 3
+        goToNext();
+    };
     const handleChange = (e, index) => {
         const value = e.target.value;
         if (/^[0-9]$/.test(value) || value === "") {
@@ -137,7 +141,7 @@ const ConfirmPin = ({ goToPrevious }) => {
                     >
                         Cancel
                     </button>
-                    <button className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'>
+                    <button onClick={goToNext} className='px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'>
                         Confirm Payment
                     </button>
                 </div>
@@ -148,37 +152,38 @@ const ConfirmPin = ({ goToPrevious }) => {
 
 const PaymentSuccess = () => {
     return (
-        <div className='p-12 flex flex-col items-center'>
-            <img src="/Logo.jpg" alt="Logo" className='mb-8' />
-            <div className='border p-6 rounded-lg text-center'>
-                <h3 className='font-bold text-2xl mb-2 text-green-600'>Payment Successful!</h3>
-                <h3 className='text-gray-400 text-sm mb-6'>Thank you for your payment. Your booking is confirmed.</h3>
-                <div className='text-green-600 mb-4'>
+        <div className='mt-[15%]'>
+            {/* <img src="/Logo.jpg" alt="Logo" className='mb-8' /> */}
+            <div className='text-center ' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <div className='text-white bg-green-400 rounded-full p-4 mb-4 border-2 border-green-300'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
+                <h3 className='font-bold text-2xl mb-2'>Payment Completed</h3>
+                <h3 className='text-gray-400 text-sm mb-6'>Your payment has been completed successfully</h3>
+                <Button variant='contained'>Next</Button>
+
             </div>
         </div>
     );
 };
 
+
+
 const Price = () => {
     const [step, setStep] = useState(1);
 
     const goToNext = () => {
-        if (step === 1) {
-            setStep(2);
-        }
-        else {
+        // Move to next step if it's less than 3
+        if (step < 3) {
             setStep(step + 1);
         }
     };
 
     const goToPrevious = () => {
-        if (step === 3) {
-            setStep(1);
-        } else {
+        // Move to previous step if it's greater than 1
+        if (step > 1) {
             setStep(step - 1);
         }
     };
@@ -186,8 +191,8 @@ const Price = () => {
     return (
         <>
             {step === 1 && <PaymentDetails goToNext={goToNext} />}
-            {step === 2 && <ConfirmPin goToPrevious={goToPrevious} />}
-            {step === 3 && <PaymentSuccess />} {/* New Payment Success component */}
+            {step === 2 && <ConfirmPin goToNext={goToNext} goToPrevious={goToPrevious} />}
+            {step === 3 && <PaymentSuccess />}
         </>
     );
 };
