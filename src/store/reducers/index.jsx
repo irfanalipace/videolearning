@@ -1,9 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import adminReducer from './adminReducers'
+import { authReducer } from "./reducer";
 const rootReducer = combineReducers({
-    admin: adminReducer,
+    admin: authReducer,
 
-    
+
 })
 
 export default rootReducer

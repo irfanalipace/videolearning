@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography, Paper } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 const PreSubscriptions = () => {
+  const navigate = useNavigate()
   const [selectedPlan, setSelectedPlan] = useState('monthly');
 
   return (
     <Box sx={{ background: "white" }}>
       <Typography variant="h6" gutterBottom sx={{ padding: "23px" }}>
-      Manage Subscription
+        Manage Subscription
       </Typography>
       <Box
         sx={{
@@ -59,11 +61,11 @@ const PreSubscriptions = () => {
               <>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Box>
-                    <Typography 
-                      variant="h6" 
-                      component="span" 
-                      sx={{ 
-                        fontWeight: 'bold', 
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        fontWeight: 'bold',
                         fontSize: "34px",
                         borderBottom: '2px solid black',
                         paddingBottom: '4px'
@@ -73,24 +75,24 @@ const PreSubscriptions = () => {
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography 
-                      variant="h6" 
-                      component="span" 
-                      sx={{ 
-                        fontWeight: 'bold', 
-                        fontSize: "34px", 
-                        marginLeft: 5, 
-                        color: "#0294D3" 
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        fontWeight: 'bold',
+                        fontSize: "34px",
+                        marginLeft: 5,
+                        color: "#0294D3"
                       }}
                     >
-                      Basic 
+                      Basic
                     </Typography>
-                    <Typography 
-                      variant="body1" 
-                      sx={{ 
+                    <Typography
+                      variant="body1"
+                      sx={{
                         marginLeft: 5,
-                        fontSize: "12px", 
-                        color: "black" 
+                        fontSize: "12px",
+                        color: "black"
                       }}
                     >
                       Very Basic
@@ -106,11 +108,11 @@ const PreSubscriptions = () => {
               <>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Box>
-                    <Typography 
-                      variant="h6" 
-                      component="span" 
-                      sx={{ 
-                        fontWeight: 'bold', 
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        fontWeight: 'bold',
                         fontSize: "34px",
                         borderBottom: '2px solid black',
                         paddingBottom: '4px'
@@ -120,24 +122,24 @@ const PreSubscriptions = () => {
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography 
-                      variant="h6" 
-                      component="span" 
-                      sx={{ 
-                        fontWeight: 'bold', 
-                        fontSize: "34px", 
-                        marginLeft: 5, 
-                        color: "#0294D3" 
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        fontWeight: 'bold',
+                        fontSize: "34px",
+                        marginLeft: 5,
+                        color: "#0294D3"
                       }}
                     >
                       $1000
                     </Typography>
-                    <Typography 
-                      variant="body1" 
-                      sx={{ 
+                    <Typography
+                      variant="body1"
+                      sx={{
                         marginLeft: 5,
-                        fontSize: "12px", 
-                        color: "black" 
+                        fontSize: "12px",
+                        color: "black"
                       }}
                     >
                       very Basic
@@ -159,12 +161,12 @@ const PreSubscriptions = () => {
             </Typography>
           ))}
           {selectedPlan === 'monthly' && (
-          <Button sx={{background:"#0294D3", color:"white", width:"100%", padding:"7px", marginTop:"4px"}}>Try for Free</Button>
+            <Button onClick={() => navigate('/price')} sx={{ background: "#0294D3", color: "white", width: "100%", padding: "7px", marginTop: "4px" }}>Try for Free</Button>
           )}
           {selectedPlan === 'yearly' && (
-            <Button sx={{background:"#0294D3", color:"white", width:"100%", padding:"7px", marginTop:"4px"}}>Purchase</Button>
-            )}
-          </Paper>
+            <Button onClick={() => navigate('/price')} sx={{ background: "#0294D3", color: "white", width: "100%", padding: "7px", marginTop: "4px" }}>Purchase</Button>
+          )}
+        </Paper>
       </Box>
     </Box>
   );
