@@ -1,4 +1,3 @@
-// redux/actions.js
 import axios from 'axios';
 import {
     REGISTER_REQUEST,
@@ -10,21 +9,31 @@ import {
 } from './actionTypes';
 
 const API_URL = 'https://courselearningbackend.saeedantechpvt.com/api/';
+
 export const registerUser = (userData) => {
     return async (dispatch) => {
         dispatch({ type: REGISTER_REQUEST });
         try {
             const response = await axios.post(`${API_URL}register`, userData);
+
             dispatch({
                 type: REGISTER_SUCCESS,
-                payload: response.data,
+                payload: {
+                    user: response.data.payload,
+                    token: response.data.token
+                },
             });
-            localStorage.setItem('token', response.data.token); // Store token
+
+            localStorage.setItem('token', response.data.token);
+
+            return response;
         } catch (error) {
+
             dispatch({
                 type: REGISTER_FAILURE,
                 payload: error.response ? error.response.data : 'Server Error',
             });
+            throw error;
         }
     };
 };
@@ -45,6 +54,50 @@ export const loginUser = (userData) => {
                 type: LOGIN_FAILURE,
                 payload: error.response ? error.response.data : 'Server Error',
             });
+        }
+    };
+};
+
+// redux/actions.js
+
+export const verifyOtp = (otpData) => {
+    return async (dispatch) => {
+        dispatch({ type: 'OTP_REQUEST' });
+        try {
+            const response = await axios.post(`${API_URL}verifyOtp`, otpData);
+            dispatch({
+                type: 'OTP_SUCCESS',
+                payload: response.data,
+            });
+            return response;
+        } catch (error) {
+            dispatch({
+                type: 'OTP_FAILURE',
+                payload: error.response ? error.response.data : 'Server Error',
+            });
+            throw error;
+        }
+    };
+};
+
+
+
+export const resendOtp = (resendData) => {
+    return async (dispatch) => {
+        dispatch({ type: 'RESEND_OTP' });
+        try {
+            const response = await axios.post(`${API_URL}resendOtp`, resendData);
+            dispatch({
+                type: 'OTP_SUCCESSS',
+                payload: response.data,
+            });
+            return response;
+        } catch (error) {
+            dispatch({
+                type: 'OTP_FAILUREE',
+                payload: error.response ? error.response.data : 'Server Error',
+            });
+            throw error;
         }
     };
 };

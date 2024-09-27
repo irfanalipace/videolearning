@@ -34,6 +34,7 @@ export default function Router() {
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
     { path: "/price", element: <Price /> },
+    { path: "otp-authentication", element: <OtpAuthentications /> },
     {
       path: "/",
       element: <RootLayout />,
@@ -48,7 +49,6 @@ export default function Router() {
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification /> },
         { path: "resources/about-us", element: <AboutUs /> },
-        { path: "otp-authentication", element: <OtpAuthentications /> },
         { path: "verify-email", element: <VerifyEmail /> },
         { path: "auth-success", element: <AuthticationSuccess /> },
         {

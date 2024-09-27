@@ -1,4 +1,5 @@
-// redux/reducers.js
+// redux/reducer.js
+
 import {
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
@@ -11,10 +12,11 @@ import {
 const initialState = {
     loading: false,
     user: null,
+    token: null,
     error: null,
 };
 
-export const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case REGISTER_REQUEST:
         case LOGIN_REQUEST:
@@ -28,7 +30,9 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                user: action.payload,
+                user: action.payload.user,  // Store user data in Redux
+                token: action.payload.token, // Store token in Redux
+                error: null,
             };
         case REGISTER_FAILURE:
         case LOGIN_FAILURE:
@@ -41,3 +45,5 @@ export const authReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export default authReducer;

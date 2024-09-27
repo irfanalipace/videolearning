@@ -1,16 +1,57 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/reducers/action";
+import { useNavigate } from "react-router-dom";
+import { Snackbar, Alert } from "@mui/material"; // Import MUI Snackbar
+
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
 
   const handleSignup = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    dispatch(registerUser(userData));
+
+    dispatch(registerUser(userData))
+      .then((response) => {
+        console.log(response, "++++++++++++");
+        // If successful, navigate to OTP authentication page and show success message
+
+        setErrorMessage(response.data.message || "Registration successful!");
+        setSnackbarOpen(true);
+        navigate('/otp-authentication');
+
+
+      })
+      .catch((error) => {
+        console.log(error?.response?.data.payload, "@@@@@@@@@@@@");
+
+        const errorData = error?.response?.data?.payload || {};
+
+        if (errorData.email && errorData.password) {
+          setErrorMessage(`Email: ${errorData.email} Password: ${errorData.password}`);
+        } else if (errorData.email) {
+          setErrorMessage(`Email: ${errorData.email}`);
+        } else if (errorData.password) {
+          setErrorMessage(`Password: ${errorData.password}`);
+        } else {
+          setErrorMessage(errorData.message || 'Registration failed. Please try again.');
+        }
+
+        setSnackbarOpen(true);
+      });
   };
+
+
+
 
   return (
     <div className="grid grid-cols-12">
@@ -59,14 +100,10 @@ const Signup = () => {
           />
         </div>
 
-        {/* Error message */}
-        {/* {error && <p className="text-red-500">{error}</p>} */}
-
         {/* Signup Button */}
         <button
           onClick={handleSignup}
-          // disabled={loading}
-          className={`bg-bluePrimary text-white font-bold py-3 rounded-[7px] text-sm md:text-[16px] $`}
+          className="bg-bluePrimary text-white font-bold py-3 rounded-[7px] text-sm md:text-[16px]"
         >
           Sign Up
         </button>
@@ -88,6 +125,13 @@ const Signup = () => {
           className="object-cover h-[112vh] w-full"
         />
       </div>
+
+      {/* MUI Snackbar for error messages */}
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

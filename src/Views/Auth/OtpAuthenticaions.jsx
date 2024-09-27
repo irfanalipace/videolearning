@@ -1,8 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Box, Typography, TextField, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
 import signinImage from "../../assets/picture/signin.png";
+import { resendOtp, verifyOtp } from "../../store/reducers/action";
+import { useNavigate } from "react-router-dom";
 
 const OtpAuthentications = () => {
+  const [otp, setOtp] = useState(Array(4).fill(""));
+  const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  const data = useSelector((stat) => stat?.admin?.user)
+  // console.log(data, 'ujooooooooooo')
+  const navigate = useNavigate()
+
+  const handleOtpChange = (index, value) => {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+  };
+
+  const handleSubmit = () => {
+    const otpCode = otp.join("");
+    const otpData = {
+      email: data.email,
+      otp: otpCode,
+    };
+
+    dispatch(verifyOtp(otpData))
+      .then((response) => {
+        if (response.payload.success) {
+          console.log("OTP verified successfully!");
+
+          // Navigate to next page or show success message
+          setErrorMessage(response?.data?.payload?.message || "OTP verification failed.");
+        } else {
+          setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        }
+        console.log(response, 'jjjjjjjjj')
+      })
+      .catch((error) => {
+        setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+      });
+  };
+
+  const handleResendOtp = () => {
+    const resendData = {
+      email: data.email,
+      // otp: otpCode,
+    };
+
+    dispatch(resendOtp(resendData))
+      .then((response) => {
+        if (response.payload.success) {
+          console.log("OTP resend successfully!");
+          console.log(response, 'jjjjjjjjj')
+          navigate('/watch-videos')
+          // Navigate to next page or show success message
+          setErrorMessage(response?.data?.payload?.message || "OTP verification failed.");
+        } else {
+          setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        }
+      })
+      .catch((error) => {
+        setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+      });
+  };
+
+
+
   return (
     <Grid
       container
@@ -21,11 +86,7 @@ const OtpAuthentications = () => {
       >
         <Box sx={{ width: { xs: "100%", sm: "80%" }, textAlign: "left" }}>
           <Box sx={{ mb: 4 }}>
-            <img
-              src={"/Logo.jpg"}
-              alt="Logo"
-              style={{ maxWidth: "200px"}}
-            />
+            <img src={"/Logo.jpg"} alt="Logo" style={{ maxWidth: "200px" }} />
           </Box>
 
           <Typography
@@ -43,14 +104,14 @@ const OtpAuthentications = () => {
             variant="body1"
             sx={{ mb: 3, fontSize: { xs: "0.9rem", sm: "1rem" } }}
           >
-            Please enter the four digit verification code we have sent to{" "}
+            Please enter the four-digit verification code we have sent to{" "}
             <Typography sx={{ color: "#0294D3", display: "inline-block" }}>
-              hamzayasin499@gmail.com
+              {data?.email}
             </Typography>
           </Typography>
 
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-            {[1, 2, 3, 4].map((_, index) => (
+            {[0, 1, 2, 3].map((index) => (
               <TextField
                 key={index}
                 variant="outlined"
@@ -60,16 +121,23 @@ const OtpAuthentications = () => {
                   style: {
                     textAlign: "center",
                     fontSize: "1.5rem",
-                    width: "50px",
                   },
                 }}
+                value={otp[index]}
+                onChange={(e) => handleOtpChange(index, e.target.value)}
                 sx={{
-                  width: { xs: "40px", sm: "50px", md:"90px" },
+                  width: { xs: "40px", sm: "50px", md: "90px" },
                   marginRight: index !== 3 ? { xs: "8px", sm: "12px" } : "0",
                 }}
               />
             ))}
           </Box>
+
+          {errorMessage && (
+            <Typography variant="body1" color="error" sx={{ mb: 2 }}>
+              {errorMessage}
+            </Typography>
+          )}
 
           <Typography
             variant="body1"
@@ -77,6 +145,7 @@ const OtpAuthentications = () => {
           >
             Don’t receive the OTP?{" "}
             <Typography
+              onClick={handleResendOtp}
               component="span"
               sx={{ color: "#0294D3", cursor: "pointer" }}
             >
@@ -86,6 +155,7 @@ const OtpAuthentications = () => {
 
           <Button
             size="large"
+            onClick={handleSubmit}
             sx={{
               width: "100%",
               background: "#0294D3",
