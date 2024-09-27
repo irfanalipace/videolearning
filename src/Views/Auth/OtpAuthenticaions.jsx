@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux"; // Import useDispatch
 import signinImage from "../../assets/picture/signin.png";
 import { resendOtp, verifyOtp } from "../../store/reducers/action";
 import { useNavigate } from "react-router-dom";
+import { Snackbar, Alert } from "@mui/material"; // Add this line
+
+
 
 const OtpAuthentications = () => {
   const [otp, setOtp] = useState(Array(4).fill(""));
@@ -12,6 +15,10 @@ const OtpAuthentications = () => {
   const data = useSelector((stat) => stat?.admin?.user)
   // console.log(data, 'ujooooooooooo')
   const navigate = useNavigate()
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success"); // 'success' or 'error'
+
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
@@ -21,50 +28,50 @@ const OtpAuthentications = () => {
 
   const handleSubmit = () => {
     const otpCode = otp.join("");
-    const otpData = {
-      email: data.email,
-      otp: otpCode,
-    };
+    const otpData = { email: data.email, otp: otpCode };
 
     dispatch(verifyOtp(otpData))
       .then((response) => {
-        if (response.payload.success) {
-          console.log("OTP verified successfully!");
-
-          // Navigate to next page or show success message
-          setErrorMessage(response?.data?.payload?.message || "OTP verification failed.");
+        console.log(response, 'jjjjj')
+        if (response.data.success) {
+          setSnackbarMessage(response?.data?.message || "OTP verified successfully!");
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
+          navigate('/watch-videos');
         } else {
-          setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+          setSnackbarMessage(response?.data?.message || "OTP verification failed.");
+          setSnackbarSeverity("error");
+          setSnackbarOpen(true);
         }
-        console.log(response, 'jjjjjjjjj')
       })
       .catch((error) => {
-        setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        setSnackbarMessage(error?.response?.data?.message || "OTP verification failed.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       });
   };
 
+
   const handleResendOtp = () => {
-    const resendData = {
-      email: data.email,
-      // otp: otpCode,
-    };
+    const resendData = { email: data.email };
 
     dispatch(resendOtp(resendData))
       .then((response) => {
-        if (response.payload.success) {
-          console.log("OTP resend successfully!");
-          console.log(response, 'jjjjjjjjj')
-          navigate('/watch-videos')
-          // Navigate to next page or show success message
-          setErrorMessage(response?.data?.payload?.message || "OTP verification failed.");
-        } else {
-          setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        console.log(response, 'jj')
+
+        if (response.data.success) {
+          setSnackbarMessage(response?.data?.message || "OTP resent successfully!");
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
         }
       })
       .catch((error) => {
-        setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        setSnackbarMessage(error?.response?.data?.message || "OTP resend failed.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       });
   };
+
 
 
 
@@ -185,6 +192,12 @@ const OtpAuthentications = () => {
             style={{ height: "470px", width: "100%" }}
           />
         </Box>
+        <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+          <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
+
       </Grid>
     </Grid>
   );
