@@ -23,6 +23,8 @@ const RecentDownloadWatch = () => {
     setIsPlaying(!isPlaying);
   };
 
+  
+
   return (
     <div className="flex flex-col gap-4 bg-recent rounded-lg w-full p-2">
       {/* recent download */}

@@ -19,16 +19,24 @@ const SignIn = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    debugger;
     dispatch(loginUser(userData))
       .then((response) => {
         console.log(response, "++++++++++++");
-        // If successful, navigate to OTP authentication page and show success message
 
-        setErrorMessage(response.data.payload.message || "Login successfully!");
+        const token = response.data.payload.token;
+        console.log(token, 'token')
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+
+        if (response.data.payload.user.is_verified === 1) {
+          navigate("/watch-videos");
+        } else {
+          navigate("/otp-authentication");
+        }
+
+        setErrorMessage(response.data.message || "Login successfully!");
         setSnackbarOpen(true);
-
-        // navigate("/otp-authentication");
       })
       .catch((error) => {
         const errorData = error?.response?.data?.payload || {};

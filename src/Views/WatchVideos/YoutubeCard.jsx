@@ -10,6 +10,7 @@ const YoutubeCard = ({
   videoDuration,
   backgroundImage,
   Vediotitle,
+
 }) => {
   return (
     <Card
@@ -33,7 +34,7 @@ const YoutubeCard = ({
         <iframe
           width="100%"
           height="100%"
-          src={videoUrl}
+          src={`https://www.youtube.com/embed/${videoUrl}`}
           title={title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
