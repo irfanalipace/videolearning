@@ -221,6 +221,7 @@ const WatchVideos = () => {
               {ButtonsData.map((val, ind) => {
                 return (
                   <Button
+                    key={ind}
                     variant="contained"
                     color="secondary"
                     disableElevation

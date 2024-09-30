@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/reducers/action";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material"; // Import MUI Snackbar
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,9 +27,7 @@ const Signup = () => {
 
         setErrorMessage(response.data.message || "Registration successful!");
         setSnackbarOpen(true);
-        navigate('/otp-authentication');
-
-
+        navigate("/otp-authentication");
       })
       .catch((error) => {
         console.log(error?.response?.data.payload, "@@@@@@@@@@@@");
@@ -37,21 +35,22 @@ const Signup = () => {
         const errorData = error?.response?.data?.payload || {};
 
         if (errorData.email && errorData.password) {
-          setErrorMessage(`Email: ${errorData.email} Password: ${errorData.password}`);
+          setErrorMessage(
+            `Email: ${errorData.email} Password: ${errorData.password}`
+          );
         } else if (errorData.email) {
           setErrorMessage(`Email: ${errorData.email}`);
         } else if (errorData.password) {
           setErrorMessage(`Password: ${errorData.password}`);
         } else {
-          setErrorMessage(errorData.message || 'Registration failed. Please try again.');
+          setErrorMessage(
+            errorData.message || "Registration failed. Please try again."
+          );
         }
 
         setSnackbarOpen(true);
       });
   };
-
-
-
 
   return (
     <div className="grid grid-cols-12">
@@ -66,7 +65,8 @@ const Signup = () => {
             Welcome Back!
           </h1>
           <p className="text-signText font-medium text-sm md:text-[16px]">
-            Please input your information in the fields below to enter your Journey platform.
+            Please input your information in the fields below to enter your
+            Journey platform.
           </p>
         </div>
 
@@ -112,7 +112,9 @@ const Signup = () => {
         <div>
           <p className="text-[#808080] text-center mt-4">
             Already have an account?{" "}
-            <strong className="text-[#0294D3]">Login</strong>
+            <Link to="/sign-in" className="text-[#0294D3]">
+              Login
+            </Link>
           </p>
         </div>
       </div>
@@ -127,8 +129,16 @@ const Signup = () => {
       </div>
 
       {/* MUI Snackbar for error messages */}
-      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
           {errorMessage}
         </Alert>
       </Snackbar>

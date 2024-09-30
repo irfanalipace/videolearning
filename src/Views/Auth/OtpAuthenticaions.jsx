@@ -6,19 +6,16 @@ import { resendOtp, verifyOtp } from "../../store/reducers/action";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material"; // Add this line
 
-
-
 const OtpAuthentications = () => {
   const [otp, setOtp] = useState(Array(4).fill(""));
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
-  const data = useSelector((stat) => stat?.admin?.user)
+  const data = useSelector((stat) => stat?.admin?.user);
   // console.log(data, 'ujooooooooooo')
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success"); // 'success' or 'error'
-
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
@@ -32,48 +29,54 @@ const OtpAuthentications = () => {
 
     dispatch(verifyOtp(otpData))
       .then((response) => {
-        console.log(response, 'jjjjj')
+        console.log(response, "jjjjj");
         if (response.data.success) {
-          setSnackbarMessage(response?.data?.message || "OTP verified successfully!");
+          setSnackbarMessage(
+            response?.data?.message || "OTP verified successfully!Please Login"
+          );
           setSnackbarSeverity("success");
           setSnackbarOpen(true);
-          navigate('/watch-videos');
+          navigate("/sign-in");
         } else {
-          setSnackbarMessage(response?.data?.message || "OTP verification failed.");
+          setSnackbarMessage(
+            response?.data?.message || "OTP verification failed."
+          );
           setSnackbarSeverity("error");
           setSnackbarOpen(true);
         }
       })
       .catch((error) => {
-        setSnackbarMessage(error?.response?.data?.message || "OTP verification failed.");
+        setSnackbarMessage(
+          error?.response?.data?.message || "OTP verification failed."
+        );
         setSnackbarSeverity("error");
         setSnackbarOpen(true);
       });
   };
-
 
   const handleResendOtp = () => {
     const resendData = { email: data.email };
 
     dispatch(resendOtp(resendData))
       .then((response) => {
-        console.log(response, 'jj')
+        console.log(response, "jj");
 
         if (response.data.success) {
-          setSnackbarMessage(response?.data?.message || "OTP resent successfully!");
+          setSnackbarMessage(
+            response?.data?.message || "OTP resent successfully!"
+          );
           setSnackbarSeverity("success");
           setSnackbarOpen(true);
         }
       })
       .catch((error) => {
-        setSnackbarMessage(error?.response?.data?.message || "OTP resend failed.");
+        setSnackbarMessage(
+          error?.response?.data?.message || "OTP resend failed."
+        );
         setSnackbarSeverity("error");
         setSnackbarOpen(true);
       });
   };
-
-
-
 
   return (
     <Grid
@@ -192,12 +195,19 @@ const OtpAuthentications = () => {
             style={{ height: "470px", width: "100%" }}
           />
         </Box>
-        <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
-          <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={() => setSnackbarOpen(false)}
+        >
+          <Alert
+            onClose={() => setSnackbarOpen(false)}
+            severity={snackbarSeverity}
+            sx={{ width: "100%" }}
+          >
             {snackbarMessage}
           </Alert>
         </Snackbar>
-
       </Grid>
     </Grid>
   );
