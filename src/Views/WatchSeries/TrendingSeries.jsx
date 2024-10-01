@@ -35,6 +35,9 @@ const TrendingSeries = () => {
     fetchSeries();
   }, []);
 
+
+  
+
   return (
     <div className="grid grid-cols-12 gap-3">
       <div className="col-span-9">

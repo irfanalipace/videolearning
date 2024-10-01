@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Card, CardContent, Button } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
+import { FaDownload } from "react-icons/fa6";
 
 const YoutubeCard = ({
   videoUrl,
@@ -8,10 +9,17 @@ const YoutubeCard = ({
   description,
   buttonText,
   videoDuration,
+  onPlay,
   backgroundImage,
   Vediotitle,
-
+  showDownloadIcon,
+  onDownloadClick,
 }) => {
+  // const handlePlay = () => {
+  //   if (onPlay) {
+  //     onPlay();
+  //   }
+  // };
   return (
     <Card
       sx={{
@@ -24,7 +32,6 @@ const YoutubeCard = ({
 
         position: "relative",
         overflow: "hidden",
-        // backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -36,6 +43,7 @@ const YoutubeCard = ({
           height="100%"
           src={`https://www.youtube.com/embed/${videoUrl}`}
           title={title}
+          onPlay={onPlay}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -91,7 +99,7 @@ const YoutubeCard = ({
               component="div"
               noWrap
               sx={{
-                fonntSize: "16px",
+                fontSize: "16px",
                 fontWeight: "700",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
@@ -126,7 +134,7 @@ const YoutubeCard = ({
         </Typography>
       </CardContent>
 
-      <Box sx={{ textAlign: "center", padding: "6px" }}>
+      <Box sx={{ alignItems: "center", padding: "6px", display: "flex", gap: "5px", justifyContent: "center" }}>
         <Button
           variant="contained"
           size="small"
@@ -135,6 +143,10 @@ const YoutubeCard = ({
         >
           {buttonText}
         </Button>
+        {/* Conditionally render the download icon */}
+        {showDownloadIcon && (
+          <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: 'pointer' }} />
+        )}
       </Box>
     </Card>
   );

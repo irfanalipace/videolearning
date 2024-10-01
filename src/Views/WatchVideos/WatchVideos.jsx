@@ -2,27 +2,17 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
-  Container,
   Grid,
   IconButton,
-  Button,
-  useTheme,
-  FormGroup,
-  FormControlLabel,
-  Switch,
   CircularProgress,
 } from "@mui/material";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import YoutubeCard from "./YoutubeCard";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import DropDown from "../../components/DropDown/DropDown";
-import { IoIosSearch } from "react-icons/io";
 import { IoIosMenu } from "react-icons/io";
 import { ArrowBack } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import YoutubeCard from "./YoutubeCard";
+import { useNavigate } from "react-router-dom";
 import { request } from "../../services/axios";
+import { useTheme } from "@mui/material";
 
 const WatchVideos = () => {
   const theme = useTheme();
@@ -30,48 +20,10 @@ const WatchVideos = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [view, setView] = useState("list");
   const [video, setVideoData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loader state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const dropdownData = [
-    {
-      id: 1,
-      title: "Levels",
-      options: ["Level 1", "Level 2", "Level 3"],
-    },
-    {
-      id: 2,
-      title: "Countries",
-      options: ["Country 1", "Country 2", "Country 3"],
-    },
-    {
-      id: 3,
-      title: "Topics",
-      options: ["Topic 1", "Topic 2", "Topic 3"],
-    },
-    {
-      id: 4,
-      title: "Guides",
-      options: ["Guide 1", "Guide 2", "Guide 3"],
-    },
-  ];
-
-  const ButtonsData = [
-    { id: 1, title: "Absolute Beginner", s: true },
-    { id: 2, title: "Beginner", s: false },
-    { id: 3, title: "Early Intermediate", s: false },
-    { id: 4, title: "High Intermediate", s: false },
-    { id: 5, title: "Advanced", s: false },
-  ];
-
-  const handleClick = () => {
-    if (view === "list") {
-      setView("dashboard");
-    } else {
-      setView("list");
-    }
-  };
-
+  // Fetch videos
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -84,19 +36,50 @@ const WatchVideos = () => {
           setVideoData(response.data.payload);
         }
       } catch (error) {
-        console.log("Error fetching video data:", error);
-        ToastComp({
-          variant: "error",
-          message: "Failed to fetch videos. Please try again later.",
-        });
+        console.error("Error fetching video data:", error);
+        // You can add a Toast or Snackbar for user feedback
       } finally {
-        setLoading(false); // Stop loading after API response
+        setLoading(false);
       }
     };
 
     fetchVideos();
   }, []);
 
+  // Handle video download
+  const handleDownloadClick = async (video_id) => {
+    try {
+      await request({
+        method: "post",
+        url: "api/download/list",
+        data: {
+          video_id,
+          type: "video",
+        },
+      });
+      console.log("Download initiated for video_id:", video_id);
+    } catch (error) {
+      console.error("Error downloading video:", error);
+      // Optionally show user feedback like Toast or Snackbar
+    }
+  };
+
+  // Handle video play event
+  const handleVideoPlay = async (video_id) => {
+    try {
+      await request({
+        method: "post",
+        url: "api/video/history",
+        data: {
+          video_id,
+          type: "video",
+        },
+      });
+      console.log("Play initiated for video_id:", video_id);
+    } catch (error) {
+      console.error("Error playing video:", error);
+    }
+  };
 
   return (
     <Box>
@@ -104,7 +87,7 @@ const WatchVideos = () => {
         <Grid item xs={6}>
           <Box sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
             {view === "dashboard" && (
-              <ArrowBack sx={{ mr: 2, color: secondary }} onClick={handleClick} />
+              <ArrowBack sx={{ mr: 2, color: secondary }} onClick={() => setView("list")} />
             )}
             <Typography variant="h6" fontWeight="bold" color="secondary">
               Watch Videos
@@ -127,68 +110,44 @@ const WatchVideos = () => {
           </Box>
         </Grid>
 
-        <Grid container alignItems="center" sx={{ my: "12px", mb: 3 }}>
-          {view === "list" ? (
+        {/* Content for List or Dashboard View */}
+        <Grid container sx={{ my: "12px", mb: 3 }}>
+          {view === "list" && (
             <Grid item xs={12}>
               <Box display="flex" justifyContent="space-between" alignItems="center">
-                {dropdownData.map((val, ind) => (
-                  <Box key={ind}>
-                    <DropDown data={val} />
-                  </Box>
-                ))}
-                <Box sx={{ borderRight: "1px solid grey" }}>
-                  <FormGroup>
-                    <FormControlLabel control={<Switch />} label="Hide Watched" />
-                  </FormGroup>
-                </Box>
-                <Box>
-                  <IoIosSearch size={35} style={{ marginLeft: "-20px", cursor: "pointer" }} />
-                </Box>
+                {/* Dropdown for filters can be added here */}
               </Box>
-            </Grid>
-          ) : (
-            <Grid item xs={12}>
-              {ButtonsData.map((val, ind) => (
-                <Button
-                  key={ind}
-                  variant="contained"
-                  color="secondary"
-                  disableElevation
-                  sx={{
-                    textTransform: "none",
-                    mr: 2,
-                    background: !val.s ? "#e2e2e2" : "",
-                    color: !val.s ? "black" : "white",
-                    px: 4,
-                    py: 1,
-                  }}
-                >
-                  {val.title}
-                </Button>
-              ))}
             </Grid>
           )}
         </Grid>
 
+        {/* Video Cards */}
         <Grid container spacing={4}>
           {loading ? (
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
               <CircularProgress color="secondary" />
             </Box>
-          ) : (
-            video?.map((videos, index) => (
+          ) : video.length > 0 ? (
+            video.map((videos, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <YoutubeCard
-                  videoUrl={video.video}
-                  title={videos.title}
                   Vediotitle={videos.title}
+                  videoUrl={videos.video}
+                  title={videos.title}
+                  onPlay={() => ha = ndleVideoPlay(videos.id)}
                   description={videos.description}
                   buttonText={videos.level}
                   videoDuration={videos.videoDuration}
                   backgroundImage={videos.backgroundImage}
+                  showDownloadIcon={true}
+                  onDownloadClick={() => handleDownloadClick(videos.id)}
                 />
               </Grid>
             ))
+          ) : (
+            <Typography variant="h6" sx={{ textAlign: "center", width: "100%" }}>
+              No videos available
+            </Typography>
           )}
         </Grid>
       </Grid>

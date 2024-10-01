@@ -203,6 +203,7 @@ const WatchHistory = () => {
                       buttonText={video.level}
                       videoDuration={video.videoDuration || "N/A"}
                       backgroundImage={video.backgroundImage || ""}
+                      
                     />
                   </Grid>
                 );
