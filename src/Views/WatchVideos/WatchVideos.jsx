@@ -51,7 +51,7 @@ const WatchVideos = () => {
     try {
       await request({
         method: "post",
-        url: "api/download/list",
+        url: "api/video/list",
         data: {
           video_id,
           type: "video",
@@ -78,6 +78,24 @@ const WatchVideos = () => {
       console.log("Play initiated for video_id:", video_id);
     } catch (error) {
       console.error("Error playing video:", error);
+    }
+  };
+
+  const handleAddToList = async (video_id, type) => {
+    try {
+      await request({
+        method: "post",
+        url: "api/video/list",
+        data: {
+          video_id,
+          type: 'video'
+        },
+      });
+      console.log(`Video ${video_id} added to the list`);
+      // Optionally show user feedback like Toast or Snackbar
+    } catch (error) {
+      console.error("Error adding video to the list:", error);
+      // Optionally show user feedback
     }
   };
 
@@ -134,13 +152,15 @@ const WatchVideos = () => {
                   Vediotitle={videos.title}
                   videoUrl={videos.video}
                   title={videos.title}
-                  onPlay={() => ha = ndleVideoPlay(videos.id)}
+                  onPlay={() => handleVideoPlay(videos.id)}
                   description={videos.description}
                   buttonText={videos.level}
                   videoDuration={videos.videoDuration}
                   backgroundImage={videos.backgroundImage}
                   showDownloadIcon={true}
                   onDownloadClick={() => handleDownloadClick(videos.id)}
+                  menuItems={["Add to list",]}
+                  handleAdd={() => handleAddToList(videos.id)}
                 />
               </Grid>
             ))

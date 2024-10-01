@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ContinueSelect from "./ContinueSelect";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { request } from "../../services/axios";
+import { FaDownload } from "react-icons/fa6";
 
 const ContinueWatching = ({ series }) => {
   const data = series[0]?.videos;
@@ -30,6 +31,11 @@ const ContinueWatching = ({ series }) => {
       console.error("Error in sendVideoData:", error);
     }
   };
+
+  const handleWatchNowClick = (watch) => {
+    navigate("/watch-series-phase-two", { state: { video: watch } });
+  };
+
 
   return (
     <div className="flex flex-col gap-4">
@@ -61,13 +67,14 @@ const ContinueWatching = ({ series }) => {
               <div className="flex items-center justify-between mt-3">
                 <button
                   className="bg-blue-500 rounded-3xl px-4 py-1 text-white hover:bg-blue-600 transition-all"
-                  onClick={() => navigate("/watch-series-phase-two")}
+                  onClick={() => handleWatchNowClick(watch)}
                 >
                   Watch Now
                 </button>
 
+
                 <button onClick={() => handleDownloadClick(watch.id)} className="bg-white/40 rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center">
-                  +
+                  <FaDownload />
                 </button>
               </div>
             </div>

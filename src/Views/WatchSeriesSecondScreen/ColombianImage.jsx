@@ -1,6 +1,6 @@
 import VideoPlayer from "./VideoComponent";
 
-const ColombianImage = () => {
+const ColombianImage = ({ video }) => {
   return (
     <div className="w-full flex flex-col items-start gap-3">
       {/* back  */}
@@ -9,7 +9,7 @@ const ColombianImage = () => {
         back
       </span>
       {/*  */}
-      <VideoPlayer />
+      <VideoPlayer video={video} />
     </div>
   );
 };

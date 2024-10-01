@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Typography, Card, CardContent, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Card, CardContent, Button, Menu, MenuItem } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { FaDownload } from "react-icons/fa6";
 
@@ -13,13 +13,22 @@ const YoutubeCard = ({
   backgroundImage,
   Vediotitle,
   showDownloadIcon,
+  handleAdd,
   onDownloadClick,
+  menuItems, // New prop to pass menu items
 }) => {
-  // const handlePlay = () => {
-  //   if (onPlay) {
-  //     onPlay();
-  //   }
-  // };
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // Handle opening of the menu
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  // Handle closing of the menu
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Card
       sx={{
@@ -29,7 +38,6 @@ const YoutubeCard = ({
         flexDirection: "column",
         justifyContent: "space-between",
         boxShadow: 3,
-
         position: "relative",
         overflow: "hidden",
         backgroundSize: "cover",
@@ -55,7 +63,6 @@ const YoutubeCard = ({
             height: "100%",
           }}
         />
-
         <Box
           sx={{
             position: "absolute",
@@ -113,10 +120,36 @@ const YoutubeCard = ({
               {Vediotitle}
             </Typography>
           </Box>
-          <Box>
-            <MoreHoriz style={{ color: "#0294D3" }} />
+
+          {/* More Button */}
+          <Box onClick={handleMenuClick}>
+            <MoreHoriz style={{ color: "#0294D3", cursor: "pointer" }} />
           </Box>
+
+          {/* Menu for "Add to list" etc. */}
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            {menuItems?.map((item, index) => (
+              <MenuItem key={index} onClick={handleMenuClose}>
+                <p onClick={handleAdd}>
+                  {item}
+                </p>
+              </MenuItem>
+            ))}
+          </Menu>
         </Box>
+
         <Typography
           variant="body2"
           color="text.secondary"
@@ -143,9 +176,10 @@ const YoutubeCard = ({
         >
           {buttonText}
         </Button>
+
         {/* Conditionally render the download icon */}
         {showDownloadIcon && (
-          <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: 'pointer' }} />
+          <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: "pointer" }} />
         )}
       </Box>
     </Card>

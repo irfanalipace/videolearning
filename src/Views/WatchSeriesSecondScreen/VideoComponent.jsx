@@ -1,27 +1,31 @@
 import { useRef, useState } from "react";
 
-const VideoPlayer = () => {
-  const videoRef = useRef(null);
+const VideoPlayer = ({ video }) => {
+  const iframeRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayPause = () => {
+    const iframeWindow = iframeRef.current.contentWindow;
     if (isPlaying) {
-      videoRef.current.pause();
+      iframeWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     } else {
-      videoRef.current.play();
+      iframeWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
     setIsPlaying(!isPlaying);
   };
 
   return (
     <div className="relative w-full">
-      {/* Video element */}
-      <video
-        ref={videoRef}
+      {/* Embedded iframe for video */}
+      <iframe
+        ref={iframeRef}
         className="rounded-lg w-full"
-        controls
-        src="https://www.w3schools.com/html/mov_bbb.mp4" // Replace with your own video URL
-      ></video>
+        src={`https://www.youtube.com/embed/${video.video}?enablejsapi=1`}
+        title={video.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
 
       {/* Play/Pause button */}
       {/* <div className="absolute bottom-6 left-4 flex items-center space-x-4">
