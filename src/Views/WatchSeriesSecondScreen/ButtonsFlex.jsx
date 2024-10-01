@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { HiDocumentText } from "react-icons/hi";
 import { FiDownload } from "react-icons/fi";
 import { request } from "../../services/axios";
+import { FaSpinner } from "react-icons/fa"; // Add Spinner icon for loading
 
 const ButtonsFlex = ({ video }) => {
+  // State to track loading for the "Add to My List" button
+  const [loading, setLoading] = useState(false);
+
   // Function to handle adding a video (series) to the list
   const handleAddToList = async (series_id) => {
+    setLoading(true); // Set loading state to true when the request starts
     try {
       await request({
         method: "post",
@@ -16,10 +21,12 @@ const ButtonsFlex = ({ video }) => {
         },
       });
       console.log(`Series ${series_id} added to the list`);
-      // Optionally, you can show user feedback like a Toast or Snackbar
+      // Optionally, show user feedback like a Toast or Snackbar
     } catch (error) {
       console.error("Error adding series to the list:", error);
       // Optionally, show user feedback like a Toast or Snackbar
+    } finally {
+      setLoading(false); // Reset loading state when the request completes
     }
   };
 
@@ -37,10 +44,17 @@ const ButtonsFlex = ({ video }) => {
           {/* Add to My List Button */}
           <button
             onClick={() => handleAddToList(video.series_id)}
-            className="bg-bluePrimary/30 p-3 rounded-md flex items-center gap-1 justify-center font-semibold text-sm"
+            className={`bg-bluePrimary/30 p-3 rounded-md flex items-center gap-1 justify-center font-semibold text-sm ${loading ? 'cursor-not-allowed' : ''}`}
+            disabled={loading} // Disable button during loading
           >
-            <HiDocumentText className="w-5 h-5 object-cover" />
-            <span>Add to My List</span>
+            {loading ? (
+              <FaSpinner className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                <HiDocumentText className="w-5 h-5 object-cover" />
+                <span>Add to My List</span>
+              </>
+            )}
           </button>
 
           {/* Download Button */}

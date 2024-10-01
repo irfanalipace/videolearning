@@ -21,6 +21,8 @@ const WatchVideos = () => {
   const [view, setView] = useState("list");
   const [video, setVideoData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloadingVideos, setDownloadingVideos] = useState({});
+
   const navigate = useNavigate();
 
   // Fetch videos
@@ -48,6 +50,7 @@ const WatchVideos = () => {
 
   // Handle video download
   const handleDownloadClick = async (video_id) => {
+    setDownloadingVideos((prev) => ({ ...prev, [video_id]: true })); // Set loading to true for this video
     try {
       await request({
         method: "post",
@@ -61,8 +64,11 @@ const WatchVideos = () => {
     } catch (error) {
       console.error("Error downloading video:", error);
       // Optionally show user feedback like Toast or Snackbar
+    } finally {
+      setDownloadingVideos((prev) => ({ ...prev, [video_id]: false })); // Set loading to false after download attempt
     }
   };
+
 
   // Handle video play event
   const handleVideoPlay = async (video_id) => {
@@ -159,9 +165,11 @@ const WatchVideos = () => {
                   backgroundImage={videos.backgroundImage}
                   showDownloadIcon={true}
                   onDownloadClick={() => handleDownloadClick(videos.id)}
+                  isDownloading={downloadingVideos[videos.id]} // Pass the loading state for this specific video
                   menuItems={["Add to list",]}
                   handleAdd={() => handleAddToList(videos.id)}
                 />
+
               </Grid>
             ))
           ) : (

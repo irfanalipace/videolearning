@@ -1,16 +1,22 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContinueSelect from "./ContinueSelect";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { request } from "../../services/axios";
 import { FaDownload } from "react-icons/fa6";
+import { FaSpinner } from "react-icons/fa";
 
 const ContinueWatching = ({ series }) => {
   const data = series[0]?.videos;
-  console.log(data, 'hhhhh')
+  console.log(data, 'hhhhh');
   const navigate = useNavigate();
 
+  // State to track which video is being downloaded
+  const [downloadingVideo, setDownloadingVideo] = useState(null);
 
   const handleDownloadClick = (video_id) => {
+    // Set the current video as downloading
+    setDownloadingVideo(video_id);
     sendVideoData(video_id, "series_video");
   };
 
@@ -29,6 +35,9 @@ const ContinueWatching = ({ series }) => {
       console.log("Response:", response);
     } catch (error) {
       console.error("Error in sendVideoData:", error);
+    } finally {
+      // Reset downloading state after the request completes
+      setDownloadingVideo(null);
     }
   };
 
@@ -36,18 +45,17 @@ const ContinueWatching = ({ series }) => {
     navigate("/watch-series-phase-two", { state: { video: watch } });
   };
 
-
   return (
     <div className="flex flex-col gap-4">
       <ContinueSelect />
       <div className="grid grid-cols-3 gap-4">
         {data?.map((watch, index) => (
-          <div key={index} className=" rounded-xl cursor-pointer transition-all duration-300  bg-a-800">
+          <div key={index} className="rounded-xl cursor-pointer transition-all duration-300 bg-a-800">
             {/* Embed the iframe for the video */}
             <iframe
               src={`https://www.youtube.com/embed/${watch.video}`} // Ensure 'watch.video' contains the correct YouTube video ID
               title={watch.title}
-              className="h-[100px] w-full rounded-t-xl" // Rounded top corners
+              className="h-[100px] w-full rounded-t-xl"
               frameBorder="0"
               allowFullScreen
             />
@@ -72,9 +80,17 @@ const ContinueWatching = ({ series }) => {
                   Watch Now
                 </button>
 
-
-                <button onClick={() => handleDownloadClick(watch.id)} className="bg-white/40 rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center">
-                  <FaDownload />
+                <button
+                  onClick={() => handleDownloadClick(watch.id)}
+                  className={`${downloadingVideo === watch.id ? "bg-gray-400" : "bg-white/40"
+                    } rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center`}
+                  disabled={downloadingVideo === watch.id}
+                >
+                  {downloadingVideo === watch.id ? (
+                    <FaSpinner className="animate-spin" />
+                  ) : (
+                    <FaDownload />
+                  )}
                 </button>
               </div>
             </div>

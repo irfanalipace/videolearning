@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Card, CardContent, Button, Menu, MenuItem } from "@mui/material";
+import { Box, Typography, Card, CardContent, Button, Menu, MenuItem, CircularProgress } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { FaDownload } from "react-icons/fa6";
 
@@ -10,12 +10,12 @@ const YoutubeCard = ({
   buttonText,
   videoDuration,
   onPlay,
-  backgroundImage,
   Vediotitle,
   showDownloadIcon,
   handleAdd,
   onDownloadClick,
-  menuItems, // New prop to pass menu items
+  menuItems,
+  isDownloading, 
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -142,9 +142,7 @@ const YoutubeCard = ({
           >
             {menuItems?.map((item, index) => (
               <MenuItem key={index} onClick={handleMenuClose}>
-                <p onClick={handleAdd}>
-                  {item}
-                </p>
+                <p onClick={handleAdd}>{item}</p>
               </MenuItem>
             ))}
           </Menu>
@@ -168,18 +166,19 @@ const YoutubeCard = ({
       </CardContent>
 
       <Box sx={{ alignItems: "center", padding: "6px", display: "flex", gap: "5px", justifyContent: "center" }}>
-        <Button
-          variant="contained"
-          size="small"
-          style={{ width: "100%", padding: "6px" }}
-          color="secondary"
-        >
+        <Button variant="contained" size="small" style={{ width: "100%", padding: "6px" }} color="secondary">
           {buttonText}
         </Button>
 
-        {/* Conditionally render the download icon */}
+        {/* Conditionally render the download icon or loader */}
         {showDownloadIcon && (
-          <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: "pointer" }} />
+          <Box>
+            {isDownloading ? (
+              <CircularProgress size={24} color="secondary" />
+            ) : (
+              <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: "pointer" }} />
+            )}
+          </Box>
         )}
       </Box>
     </Card>
