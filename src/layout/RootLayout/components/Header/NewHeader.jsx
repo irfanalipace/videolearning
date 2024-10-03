@@ -1,13 +1,17 @@
 import SearchInput from "./SearchInput";
 import { IconButton, Avatar, useTheme, Button } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
+import { useDispatch } from "react-redux";
 
 const NewHeader = ({ open, toggleOpen }) => {
   const theme = useTheme();
-
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(
+{type: "LOGOUT_SUCCESS"}
+    )
+  }
   return (
     <header className="px-5 py-2 fixed top-0 z-20 w-full bg-white shadow md:flex md:items-center md:justify-between ">
       <div className="w-[280px]  flex items-center justify-center">
@@ -37,20 +41,11 @@ const NewHeader = ({ open, toggleOpen }) => {
             sx={{ textTransform: "none" }}
             color="secondary"
             variant="outlined"
-            component={Link}
-            to="/sign-up"
+            onClick={handleLogout}
           >
-            Sign up
+            Log Out
           </Button>
-          <Button
-            sx={{ textTransform: "none" }}
-            color="secondary"
-            variant="contained"
-            component={Link}
-            to="/sign-in"
-          >
-            Sign in
-          </Button>
+          
         </div>
       </div>
     </header>

@@ -7,11 +7,9 @@ const Header = () => {
     <Toolbar>
         Landing
         <Button  variant='contained' sx={{ml:'auto'}}>
-        Login
+        Log out
         </Button> 
-        <Button variant='contained'>
-            SignUp
-        </Button>
+     
     </Toolbar>
 </AppBar>
   )

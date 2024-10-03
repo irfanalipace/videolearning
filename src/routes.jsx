@@ -27,45 +27,52 @@ import Signup from "./Views/Auth/Signup";
 import VedioPlateform from "./Views/Resources/VedioPlateform";
 import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 import Price from "./Views/Payment/Price";
+import { useSelector } from "react-redux";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export default function Router() {
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
+  // console.log(isAuthenticated, 'hh+++++++++++')
   let element = useRoutes([
-    { path: "/subscsignriptions", element: <PremiumMembership /> },
-    { path: "/-in", element: <SignIn /> },
+    { path: "/subscriptions", element: <PremiumMembership /> },
+    { path: "/", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
     { path: "/price", element: <Price /> },
     { path: "otp-authentication", element: <OtpAuthentications /> },
-    {
-      path: "/",
-      element: <RootLayout />,
-      children: [
-        { path: "/", element: <Navigate to="/watch-videos" replace /> },
-        { path: "watch-videos", element: <WatchVideos /> },
-        { path: "watch-series", element: <WatchSeries /> },
-        { path: "no-vedio", element: <NoVideo /> },
-        { path: "vedio-list", element: <VideoList /> },
-        { path: "series-list", element: <MySeriesList /> },
-        { path: "watch-series-two", element: <WatchSeriesTwo /> },
-        { path: "watch-history", element: <WatchHistory /> },
-        { path: "notifications", element: <Notification /> },
-        { path: "resources/about-us", element: <AboutUs /> }, ///
+        {element : <ProtectedRoutes isLogged={isAuthenticated}/>, children:[
+          {
+            path:"/",
+            element: <RootLayout />,
+            children :[
+              { path: "watch-videos", element: <WatchVideos /> },
+              { path: "watch-series", element: <WatchSeries /> },
+              { path: "no-vedio", element: <NoVideo /> },
+              { path: "vedio-list", element: <VideoList /> },
+              { path: "series-list", element: <MySeriesList /> },
+              { path: "watch-series-two", element: <WatchSeriesTwo /> },
+              { path: "watch-history", element: <WatchHistory /> },
+              { path: "notifications", element: <Notification /> },
+              { path: "resources/about-us", element: <AboutUs /> },
+              {
+                path: "watch-series-phase-two",
+                element: <WatchSeriesSecondScreen />,
+              },
+              { path: "resources/faq", element: <FAQ /> },
+              { path: "resources/teaching-method", element: <TeachingMethod /> },
+              { path: "resources/vedio-plateform", element: <VedioPlateform /> },
+              { path: "resources/subscriptions", element: <PreSubscriptions /> },
+              { path: "watch-library", element: <WatchLibrary /> },
+              { path: "library", element: <Library /> },
+              { path: "progress", element: <Progress /> },
+              { path: "bignners", element: <Bignner /> },
+              { path: "settings", element: <Settings /> },
+            ]
+          }
+       
+        ]},
+        
         { path: "verify-email", element: <VerifyEmail /> },
         { path: "auth-success", element: <AuthticationSuccess /> },
-        {
-          path: "watch-series-phase-two",
-          element: <WatchSeriesSecondScreen />,
-        },
-        { path: "resources/faq", element: <FAQ /> },
-        { path: "resources/teaching-method", element: <TeachingMethod /> },
-        { path: "resources/vedio-plateform", element: <VedioPlateform /> },
-        { path: "resources/subscriptions", element: <PreSubscriptions /> },
-        { path: "watch-library", element: <WatchLibrary /> },
-        { path: "library", element: <Library /> },
-        { path: "progress", element: <Progress /> },
-        { path: "bignners", element: <Bignner /> },
-        { path: "settings", element: <Settings /> },//
-      ],
-    },
   ]);
   return element;
 }

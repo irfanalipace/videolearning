@@ -21,10 +21,8 @@ const SignIn = () => {
     const userData = { email, password };
     dispatch(loginUser(userData))
       .then((response) => {
-        console.log(response, "++++++++++++");
-
         const token = response.data.payload.token;
-        console.log(token, 'token')
+        // console.log(token, 'token')
         if (token) {
           localStorage.setItem("token", token);
         }

@@ -9,6 +9,7 @@ import {
   LOGIN_FAILURE,
   OTP_SUCCESS,
   OTP_REQUEST,
+  LOGOUT_SUCCESS
 } from "./actionTypes";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   user: null,
   token: null,
   error: null,
+  isAuthenticated : false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -29,15 +31,35 @@ const authReducer = (state = initialState, action) => {
         error: null,
       };
     case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
     case OTP_SUCCESS:
       return {
         ...state,
         loading: false,
-        user: action.payload.user, // Store user data in Redux
-        token: action.payload.token, // Store token in Redux
+        // user: action.payload.user, 
+        // token: action.payload.token, 
         error: null,
+        
       };
+      case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload.user, 
+        token: action.payload.token, 
+        isAuthenticated:true,
+        error: null,
+        
+      };
+      case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        // loading: false,
+        user: null, 
+        token: null, 
+        isAuthenticated:false,
+        
+      };
+
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
       return {

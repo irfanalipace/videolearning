@@ -7,3 +7,5 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const OTP_REQUEST = "OTP_REQUEST";
 export const OTP_SUCCESS = "OTP_SUCCESS";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+
