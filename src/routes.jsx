@@ -30,8 +30,8 @@ import Price from "./Views/Payment/Price";
 
 export default function Router() {
   let element = useRoutes([
-    { path: "/subscriptions", element: <PremiumMembership /> },
-    { path: "/sign-in", element: <SignIn /> },
+    { path: "/subscsignriptions", element: <PremiumMembership /> },
+    { path: "/-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
     { path: "/price", element: <Price /> },
     { path: "otp-authentication", element: <OtpAuthentications /> },
@@ -48,7 +48,7 @@ export default function Router() {
         { path: "watch-series-two", element: <WatchSeriesTwo /> },
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification /> },
-        { path: "resources/about-us", element: <AboutUs /> },
+        { path: "resources/about-us", element: <AboutUs /> }, ///
         { path: "verify-email", element: <VerifyEmail /> },
         { path: "auth-success", element: <AuthticationSuccess /> },
         {
@@ -63,7 +63,7 @@ export default function Router() {
         { path: "library", element: <Library /> },
         { path: "progress", element: <Progress /> },
         { path: "bignners", element: <Bignner /> },
-        { path: "settings", element: <Settings /> },
+        { path: "settings", element: <Settings /> },//
       ],
     },
   ]);
