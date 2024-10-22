@@ -3,7 +3,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const CookingColombian = () => {
+const CookingColombian = ({ series }) => {
   return (
     <div
       style={{ backgroundImage: "url('/colombian-background.jpg')" }}
@@ -11,14 +11,14 @@ const CookingColombian = () => {
     >
       {/* beginner text */}
       <span className="absolute top-0 left-0 rounded-tl-xl text-white font-bold bg-bluePrimary px-[16px] py-[15px]">
-        Beginner
+        {series[0]?.level}
       </span>
 
       <div className="pl-9 h-full flex flex-col  justify-center gap-6 text-white">
         {/* Cooking Grids */}
         <div className="w-[690px]  flex flex-col justify-center gap-2 ">
           <h1 className=" font-bold text-[20px] font-poppins">
-            Cooking Colombian Dishes
+            {series[0]?.title}
           </h1>
           <div className="grid grid-cols-5">
             <span className="text-sm font-poppins font-normal text-white">
@@ -40,18 +40,7 @@ const CookingColombian = () => {
         </div>
 
         <p className="font-light text-sm">
-          Lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet
-          connsectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor
-          sit amet consectetur lorem ipsum dolor sit amet connsectetur lorem
-          ipsum dolor sit amet consectetur lorem ipsum dolor sit amet
-          consectetur lorem ipsum dolor sit amet connsectetur lorem ipsum dolor
-          sit amet consectetur lorem ipsum sit amet consectetur lorem ipsum
-          dolor sit amet connsectetur lorem ipsum dolor sit amet consectetur
-          lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet
-          connsectetur lorem ipsum dolor sit amet consectetur sit amet
-          consectetur lorem ipsum dolor sit amet consectetur lorem ipsum dolor
-          sit amet connsectetur lorem ipsum dolor sit amet consectetur lorem
-          ipsum sit amet consectetur lorem ipsum dolor sit .
+          {series[0]?.description}
         </p>
 
         <div className="flex items-center justify-between">

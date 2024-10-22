@@ -1,67 +1,107 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContinueSelect from "./ContinueSelect";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-const ContinueWatching = () => {
+import { request } from "../../services/axios";
+import { FaDownload } from "react-icons/fa6";
+import { FaSpinner } from "react-icons/fa";
+
+const ContinueWatching = ({ series }) => {
+  const data = series[0]?.videos;
+  console.log(data, 'hhhhh');
   const navigate = useNavigate();
-  const watchingArray = [
-    { image: "/blond-girl.jpg", title: "Trying Colombia’s..." },
-    { image: "/ice-cream.jpg", title: "Lets try these tiny cocu..." },
-    {
-      image: "/pizza.jpg",
-      title: "Quiz Time with Andrés",
-    },
-  ];
+
+  // State to track which video is being downloaded
+  const [downloadingVideo, setDownloadingVideo] = useState(null);
+
+  const handleDownloadClick = (video_id) => {
+    // Set the current video as downloading
+    setDownloadingVideo(video_id);
+    sendVideoData(video_id, "series_video");
+  };
+
+  const sendVideoData = async (video_id, type) => {
+    try {
+      const options = {
+        method: "post",
+        url: "api/download/list",
+        data: {
+          video_id,
+          type,
+        },
+      };
+
+      const response = await request(options);
+      console.log("Response:", response);
+    } catch (error) {
+      console.error("Error in sendVideoData:", error);
+    } finally {
+      // Reset downloading state after the request completes
+      setDownloadingVideo(null);
+    }
+  };
+
+  const handleWatchNowClick = (watch) => {
+    navigate("/watch-series-phase-two", { state: { video: watch } });
+  };
 
   return (
     <div className="flex flex-col gap-4">
       <ContinueSelect />
       <div className="grid grid-cols-3 gap-4">
-        {watchingArray.map((watch, index) => (
-          <div
-            key={index}
-            style={{ backgroundImage: `url(${watch.image})` }}
-            className="h-[270px] relative contain bg-cover bg-center rounded-xl cursor-pointer transition-all duration-300"
-          >
-            <div className="absolute w-full rounded-xl bg-black/50 h-full flex flex-col justify-end pl-5 gap-9 text-white pb-5">
+        {data?.map((watch, index) => (
+          <div key={index} className="rounded-xl cursor-pointer transition-all duration-300 bg-a-800">
+            {/* Embed the iframe for the video */}
+            <iframe
+              src={`https://www.youtube.com/embed/${watch.video}`} // Ensure 'watch.video' contains the correct YouTube video ID
+              title={watch.title}
+              className="h-[100px] w-full rounded-t-xl"
+              frameBorder="0"
+              allowFullScreen
+            />
+            {/* Card content */}
+            <div className="py-4 px-4 bg-black rounded-b-xl flex flex-col justify-end h-full text-white z-0">
               <div>
-                <h1 className=" font-bold text-sm  font-poppins">
-                  Cooking Colombian....
-                </h1>
-                <div className="grid grid-cols-3 gap-4 text-gray-100">
-                  <span className="text-[11px] font-poppins font-thin ">
-                    11 Episodes
-                  </span>
-                  <span className="text-[11px] font-poppins font-thin ">
-                    183 Minutes
-                  </span>
-                  <span className="text-[11px] font-poppins font-thin ">
-                    Actions
-                  </span>
+                <h1 className="font-bold text-sm font-poppins">{watch.title}</h1>
+                <h1 className="font-normal text-xs font-poppins mt-1">{watch.description}</h1>
+                <div className="grid grid-cols-3 gap-4 text-gray-300 mt-2">
+                  <span className="text-[11px] font-poppins font-thin">{watch.episodes} Episodes</span>
+                  <span className="text-[11px] font-poppins font-thin">{watch.duration} Minutes</span>
+                  <span className="text-[11px] font-poppins font-thin">Actions</span>
                 </div>
               </div>
 
-              {/* buttons  */}
-
-              <div className="flex items-center justify-between pr-9">
+              {/* buttons */}
+              <div className="flex items-center justify-between mt-3">
                 <button
-                  className="bg-bluePrimary rounded-3xl px-3 pb-2 pt-1 text-white"
-                  onClick={() => navigate("/watch-series-phase-two")}
+                  className="bg-blue-500 rounded-3xl px-4 py-1 text-white hover:bg-blue-600 transition-all"
+                  onClick={() => handleWatchNowClick(watch)}
                 >
                   Watch Now
                 </button>
 
-                <button className="bg-white/40 rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center px-3 pb-2 pt-1">
-                  +
+                <button
+                  onClick={() => handleDownloadClick(watch.id)}
+                  className={`${downloadingVideo === watch.id ? "bg-gray-400" : "bg-white/40"
+                    } rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center`}
+                  disabled={downloadingVideo === watch.id}
+                >
+                  {downloadingVideo === watch.id ? (
+                    <FaSpinner className="animate-spin" />
+                  ) : (
+                    <FaDownload />
+                  )}
                 </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
       <div className="flex items-end justify-end">
         <div className="flex gap-2">
-          <FaAngleLeft />
-          <FaAngleRight />
+          <FaAngleLeft className="cursor-pointer" />
+          <FaAngleRight className="cursor-pointer" />
         </div>
       </div>
     </div>

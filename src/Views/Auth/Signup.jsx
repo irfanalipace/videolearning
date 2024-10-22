@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/reducers/action";
-import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert, Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import { ClipLoader } from 'react-spinners'; // Loader
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [modalOpen, setModalOpen] = useState(false);

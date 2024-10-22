@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import SearchInput from "./SearchInput";
 import { IconButton, Avatar, useTheme, Button } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const NewHeader = ({ open, toggleOpen }) => {
   const data = useSelector((state) => state)
@@ -21,6 +20,12 @@ const NewHeader = ({ open, toggleOpen }) => {
     setIsLoggedIn(false); // Update state to reflect logout
   };
 
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(
+{type: "LOGOUT_SUCCESS"}
+    )
+  }
   return (
     <header className="px-5 py-2 fixed top-0 z-20 w-full bg-white shadow md:flex md:items-center md:justify-between">
       <div className="w-[280px] flex items-center justify-center">

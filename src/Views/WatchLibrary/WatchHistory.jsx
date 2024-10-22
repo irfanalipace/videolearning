@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -13,6 +13,7 @@ import {
   Select,
   MenuItem,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -23,6 +24,8 @@ import YoutubeCard from "../WatchVideos/YoutubeCard";
 import image from "../../assets/picture/image1.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { request } from "../../services/axios";
+import ToastComp from "../../components/toast/ToastComp";
 const WatchHistory = () => {
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
@@ -122,6 +125,38 @@ const WatchHistory = () => {
     },
   ];
 
+  const [HistoryVideo, setHistoryVideo] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    const fetchHistoryVideos = async () => {
+      try {
+        const response = await request({
+          url: "api/video/history",
+          method: "get",
+        });
+
+        if (response?.status === 200) {
+          setHistoryVideo(response.data.payload);
+        }
+      } catch (error) {
+        console.log("Error fetching video data:", error);
+        ToastComp({
+          variant: "error",
+          message: "Failed to fetch videos. Please try again later.",
+        });
+      } finally {
+        setLoading(false); // Stop loading after API response
+      }
+    };
+
+    fetchHistoryVideos();
+  }, []);
+
   return (
     <Container>
       <Grid
@@ -130,39 +165,88 @@ const WatchHistory = () => {
         justifyContent="space-between"
         sx={{ padding: "5px" }}
       >
-      <Grid item xs={6} >
-      <Box display="flex" alignItems="center" sx={{marginBottom:"8px"}}>
-        <Link to="/watch-library" style={{ textDecoration: "none" }}>
-          <Box display="flex" alignItems="center">
-            <ArrowBackIcon />
-            <Typography sx={{ color: "#0294D3", marginLeft: 1 }}>
-              Back
+        <Grid item xs={6} >
+          <Box display="flex" alignItems="center" sx={{ marginBottom: "8px" }}>
+            <Link to="/watch-library" style={{ textDecoration: "none" }}>
+              <Box display="flex" alignItems="center">
+                <ArrowBackIcon />
+                <Typography sx={{ color: "#0294D3", marginLeft: 1 }}>
+                  Back
+                </Typography>
+              </Box>
+            </Link>
+            <Typography variant="h6" sx={{ marginLeft: 2 }}>
+              History of Videos
             </Typography>
           </Box>
-        </Link>
-        <Typography variant="h6" sx={{ marginLeft: 2 }}>
-        History of Videos
-        </Typography>
-      </Box>
-    </Grid>
+        </Grid>
 
-    
 
-    
-        <Grid container spacing={4}>
-          {videoData.map((video, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <YoutubeCard
-                videoUrl={video.videoUrl}
-                title={video.title}
-                Vediotitle={video.Vediotitle}
-                description={video.description}
-                buttonText={video.buttonText}
-                videoDuration={video.videoDuration}
-                backgroundImage={video.backgroundImage}
-              />
-            </Grid>
-          ))}
+
+
+        <Grid container spacing={4} sx={{ padding: 2 }}>
+          {loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
+              <CircularProgress color="secondary" />
+            </Box>
+          ) : (
+            HistoryVideo.length > 0 ? (
+              HistoryVideo.map((videoItem, index) => {
+                const video = videoItem.history; // Access the downloadable object
+                return (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <YoutubeCard
+                      Vediotitle={video.title}
+                      videoUrl={video.video} // Correctly reference video URL
+                      title={video.title}
+                      description={video.description}
+                      buttonText={video.level}
+                      videoDuration={video.videoDuration || "N/A"}
+                      backgroundImage={video.backgroundImage || ""}
+                      
+                    />
+                  </Grid>
+                );
+              })
+            ) : (
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                minHeight="100vh"
+                textAlign="center"
+                p={2}
+              >
+                <img
+                  src={image}
+                  alt="No Video"
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+                <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                  You Don’t have Downloading Yet
+                </Typography>
+                <Box sx={{ width: "50%" }}>
+                  <Typography variant="body1" sx={{ mb: 4 }}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </Typography>
+                </Box>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#0294D3",
+                    color: "#fff",
+                    "&:hover": {
+                      backgroundColor: "#0273b6",
+                    },
+                  }}
+                  onClick={handleBack}
+                >
+                  <ArrowBackIcon /> Go Back to Library
+                </Button>
+              </Box>
+            )
+          )}
         </Grid>
       </Grid>
     </Container>

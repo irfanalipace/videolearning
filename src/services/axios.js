@@ -1,8 +1,19 @@
 import axios from "axios";
 import ToastComp from "../components/toast/ToastComp";
 
+// Create an Axios instance
 const client = axios.create({
   baseURL: import.meta.env.VITE_REACT_APP_URL,
+});
+
+client.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 export const request = async ({ ...options }, notify = true) => {
@@ -11,58 +22,42 @@ export const request = async ({ ...options }, notify = true) => {
       if (response.status === 200) {
         if (options.method === "delete") {
           ToastComp({
-            varient: "success",
+            variant: "success",
             message: response.message
               ? response.message
               : "Removed Successfully",
           });
         } else if (options.method === "put") {
-          if (notify) {
-            ToastComp({
-              varient: "success",
-              message: response.message
-                ? response.message
-                : "Updated Successfully",
-            });
-          }
+          ToastComp({
+            variant: "success",
+            message: response.message
+              ? response.message
+              : "Updated Successfully",
+          });
         } else if (options.method === "post") {
-          if (notify) {
-            ToastComp({
-              varient: "info",
-              message: response.message ? response.message : "Already Added",
-            });
-            return response;
-          } else {
-            ToastComp({
-              varient: "info",
-              message: response.message ? response.message : "Already Added",
-            });
-          }
+          ToastComp({
+            variant: "info",
+            message: response.message ? response.message : "Already Added",
+          });
           return response;
         } else if (options.method === "patch") {
-          if (notify) {
-            ToastComp({
-              varient: "success",
-              message: response.message
-                ? response.message
-                : "Updated Successfully",
-            });
-          }
+          ToastComp({
+            variant: "success",
+            message: response.message
+              ? response.message
+              : "Updated Successfully",
+          });
         }
         return response;
       } else if (response.status === 201) {
-        if (notify == true) {
-          ToastComp({
-            varient: "success",
-            message: response.message ? response.message : "Added Successfully",
-          });
-          return response;
-        } else {
-          return response;
-        }
+        ToastComp({
+          variant: "success",
+          message: response.message ? response.message : "Added Successfully",
+        });
+        return response;
       } else {
         ToastComp({
-          varient: "error",
+          variant: "error",
           message: response.message ? response.message : "Error",
         });
         return response;
@@ -74,26 +69,27 @@ export const request = async ({ ...options }, notify = true) => {
 
   const onError = (error) => {
     console.log(
-      "Error In Axios interceptor : ",
+      "Error In Axios interceptor: ",
       error,
       error?.response?.data?.message
     );
     if (notify) {
       ToastComp({
-        varient: "error",
+        variant: "error",
         message:
           error?.response?.data?.message ||
           error?.message ||
-          "Error ! Try Again Later",
+          "Error! Try Again Later",
       });
-      return error;
     }
-    return error;
+    return Promise.reject(error);
   };
 
+  // Handle specific URL pattern (e.g., "tennis")
   if (options?.url?.includes("tennis")) {
-    return client1(options).then(onSuccess).catch(onError);
+    return client(options).then(onSuccess).catch(onError);
   }
 
+  // Default request
   return client(options).then(onSuccess).catch(onError);
 };

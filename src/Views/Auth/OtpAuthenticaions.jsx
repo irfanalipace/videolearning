@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import signinImage from "../../assets/picture/signin.png";
 import { resendOtp, verifyOtp } from "../../store/reducers/action";
 import { useNavigate } from "react-router-dom";
+import { Snackbar, Alert } from "@mui/material"; // Add this line
 
 const OtpAuthentications = () => {
   const [otp, setOtp] = useState(Array(4).fill(""));
@@ -12,6 +13,9 @@ const OtpAuthentications = () => {
   const data = useSelector((state) => state?.admin?.user);
   const navigate = useNavigate();
   const inputRefs = useRef([]); // Create a ref array for the input fields
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success"); // 'success' or 'error'
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
@@ -30,37 +34,56 @@ const OtpAuthentications = () => {
 
   const handleSubmit = () => {
     const otpCode = otp.join("");
-    const otpData = {
-      email: data.email,
-      otp: otpCode,
-    };
+    const otpData = { email: data.email, otp: otpCode };
 
     dispatch(verifyOtp(otpData))
       .then((response) => {
-        console.log("OTP verified successfully!");
-        navigate('/watch-videos', { replace: true });
+        console.log(response, "jjjjj");
+        if (response.data.success) {
+          setSnackbarMessage(
+            response?.data?.message || "OTP verified successfully!Please Login"
+          );
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
+          navigate("/sign-in");
+        } else {
+          setSnackbarMessage(
+            response?.data?.message || "OTP verification failed."
+          );
+          setSnackbarSeverity("error");
+          setSnackbarOpen(true);
+        }
       })
       .catch((error) => {
-        setErrorMessage(error?.response?.data?.message || "OTP verification failed.");
+        setSnackbarMessage(
+          error?.response?.data?.message || "OTP verification failed."
+        );
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       });
   };
 
   const handleResendOtp = () => {
-    const resendData = {
-      email: data.email,
-    };
+    const resendData = { email: data.email };
 
     dispatch(resendOtp(resendData))
       .then((response) => {
-        if (response.payload.success) {
-          console.log("OTP resent successfully!");
-          setErrorMessage(response.payload.message || "OTP resent successfully.");
-        } else {
-          setErrorMessage(response.payload.message || "Failed to resend OTP.");
+        console.log(response, "jj");
+
+        if (response.data.success) {
+          setSnackbarMessage(
+            response?.data?.message || "OTP resent successfully!"
+          );
+          setSnackbarSeverity("success");
+          setSnackbarOpen(true);
         }
       })
       .catch((error) => {
-        setErrorMessage(error?.response?.data?.message || "Failed to resend OTP.");
+        setSnackbarMessage(
+          error?.response?.data?.message || "OTP resend failed."
+        );
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
       });
   };
 
@@ -126,6 +149,19 @@ const OtpAuthentications = () => {
         <Box sx={{ width: { xs: "90%", md: "100%" }, height: "100%" }}>
           <img src={signinImage} alt="Sign in" style={{ height: "470px", width: "100%" }} />
         </Box>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={() => setSnackbarOpen(false)}
+        >
+          <Alert
+            onClose={() => setSnackbarOpen(false)}
+            severity={snackbarSeverity}
+            sx={{ width: "100%" }}
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );
