@@ -62,7 +62,7 @@ const Signup = () => {
             <div className="flex flex-col gap-2">
               <label className="text-black text-md font-semibold">Email</label>
               <input
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="px-4 py-2 border rounded focus:outline-none"
@@ -109,6 +109,7 @@ const Signup = () => {
           <Dialog open={modalOpen} onClose={handleCloseModal}>
             <DialogTitle>Privacy Policy</DialogTitle>
             <DialogContent dividers>
+              <div ref={contentRef} onScroll={handleScroll} style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <div ref={contentRef} onScroll={handleScroll} style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
                   <h1 className="text-2xl font-bold mb-4">Privacy Policy for Arabic All The Time</h1>
@@ -169,13 +170,12 @@ const Signup = () => {
                   <p>If you have any questions about this Privacy Policy, please contact us:</p>
                   <p>Email: support@example.com</p>
                 </div>
+                </div>
               </div>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseModal}>Cancel</Button>
-              <Button onClick={handleConfirmSignup} disabled={!isAgreed} className={`bg-${isAgreed ? 'bluePrimary' : 'gray-400'} text-white`}>
-                Agree
-              </Button>
+              <Button onClick={handleCloseModal} color="primary">Cancel</Button>
+              <Button onClick={handleConfirmSignup} color="primary" disabled={!isAgreed}>Agree</Button>
             </DialogActions>
           </Dialog>
         </>

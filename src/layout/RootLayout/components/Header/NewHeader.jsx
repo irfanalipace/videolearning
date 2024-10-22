@@ -3,23 +3,12 @@ import SearchInput from "./SearchInput";
 import { IconButton, Avatar, useTheme, Button } from "@mui/material";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const NewHeader = ({ open, toggleOpen }) => {
   const data = useSelector((state) => state)
   console.log(data)
   const theme = useTheme();
-  
-  // State to track if user is logged in
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Function to handle logout
-  const handleLogout = () => {
-    // Perform logout logic here
-    setIsLoggedIn(false); // Update state to reflect logout
-  };
-
   const dispatch = useDispatch()
   const handleLogout = () => {
     dispatch(
@@ -52,37 +41,15 @@ const NewHeader = ({ open, toggleOpen }) => {
         </div>
         
         <div className="flex items-center gap-2">
-          {!isLoggedIn ? (
-            <>
-              <Button
-                sx={{ textTransform: "none" }}
-                color="secondary"
-                variant="outlined"
-                component={Link}
-                to="/sign-up"
-              >
-                Sign up
-              </Button>
-              <Button
-                sx={{ textTransform: "none" }}
-                color="secondary"
-                variant="contained"
-                component={Link}
-                to="/sign-in"
-              >
-                Sign in
-              </Button>
-            </>
-          ) : (
-            <Button
-              sx={{ textTransform: "none" }}
-              color="secondary"
-              variant="contained"
-              onClick={handleLogout} // Call logout function
-            >
-              Log out
-            </Button>
-          )}
+          <Button
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            variant="outlined"
+            onClick={handleLogout}
+          >
+            Log Out
+          </Button>
+          
         </div>
       </div>
     </header>
