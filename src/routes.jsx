@@ -48,7 +48,7 @@ export default function Router() {
         { path: "watch-series-two", element: <WatchSeriesTwo /> },
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification /> },
-        { path: "resources/about-us", element: <AboutUs /> }, ///
+        { path: "resources/about-us", element: <AboutUs /> },
         { path: "verify-email", element: <VerifyEmail /> },
         { path: "auth-success", element: <AuthticationSuccess /> },
         {

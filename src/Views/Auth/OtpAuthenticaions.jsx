@@ -38,7 +38,7 @@ const OtpAuthentications = () => {
     dispatch(verifyOtp(otpData))
       .then((response) => {
         console.log("OTP verified successfully!");
-        navigate('/watch-videos', { replace: true }); // Replace the current entry in the history stack
+        navigate('/watch-videos', { replace: true });
       })
       .catch((error) => {
         setErrorMessage(error?.response?.data?.message || "OTP verification failed.");

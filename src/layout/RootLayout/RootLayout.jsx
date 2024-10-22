@@ -37,8 +37,9 @@ const RootLayout = () => {
     <div className="relative flex  h-screen overflow-hidden min-w-screen">
       {/* <TopBar onOpenNav={() => setOpen(true)} /> */}
       <NewHeader open={open} toggleOpen={toggleOpen} />
-
+<div className="hidden md:block">
       <Navbar open={open} onCloseNav={() => setOpen(false)} />
+</div>
 
       <div className="w-screen md:w-h-[calc(100vh-280px)] overflow-y-auto h-[calc(100vh-12px)] py-28 px-16 bg-[#F3F6FB]">
         <Outlet />

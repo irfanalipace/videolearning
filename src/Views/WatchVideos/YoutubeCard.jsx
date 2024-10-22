@@ -20,16 +20,19 @@ const YoutubeCard = ({
         flexDirection: "column",
         justifyContent: "space-between",
         boxShadow: 3,
-
         position: "relative",
         overflow: "hidden",
-        // backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Box sx={{ position: "relative", paddingTop: "56.25%" }}>
+      <Box
+        sx={{
+          position:"relative",
+          // Adjust padding for small screens
+        }}
+      >
         <iframe
           width="100%"
           height="100%"
@@ -44,8 +47,11 @@ const YoutubeCard = ({
             left: 0,
             width: "100%",
             height: "100%",
+            minWidth: "200px", 
+            minHeight: "200px", 
           }}
         />
+
 
         <Box
           sx={{
@@ -83,7 +89,7 @@ const YoutubeCard = ({
       </Box>
 
       <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", paddingTop:'200px' }}>
           <Box>
             <Typography
               gutterBottom
