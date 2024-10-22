@@ -46,6 +46,10 @@ const Signup = () => {
     setIsAgreed(scrollTop + clientHeight >= scrollHeight / 2);
   };
 
+  const gologin=()=>{
+    navigate('/')
+  }
+
   return (
     <div className="grid grid-cols-12">
       {loading ? (
@@ -92,7 +96,7 @@ const Signup = () => {
             </button>
 
             <p className="text-gray-600 text-center mt-4">
-              Already have an account? <strong className="text-blue-500">Login</strong>
+              Already have an account? <strong onClick={gologin} className="text-blue-500 cursor-pointer">Login</strong>
             </p>
           </div>
 
