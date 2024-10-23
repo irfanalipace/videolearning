@@ -35,8 +35,8 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // user: action.payload.user, 
-        // token: action.payload.token, 
+        user: action.payload.user, 
+        token: action.payload.token, 
         error: null,
         
       };

@@ -1,4 +1,4 @@
-import { useRoutes, Navigate } from "react-router-dom/dist"; // Import Navigate
+import { Navigate, useRoutes } from "react-router-dom"; // Import Navigate
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
@@ -27,52 +27,47 @@ import Signup from "./Views/Auth/Signup";
 import VedioPlateform from "./Views/Resources/VedioPlateform";
 import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 import Price from "./Views/Payment/Price";
-import { useSelector } from "react-redux";
-import ProtectedRoutes from "./ProtectedRoutes";
+import Nodownload from "./layout/RootLayout/components/Nodownload";
 
 export default function Router() {
-  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
-  // console.log(isAuthenticated, 'hh+++++++++++')
   let element = useRoutes([
     { path: "/subscriptions", element: <PremiumMembership /> },
-    { path: "/", element: <SignIn /> },
+    { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
     { path: "/price", element: <Price /> },
     { path: "otp-authentication", element: <OtpAuthentications /> },
-        {element : <ProtectedRoutes isLogged={isAuthenticated}/>, children:[
-          {
-            path:"/",
-            element: <RootLayout />,
-            children :[
-              { path: "watch-videos", element: <WatchVideos /> },
-              { path: "watch-series", element: <WatchSeries /> },
-              { path: "no-vedio", element: <NoVideo /> },
-              { path: "vedio-list", element: <VideoList /> },
-              { path: "series-list", element: <MySeriesList /> },
-              { path: "watch-series-two", element: <WatchSeriesTwo /> },
-              { path: "watch-history", element: <WatchHistory /> },
-              { path: "notifications", element: <Notification /> },
-              { path: "resources/about-us", element: <AboutUs /> },
-              {
-                path: "watch-series-phase-two",
-                element: <WatchSeriesSecondScreen />,
-              },
-              { path: "resources/faq", element: <FAQ /> },
-              { path: "resources/teaching-method", element: <TeachingMethod /> },
-              { path: "resources/vedio-plateform", element: <VedioPlateform /> },
-              { path: "resources/subscriptions", element: <PreSubscriptions /> },
-              { path: "watch-library", element: <WatchLibrary /> },
-              { path: "library", element: <Library /> },
-              { path: "progress", element: <Progress /> },
-              { path: "bignners", element: <Bignner /> },
-              { path: "settings", element: <Settings /> },
-            ]
-          }
-       
-        ]},
-        
-        { path: "verify-email", element: <VerifyEmail /> },
-        { path: "auth-success", element: <AuthticationSuccess /> },
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        { path: "/", element: <Navigate to="/watch-videos" replace /> }, // Redirect to /watch-videos
+        { path: "watch-videos", element: <WatchVideos /> }, // Ensure this route is defined
+        { path: "watch-series", element: <WatchSeries /> },
+        { path: "no-vedio", element: <NoVideo /> },
+        { path: "vedio-list", element: <VideoList /> },
+        { path: "series-list", element: <MySeriesList /> },
+        { path: "watch-series-two", element: <WatchSeriesTwo /> },
+        { path: "watch-history", element: <WatchHistory /> },
+        { path: "notifications", element: <Notification /> },
+        { path: "resources/about-us", element: <AboutUs /> },
+        { path: "watch-series-phase-two", element: <WatchSeriesSecondScreen /> },
+        { path: "resources/faq", element: <FAQ /> },
+        { path: "resources/teaching-method", element: <TeachingMethod /> },
+        { path: "resources/vedio-plateform", element: <VedioPlateform /> },
+        { path: "resources/subscriptions", element: <PreSubscriptions /> },
+        { path: "watch-library", element: <WatchLibrary /> },
+        { path: "library", element: <Library /> },
+        { path: "progress", element: <Progress /> },
+        { path: "bignners", element: <Bignner /> },
+        { path: "settings", element: <Settings /> },
+        { path: "/Nodownload", element: <Nodownload /> },
+
+
+      ]
+    },
+    { path: "verify-email", element: <VerifyEmail /> },
+    { path: "auth-success", element: <AuthticationSuccess /> },
   ]);
+
   return element;
 }

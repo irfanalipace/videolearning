@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/reducers/action";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar, Button, CircularProgress } from "@mui/material";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,10 +20,10 @@ const SignIn = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     const userData = { email, password };
+    setLoading(true); // Start loading
     dispatch(loginUser(userData))
       .then((response) => {
         const token = response.data.payload.token;
-        // console.log(token, 'token')
         if (token) {
           localStorage.setItem("token", token);
         }
@@ -49,13 +50,18 @@ const SignIn = () => {
           setErrorMessage(`Password: ${errorData.password}`);
         } else {
           setErrorMessage(
-            errorData.message || "Registration failed. Please try again."
+            errorData.message || "Login failed. Please try again."
           );
         }
 
         setSnackbarOpen(true);
+      })
+      .finally(() => {
+        setLoading(false); // End loading
       });
   };
+
+  const isButtonDisabled = !email || !password; // Disable button if either field is empty
 
   return (
     <div>
@@ -102,12 +108,17 @@ const SignIn = () => {
               required
             />
           </div>
-          <button
-            className="bg-bluePrimary text-white font-bold py-3 rounded-[7px] text-sm md:text-[16px]"
+          <Button
+            variant="contained"
+            className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center" // Add flex for alignment
             onClick={handleSignIn}
+            disabled={loading || isButtonDisabled}
+            sx={{ position: 'relative' }}
           >
-            Sign In
-          </button>
+            {loading ? (
+              <CircularProgress size={24} color="inherit" sx={{ marginRight: 1 }} /> // Adjust size for better fit
+            ) : "Sign In"}
+          </Button>
           <div>
             <p className="text-[#808080] text-center mt-4">
               Don't have an account?{" "}
@@ -126,7 +137,6 @@ const SignIn = () => {
         </div>
       </div>
 
-      {/* MUI Snackbar for error messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}

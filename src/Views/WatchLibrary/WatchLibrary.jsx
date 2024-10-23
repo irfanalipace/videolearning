@@ -6,32 +6,34 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import SeriesIcon from "@mui/icons-material/PlaylistPlay";
 import HistoryIcon from "@mui/icons-material/History";
+import { useSelector } from "react-redux";
 
 const items = [
   {
     name: "My Download List",
-    path: "/no-vedio",
+    path: "/vedio-list", // Adjust the path if needed
     icon: <LogoutIcon fontSize="small" />,
   },
   {
     name: "My Video List",
-    path: "/vedio-list",
+    path: "/vedio-list", // Adjust the path if needed
     icon: <VideoLibraryIcon fontSize="small" />,
   },
   {
     name: "My Series Videos",
-    path: "/series-list",
+    path: "/series-list", // Adjust the path if needed
     icon: <SeriesIcon fontSize="small" />,
   },
   {
     name: "History of Video",
-    path: "/watch-history",
+    path: "/watch-history", // Adjust the path if needed
     icon: <HistoryIcon fontSize="small" />,
   },
 ];
 
 const WatchLibrary = () => {
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -63,7 +65,15 @@ const WatchLibrary = () => {
             </span>
             {item.name}
           </Typography>
-          <IconButton onClick={() => handleNavigation(item.path)}>
+          <IconButton
+            onClick={() => {
+              if (isAuthenticated) {
+                handleNavigation(item.path); // User is authenticated, proceed with navigation
+              } else {
+                navigate('/Nodownload'); // User is not authenticated, navigate to no download page
+              }
+            }}
+          >
             <ArrowForwardIosIcon />
           </IconButton>
         </Box>

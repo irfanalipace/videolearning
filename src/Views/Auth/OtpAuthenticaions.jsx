@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Grid, Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { Grid, Box, Typography, TextField, Button, Snackbar, Alert, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { resendOtp, verifyOtp } from "../../store/reducers/action";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const OtpAuthentications = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [loading, setLoading] = useState(false); // Loading state
   const dispatch = useDispatch();
   const data = useSelector((state) => state?.admin?.user);
   const navigate = useNavigate();
@@ -30,24 +31,22 @@ const OtpAuthentications = () => {
   const handleSubmit = () => {
     const otpCode = otp.join("");
     const otpData = { email: data.email, otp: otpCode };
+    setLoading(true); // Start loading
 
     dispatch(verifyOtp(otpData))
       .then((response) => {
-        if (response.data.success) {
-          setSnackbarMessage(response?.data?.message || "OTP verified successfully! Please Login");
-          setSnackbarSeverity("success");
-          setSnackbarOpen(true);
-          navigate("/sign-in");
-        } else {
-          setSnackbarMessage(response?.data?.message || "OTP verification failed.");
-          setSnackbarSeverity("error");
-          setSnackbarOpen(true);
-        }
+        setSnackbarMessage(response.data.success ? response.data.message : "OTP verification failed.");
+        setSnackbarSeverity(response.data.success ? "success" : "error");
+        setSnackbarOpen(true);
+        if (response.data.success) navigate("/sign-in");
       })
       .catch((error) => {
         setSnackbarMessage(error?.response?.data?.message || "OTP verification failed.");
         setSnackbarSeverity("error");
         setSnackbarOpen(true);
+      })
+      .finally(() => {
+        setLoading(false); // End loading
       });
   };
 
@@ -56,11 +55,9 @@ const OtpAuthentications = () => {
 
     dispatch(resendOtp(resendData))
       .then((response) => {
-        if (response.data.success) {
-          setSnackbarMessage(response?.data?.message || "OTP resent successfully!");
-          setSnackbarSeverity("success");
-          setSnackbarOpen(true);
-        }
+        setSnackbarMessage(response.data.success ? "OTP resent successfully!" : "OTP resend failed.");
+        setSnackbarSeverity(response.data.success ? "success" : "error");
+        setSnackbarOpen(true);
       })
       .catch((error) => {
         setSnackbarMessage(error?.response?.data?.message || "OTP resend failed.");
@@ -78,7 +75,7 @@ const OtpAuthentications = () => {
             OTP Authentication
           </Typography>
           <Typography variant="body1" sx={{ mb: 3, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Please enter the four-digit verification code we have sent to{" "}
+            Please enter the four-digit verification code sent to{" "}
             <Typography sx={{ color: "#0294D3", display: "inline-block" }}>{data?.email}</Typography>
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
@@ -101,7 +98,7 @@ const OtpAuthentications = () => {
             ))}
           </Box>
           <Typography variant="body1" sx={{ mb: 4, fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-            Don’t receive the OTP?{" "}
+            Didn’t receive the OTP?{" "}
             <Typography onClick={handleResendOtp} component="span" sx={{ color: "#0294D3", cursor: "pointer" }}>
               Resend OTP
             </Typography>
@@ -110,8 +107,9 @@ const OtpAuthentications = () => {
             size="large"
             onClick={handleSubmit}
             sx={{ width: "100%", background: "#0294D3", color: "white", padding: "10px 0", fontSize: { xs: "0.9rem", sm: "1rem" }, "&:hover": { background: "#027bb3" } }}
+            disabled={loading} // Disable button while loading
           >
-            Confirm
+            {loading ? <CircularProgress size={24} color="inherit" /> : "Confirm"}
           </Button>
           <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
             <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>

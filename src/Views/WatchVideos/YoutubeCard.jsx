@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Box, Typography, Card, CardContent, Button, Menu, MenuItem, CircularProgress } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { FaDownload } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const YoutubeCard = ({
   videoUrl,
@@ -18,6 +20,9 @@ const YoutubeCard = ({
   isDownloading, 
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
+  // console.log(isAuthenticated,'sdfghjklkhfdfg')
 
   // Handle opening of the menu
   const handleMenuClick = (event) => {
@@ -179,13 +184,24 @@ const YoutubeCard = ({
           {buttonText}
         </Button>
 
-        {/* Conditionally render the download icon or loader */}
         {showDownloadIcon && (
           <Box>
             {isDownloading ? (
               <CircularProgress size={24} color="secondary" />
             ) : (
-              <FaDownload color="#0294D3" size={30} onClick={onDownloadClick} style={{ cursor: "pointer" }} />
+              <FaDownload
+                color="#0294D3"
+                size={30}
+                onClick={() => {   
+                  if (isAuthenticated) {
+                    onDownloadClick(); 
+                  } else {
+                   
+                    navigate('/Nodownload'); 
+                  }
+                }}
+                style={{ cursor: "pointer" }}
+              />
             )}
           </Box>
         )}
