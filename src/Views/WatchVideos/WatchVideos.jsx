@@ -69,7 +69,6 @@ const WatchVideos = () => {
     }
   };
 
-
   // Handle video play event
   const handleVideoPlay = async (video_id) => {
     try {
@@ -94,7 +93,7 @@ const WatchVideos = () => {
         url: "api/video/list",
         data: {
           video_id,
-          type: 'video'
+          type: "video",
         },
       });
       console.log(`Video ${video_id} added to the list`);
@@ -107,11 +106,21 @@ const WatchVideos = () => {
 
   return (
     <Box>
-      <Grid container alignItems="center" justifyContent="space-between" sx={{ padding: "7px" }}>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ padding: "7px" }}
+      >
         <Grid item xs={6}>
-          <Box sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          >
             {view === "dashboard" && (
-              <ArrowBack sx={{ mr: 2, color: secondary }} onClick={() => setView("list")} />
+              <ArrowBack
+                sx={{ mr: 2, color: secondary }}
+                onClick={() => setView("list")}
+              />
             )}
             <Typography variant="h6" fontWeight="bold" color="secondary">
               Watch Videos
@@ -121,12 +130,25 @@ const WatchVideos = () => {
 
         <Grid item xs={6}>
           <Box display="flex" justifyContent="flex-end">
-            <Box sx={{ background: view === "dashboard" ? secondary : "#e2e2e2", borderRadius: "10px" }}>
+            <Box
+              sx={{
+                background: view === "dashboard" ? secondary : "#e2e2e2",
+                borderRadius: "10px",
+              }}
+            >
               <IconButton disableRipple onClick={() => setView("dashboard")}>
-                <DashboardIcon sx={{ color: view === "dashboard" ? "white" : "black" }} />
+                <DashboardIcon
+                  sx={{ color: view === "dashboard" ? "white" : "black" }}
+                />
               </IconButton>
             </Box>
-            <Box sx={{ background: view === "list" ? secondary : "#e2e2e2", borderRadius: "10px", mx: 1.5 }}>
+            <Box
+              sx={{
+                background: view === "list" ? secondary : "#e2e2e2",
+                borderRadius: "10px",
+                mx: 1.5,
+              }}
+            >
               <IconButton onClick={() => setView("list")} disableRipple>
                 <IoIosMenu color={view === "list" ? "white" : "black"} />
               </IconButton>
@@ -134,13 +156,14 @@ const WatchVideos = () => {
           </Box>
         </Grid>
 
-        {/* Content for List or Dashboard View */}
         <Grid container sx={{ my: "12px", mb: 3 }}>
           {view === "list" && (
             <Grid item xs={12}>
-              <Box display="flex" justifyContent="space-between" alignItems="center">
-                {/* Dropdown for filters can be added here */}
-              </Box>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              ></Box>
             </Grid>
           )}
         </Grid>
@@ -148,11 +171,19 @@ const WatchVideos = () => {
         {/* Video Cards */}
         <Grid container spacing={4}>
           {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "300px",
+              }}
+            >
               <CircularProgress color="secondary" />
             </Box>
-          ) : video.length > 0 ? (
-            video.map((videos, index) => (
+          ) : video?.length > 0 ? (
+            video?.map((videos, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <YoutubeCard
                   Vediotitle={videos.title}
@@ -165,15 +196,17 @@ const WatchVideos = () => {
                   backgroundImage={videos.backgroundImage}
                   showDownloadIcon={true}
                   onDownloadClick={() => handleDownloadClick(videos.id)}
-                  isDownloading={downloadingVideos[videos.id]} // Pass the loading state for this specific video
-                  menuItems={["Add to list",]}
+                  isDownloading={downloadingVideos[videos.id]}
+                  menuItems={["Add to list"]}
                   handleAdd={() => handleAddToList(videos.id)}
                 />
-
               </Grid>
             ))
           ) : (
-            <Typography variant="h6" sx={{ textAlign: "center", width: "100%" }}>
+            <Typography
+              variant="h6"
+              sx={{ textAlign: "center", width: "100%" }}
+            >
               No videos available
             </Typography>
           )}

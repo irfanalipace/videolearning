@@ -59,12 +59,12 @@ const MySeriesList = () => {
       p={2}
     >
       <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-        {series.length > 0 ? "My Video Series" : "You Don’t have Any Video Series List"}
+        {series?.length > 0 ? "My Video Series" : "You Don’t have Any Video Series List"}
       </Typography>
 
-      {series.length > 0 ? (
+      {series?.length > 0 ? (
         <Grid container spacing={3} sx={{ width: "80%", mt: 4 }}>
-          {series.map((item) => (
+          {series?.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item.id}> {/* 12 columns total; 4 per card */}
               <Card sx={{ mb: 2 }}>
                 <CardContent>

@@ -41,74 +41,79 @@ const NoVideo = () => {
     fetchLibraryVideos();
   }, []);
 
-  console.log(libraryVideo, 'Fetched Library Videos');
+  console.log(libraryVideo, "Fetched Library Videos");
 
   return (
     <>
-
-
       {/* Loading Spinner or Video Cards */}
       <Grid container spacing={4} sx={{ padding: 2 }}>
         {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "300px",
+            }}
+          >
             <CircularProgress color="secondary" />
           </Box>
+        ) : libraryVideo?.length > 0 ? (
+          libraryVideo?.map((videoItem, index) => {
+            const video = videoItem.downloadable; // Access the downloadable object
+            return (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <YoutubeCard
+                  Vediotitle={video.title}
+                  videoUrl={video.video} // Correctly reference video URL
+                  title={video.title}
+                  description={video.description}
+                  buttonText={video.level}
+                  videoDuration={video.videoDuration || "N/A"}
+                  backgroundImage={video.backgroundImage || ""}
+                />
+              </Grid>
+            );
+          })
         ) : (
-          libraryVideo.length > 0 ? (
-            libraryVideo.map((videoItem, index) => {
-              const video = videoItem.downloadable; // Access the downloadable object
-              return (
-                <Grid item xs={12} sm={6} md={4} key={index}>
-                  <YoutubeCard
-                    Vediotitle={video.title}
-                    videoUrl={video.video} // Correctly reference video URL
-                    title={video.title}
-                    description={video.description}
-                    buttonText={video.level}
-                    videoDuration={video.videoDuration || "N/A"}
-                    backgroundImage={video.backgroundImage || ""}
-                  />
-                </Grid>
-              );
-            })
-          ) : (
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              minHeight="100vh"
-              textAlign="center"
-              p={2}
-            >
-              <img
-                src={image}
-                alt="No Video"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-                You Don’t have Downloading Yet
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            minHeight="100vh"
+            textAlign="center"
+            p={2}
+          >
+            <img
+              src={image}
+              alt="No Video"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+            <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+              You Don’t have Downloading Yet
+            </Typography>
+            <Box sx={{ width: "50%" }}>
+              <Typography variant="body1" sx={{ mb: 4 }}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </Typography>
-              <Box sx={{ width: "50%" }}>
-                <Typography variant="body1" sx={{ mb: 4 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Typography>
-              </Box>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#0294D3",
-                  color: "#fff",
-                  "&:hover": {
-                    backgroundColor: "#0273b6",
-                  },
-                }}
-                onClick={handleBack}
-              >
-                <ArrowBackIcon /> Go Back to Library
-              </Button>
             </Box>
-          )
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#0294D3",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "#0273b6",
+                },
+              }}
+              onClick={handleBack}
+            >
+              <ArrowBackIcon /> Go Back to Library
+            </Button>
+          </Box>
         )}
       </Grid>
     </>

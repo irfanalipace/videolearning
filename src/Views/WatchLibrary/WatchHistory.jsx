@@ -165,7 +165,7 @@ const WatchHistory = () => {
         justifyContent="space-between"
         sx={{ padding: "5px" }}
       >
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <Box display="flex" alignItems="center" sx={{ marginBottom: "8px" }}>
             <Link to="/watch-library" style={{ textDecoration: "none" }}>
               <Box display="flex" alignItems="center">
@@ -181,71 +181,74 @@ const WatchHistory = () => {
           </Box>
         </Grid>
 
-
-
-
         <Grid container spacing={4} sx={{ padding: 2 }}>
           {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "300px",
+              }}
+            >
               <CircularProgress color="secondary" />
             </Box>
+          ) : HistoryVideo?.length > 0 ? (
+            HistoryVideo?.map((videoItem, index) => {
+              const video = videoItem.history; // Access the downloadable object
+              return (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <YoutubeCard
+                    Vediotitle={video.title}
+                    videoUrl={video.video} // Correctly reference video URL
+                    title={video.title}
+                    description={video.description}
+                    buttonText={video.level}
+                    videoDuration={video.videoDuration || "N/A"}
+                    backgroundImage={video.backgroundImage || ""}
+                  />
+                </Grid>
+              );
+            })
           ) : (
-            HistoryVideo.length > 0 ? (
-              HistoryVideo.map((videoItem, index) => {
-                const video = videoItem.history; // Access the downloadable object
-                return (
-                  <Grid item xs={12} sm={6} md={4} key={index}>
-                    <YoutubeCard
-                      Vediotitle={video.title}
-                      videoUrl={video.video} // Correctly reference video URL
-                      title={video.title}
-                      description={video.description}
-                      buttonText={video.level}
-                      videoDuration={video.videoDuration || "N/A"}
-                      backgroundImage={video.backgroundImage || ""}
-                      
-                    />
-                  </Grid>
-                );
-              })
-            ) : (
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                minHeight="100vh"
-                textAlign="center"
-                p={2}
-              >
-                <img
-                  src={image}
-                  alt="No Video"
-                  style={{ maxWidth: "100%", height: "auto" }}
-                />
-                <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
-                  You Don’t have Downloading Yet
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              minHeight="100vh"
+              textAlign="center"
+              p={2}
+            >
+              <img
+                src={image}
+                alt="No Video"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                You Don’t have Downloading Yet
+              </Typography>
+              <Box sx={{ width: "50%" }}>
+                <Typography variant="body1" sx={{ mb: 4 }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
-                <Box sx={{ width: "50%" }}>
-                  <Typography variant="body1" sx={{ mb: 4 }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </Typography>
-                </Box>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#0294D3",
-                    color: "#fff",
-                    "&:hover": {
-                      backgroundColor: "#0273b6",
-                    },
-                  }}
-                  onClick={handleBack}
-                >
-                  <ArrowBackIcon /> Go Back to Library
-                </Button>
               </Box>
-            )
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#0294D3",
+                  color: "#fff",
+                  "&:hover": {
+                    backgroundColor: "#0273b6",
+                  },
+                }}
+                onClick={handleBack}
+              >
+                <ArrowBackIcon /> Go Back to Library
+              </Button>
+            </Box>
           )}
         </Grid>
       </Grid>
