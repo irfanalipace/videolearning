@@ -8,7 +8,7 @@ import {
   LOGIN_FAILURE,
 } from "./actionTypes";
 
-const API_URL = "https://courselearningbackend.saeedantechpvt.com/api/";
+const API_URL = `${import.meta.env.VITE_REACT_APP_URL}api/`
 
 export const registerUser = (userData) => {
   return async (dispatch) => {

@@ -70,21 +70,17 @@ const CookingColombian = () => {
           {/* images section */}
           <div className="w-[350px] grid grid-cols-4 gap-3 pr-12">
             <div className="relative">
-              <img
-                src="/public/water.jpg"
-                className="rounded-lg cover"
-                alt=""
-              />
+              <img src="/water.jpg" className="rounded-lg cover" alt="" />
               <button className="bg-bluePrimary text-white absolute top-1 -left-5 w-9 h-9 rounded-full">
                 <ArrowBackIosIcon size={17} />
               </button>
             </div>
 
-            <img src="/public/woman.jpg" className="rounded-lg cover" alt="" />
-            <img src="/public/food.jpg" className="rounded-lg cover" alt="" />
+            <img src="/woman.jpg" className="rounded-lg cover" alt="" />
+            <img src="/food.jpg" className="rounded-lg cover" alt="" />
             <div className="relative">
               <img
-                src="/public/groupcartoons.jpg"
+                src="/groupcartoons.jpg"
                 className="rounded-lg cover"
                 alt=""
               />

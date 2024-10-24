@@ -9,7 +9,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,10 +17,36 @@ const SignIn = () => {
     setSnackbarOpen(false);
   };
 
+  const validateEmail = (email) => {
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    // Password should be at least 6 characters long
+    return password.length >= 6;
+  };
+
   const handleSignIn = (e) => {
     e.preventDefault();
+
+    // Validate email and password
+    if (!validateEmail(email)) {
+      setErrorMessage("Invalid email format.");
+      setSnackbarOpen(true);
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setErrorMessage("Password must be at least 6 characters.");
+      setSnackbarOpen(true);
+      return;
+    }
+
     const userData = { email, password };
     setLoading(true); // Start loading
+
     dispatch(loginUser(userData))
       .then((response) => {
         const token = response.data.payload.token;
@@ -61,24 +87,18 @@ const SignIn = () => {
       });
   };
 
-  const isButtonDisabled = !email || !password; // Disable button if either field is empty
+  const isButtonDisabled = !email || !password;
 
   return (
     <div>
       <div className="flex h-screen items-center gap-7 justify-center">
         <div className="flex flex-col justify-center gap-8 w-full lg:w-[40%]">
-          <img
-            src="/Logo.jpg"
-            className="object-cover w-[150px] h-[72.37px]"
-            alt="Logo"
-          />
           <div className="flex flex-col gap-4">
             <h1 className="text-black font-bold text-sm md:text-lg lg:text-[36px]">
               Welcome Back!
             </h1>
             <p className="text-signText font-medium text-sm md:text-[16px]">
-              Please input your information in the fields below to enter your
-              Journey platform.
+              Sign in on the internal platform
             </p>
           </div>
           <div className="flex flex-col gap-2">
@@ -86,7 +106,7 @@ const SignIn = () => {
               Email
             </span>
             <input
-              type="text"
+              type="email"
               className="px-[10px] py-4 border-[1px] border-signInputBorder rounded-[7px] focus:outline-none"
               placeholder="e.g hamzayasin499@gmail.com"
               value={email}
@@ -94,7 +114,6 @@ const SignIn = () => {
             />
           </div>
 
-          {/* Password Input */}
           <div className="flex flex-col gap-2">
             <span className="text-black text-sm md:text-[16px] font-semibold">
               Password
@@ -110,14 +129,20 @@ const SignIn = () => {
           </div>
           <Button
             variant="contained"
-            className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center" // Add flex for alignment
+            className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center"
             onClick={handleSignIn}
             disabled={loading || isButtonDisabled}
-            sx={{ position: 'relative' }}
+            sx={{ position: "relative" }}
           >
             {loading ? (
-              <CircularProgress size={24} color="inherit" sx={{ marginRight: 1 }} /> // Adjust size for better fit
-            ) : "Sign In"}
+              <CircularProgress
+                size={24}
+                color="inherit"
+                sx={{ marginRight: 1 }}
+              />
+            ) : (
+              "Sign In"
+            )}
           </Button>
           <div>
             <p className="text-[#808080] text-center mt-4">

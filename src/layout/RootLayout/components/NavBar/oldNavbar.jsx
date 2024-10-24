@@ -132,9 +132,9 @@ export default function Nav({ openNav, onCloseNav }) {
           justifyContent: "center",
         }}
       >
-        <Box sx={{ display: "flex" }}>
+        {/* <Box sx={{ display: "flex" }}>
           <img src={"/Logo.jpg"} />
-        </Box>
+        </Box> */}
       </Box>
       <Box>
         <List component="nav">

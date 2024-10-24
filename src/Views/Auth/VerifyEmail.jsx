@@ -22,11 +22,11 @@ const VerifyEmail = () => {
             alignItems: "center",
           }}
         >
-          <img
+          {/* <img
             src="/Logo.jpg"
             alt="Logo"
             style={{ maxWidth: "150px", width: "100%" }}
-          />
+          /> */}
         </Box>
 
         <Typography

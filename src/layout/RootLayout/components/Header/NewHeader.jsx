@@ -17,10 +17,10 @@ const NewHeader = ({ open, toggleOpen, onLogout }) => {
   return (
     <header className="px-5 py-2 fixed top-0 z-20 w-full bg-white shadow md:flex md:items-center md:justify-between">
       <div className="w-[280px] flex items-center justify-center">
-        <img
+        {/* <img
           src={"/Logo.jpg"}
           className="hidden md:block w-[158px] h-[75px] object-contain"
-        />
+        /> */}
       </div>
 
       <div className="flex items-center justify-between w-full px-2">
