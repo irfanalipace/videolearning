@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/reducers/action";
-import { Alert, Snackbar, Button, CircularProgress } from "@mui/material";
+import { Alert, Snackbar, Button, CircularProgress, Dialog } from "@mui/material";
+import Policy from "./Policy";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,8 @@ const SignIn = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checkbox, setCheckbox] = useState(false);
+  const [policyOpen, setPolicyOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,20 +21,17 @@ const SignIn = () => {
   };
 
   const validateEmail = (email) => {
-    // Basic email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const validatePassword = (password) => {
-    // Password should be at least 6 characters long
     return password.length >= 6;
   };
 
   const handleSignIn = (e) => {
     e.preventDefault();
 
-    // Validate email and password
     if (!validateEmail(email)) {
       setErrorMessage("Invalid email format.");
       setSnackbarOpen(true);
@@ -45,7 +45,7 @@ const SignIn = () => {
     }
 
     const userData = { email, password };
-    setLoading(true); // Start loading
+    setLoading(true);
 
     dispatch(loginUser(userData))
       .then((response) => {
@@ -65,7 +65,6 @@ const SignIn = () => {
       })
       .catch((error) => {
         const errorData = error?.response?.data?.payload || {};
-
         if (errorData.email && errorData.password) {
           setErrorMessage(
             `Email: ${errorData.email} Password: ${errorData.password}`
@@ -83,11 +82,11 @@ const SignIn = () => {
         setSnackbarOpen(true);
       })
       .finally(() => {
-        setLoading(false); // End loading
+        setLoading(false);
       });
   };
 
-  const isButtonDisabled = !email || !password;
+  const isButtonDisabled = !email || !password || !checkbox;
 
   return (
     <div>
@@ -127,6 +126,19 @@ const SignIn = () => {
               required
             />
           </div>
+
+          <div className="flex gap-2">
+            <input
+              type="checkbox"
+              id="termsCheckbox"
+              onChange={(e) => setCheckbox(e.target.checked)}
+              required
+            />
+            <span className="text-black text-sm md:text-[16px] font-semibold">
+              I agree to <span onClick={() => setPolicyOpen(true)} className="text-blue-600 underline cursor-pointer"> Terms And Conditions </span>
+            </span>
+          </div>
+
           <Button
             variant="contained"
             className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center"
@@ -135,11 +147,7 @@ const SignIn = () => {
             sx={{ position: "relative" }}
           >
             {loading ? (
-              <CircularProgress
-                size={24}
-                color="inherit"
-                sx={{ marginRight: 1 }}
-              />
+              <CircularProgress size={24} color="inherit" sx={{ marginRight: 1 }} />
             ) : (
               "Sign In"
             )}
@@ -175,6 +183,10 @@ const SignIn = () => {
           {errorMessage}
         </Alert>
       </Snackbar>
+
+      <Dialog open={policyOpen} onClose={() => setPolicyOpen(false)} maxWidth="sm" fullWidth>
+        <Policy contentRef={null} handleScroll={null} />
+      </Dialog>
     </div>
   );
 };

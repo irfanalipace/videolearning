@@ -62,7 +62,6 @@ export default function Router() {
         { path: "settings", element: <Settings /> },
         { path: "/Nodownload", element: <Nodownload /> },
 
-
       ]
     },
     { path: "verify-email", element: <VerifyEmail /> },

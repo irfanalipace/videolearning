@@ -65,7 +65,7 @@ const Nodownload = () => {
         <div>
           <h1 className="text-4xl flex flex-col gap-1 font-bold items-center justify-center">
             Get instant access to our
-            <span className="text-5xl font-bold text-[#ff9301]">
+            <span className="text-5xl font-bold text-[#005687]">
               premium membership
             </span>
           </h1>
@@ -89,13 +89,13 @@ const Nodownload = () => {
           </h1>
           <button
             onClick={gosignup}
-            className="py-2 px-7 rounded-lg text-white text-xl bg-[#ff9301]"
+            className="py-2 px-7 rounded-lg text-white text-xl bg-[#005687]"
           >
             Sign up to upgrade
           </button>
           <h1
             onClick={handleOpenModal}
-            className="text-lg font-bold text-[#ff9301] cursor-pointer"
+            className="text-lg font-bold text-[#005687] cursor-pointer"
           >
             Terms and Conditions
           </h1>

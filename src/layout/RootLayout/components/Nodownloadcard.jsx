@@ -14,7 +14,7 @@ const Nodownloadcard = ({ imageUrl, title, description,title2 }) => {
 
       {/* Card Content */}
       <div className="pt-16 px-2 pb-4 text-center">
-        <h2 className="text-lg font-semibold ">{title} <span className='text-orange-600'> {description} </span> {title2}</h2>
+        <h2 className="text-lg font-semibold ">{title} <span className='text-[#005687]'> {description} </span> {title2}</h2>
       </div>
     </div>
   );
