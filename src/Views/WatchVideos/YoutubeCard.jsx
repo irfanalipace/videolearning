@@ -17,19 +17,16 @@ const YoutubeCard = ({
   handleAdd,
   onDownloadClick,
   menuItems,
-  isDownloading, 
+  isDownloading,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
-  // console.log(isAuthenticated,'sdfghjklkhfdfg')
 
-  // Handle opening of the menu
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  // Handle closing of the menu
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -37,8 +34,7 @@ const YoutubeCard = ({
   return (
     <Card
       sx={{
-        width: "100%",
-        height: "394px",
+        height:"500px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -50,78 +46,54 @@ const YoutubeCard = ({
         backgroundRepeat: "no-repeat",
       }}
     >
+      <Box sx={{ position: "relative", width: "100%", height: "100%", margin: "0 auto" }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "center" }}>
+
+
+          <iframe
+            src={`https://www.youtube.com/embed/${videoUrl}`}
+            title={title}
+            onPlay={onPlay}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              minWidth: "200px",  
+              minHeight: "200px", 
+              width:"100%",
+              height:"300px"
+            }}
+          />
+        </Box>
+      </Box>
       <Box
         sx={{
-          position:"relative",
-          // Adjust padding for small screens
+          position: "absolute",
+          bottom: "8px",
+          right: "8px",
+          // backgroundColor: "#000000",
+          color: "#ffffff",
+          padding: "4px 8px",
+          borderRadius: "4px",
+          fontSize: "14px",
         }}
       >
-        <iframe
-          width="100%"
-          height="100%"
-          src={`https://www.youtube.com/embed/${videoUrl}`}
-          title={title}
-          onPlay={onPlay}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            minWidth: "200px", 
-            minHeight: "200px", 
-          }}
-        />
-
-
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            backgroundColor: "#0294D3",
-            color: "#ffffff",
-            padding: "8px",
-            borderBottomRightRadius: "4px",
-            zIndex: 1,
-            maxWidth: "calc(100% - 16px)",
-          }}
-        >
-          <Typography component="div" noWrap style={{ fontSize: "10px" }}>
-            {title}
-          </Typography>
-        </Box>
-
-        {/* Video Duration */}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "8px",
-            right: "8px",
-            backgroundColor: "#000000",
-            color: "#ffffff",
-            padding: "4px 8px",
-            borderRadius: "4px",
-            fontSize: "14px",
-          }}
-        >
-          <Typography variant="caption">{videoDuration}</Typography>
-        </Box>
+        <Typography variant="caption">{videoDuration}</Typography>
       </Box>
 
       <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "space-between", paddingTop:'200px' }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", paddingTop: '200px' }}>
           <Box>
             <Typography
               gutterBottom
               component="div"
               noWrap
               sx={{
-                fontSize: "16px",
-                fontWeight: "700",
+                fontSize:"16px",
+                fontWeight:"700",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
@@ -192,12 +164,11 @@ const YoutubeCard = ({
               <FaDownload
                 color="#0294D3"
                 size={30}
-                onClick={() => {   
+                onClick={() => {
                   if (isAuthenticated) {
-                    onDownloadClick(); 
+                    onDownloadClick();
                   } else {
-                   
-                    navigate('/Nodownload'); 
+                    navigate('/Nodownload');
                   }
                 }}
                 style={{ cursor: "pointer" }}
@@ -210,4 +181,4 @@ const YoutubeCard = ({
   );
 };
 
-export default YoutubeCard;
+export default YoutubeCard

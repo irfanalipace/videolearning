@@ -60,7 +60,7 @@ const VideoList = () => {
           // Use 'item' for clarity
           const video = item.video; // Access the nested video object
           return (
-            <Grid item xs={12} sm={6} md={4} key={video.id}>
+            <Grid item xs={12} sm={12} md={6} key={video.id}>
               <YoutubeCard
                 Vediotitle={video?.title}
                 videoUrl={video.video} // Correctly reference video URL

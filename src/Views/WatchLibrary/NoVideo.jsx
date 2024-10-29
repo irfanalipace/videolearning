@@ -63,7 +63,7 @@ const NoVideo = () => {
           libraryVideo?.map((videoItem, index) => {
             const video = videoItem.downloadable; // Access the downloadable object
             return (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} sm={12} md={6} key={index}>
                 <YoutubeCard
                   Vediotitle={video.title}
                   videoUrl={video.video} // Correctly reference video URL

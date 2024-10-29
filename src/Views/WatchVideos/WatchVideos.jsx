@@ -184,7 +184,7 @@ const WatchVideos = () => {
             </Box>
           ) : video?.length > 0 ? (
             video?.map((videos, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} sm={12} md={6} key={index}>
                 <YoutubeCard
                   Vediotitle={videos.title}
                   videoUrl={videos.video}

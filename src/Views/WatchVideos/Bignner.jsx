@@ -164,7 +164,7 @@ const Bignner = () => {
 
         <Grid container spacing={3}>
           {filteredVideos?.map((video, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} sm={12} md={6} key={index}>
               <YoutubeCard
                 videoUrl={video.videoUrl}
                 title={video.title}
