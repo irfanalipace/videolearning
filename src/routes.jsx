@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom"; // Import Navigate
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
+import { useState, useEffect } from "react";
 import WatchSeries from "./Views/WatchSeries/WatchSeries";
 import WatchLibrary from "./Views/WatchLibrary/WatchLibrary";
 import Library from "./Views/Library/Library";
@@ -28,9 +29,12 @@ import VedioPlateform from "./Views/Resources/VedioPlateform";
 import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 import Price from "./Views/Payment/Price";
 import Nodownload from "./layout/RootLayout/components/Nodownload";
+import WelcomePopup from "./components/WellcomPopup/WelcomePopup";
 
 export default function Router() {
+  const [showWelcomePopup, setShowWelcomePopup] = useState(true);
   let element = useRoutes([
+    
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
@@ -68,5 +72,11 @@ export default function Router() {
     { path: "auth-success", element: <AuthticationSuccess /> },
   ]);
 
-  return element;
+  return (
+    <>
+      {showWelcomePopup && <WelcomePopup />}
+      {element}
+    </>
+  )
 }
+
