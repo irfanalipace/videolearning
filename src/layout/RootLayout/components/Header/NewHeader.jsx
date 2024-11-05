@@ -171,17 +171,7 @@ const NewHeader = ({ open, toggleOpen }) => {
           >
             Log in
           </Button>
-          {
-            isAuthenticatedUser &&
-            <Button
-            sx={{ textTransform: "none" }}
-            color="secondary"
-            variant="contained"
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
-          }
+       
          
         </Box>
       </Toolbar>

@@ -22,6 +22,11 @@ const YoutubeCard = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
+  console.log(isAuthenticated,"")
+  const storedVideoType = localStorage.getItem("videoType");
+
+  console.log(storedVideoType,"storedVideoType");
+
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -155,27 +160,39 @@ const YoutubeCard = ({
         <Button variant="contained" size="small" style={{ width: "100%", padding: "6px" }} color="secondary">
           {buttonText}
         </Button>
-
-        {showDownloadIcon && (
+        {storedVideoType === "1" ? (
+          showDownloadIcon && (
+            <Box>
+              {isDownloading ? (
+                <CircularProgress size={24} color="secondary" />
+              ) : (
+                <FaDownload
+                  color="#0294D3"
+                  size={30}
+                  onClick={() => {
+                    if (isAuthenticated) {
+                      onDownloadClick();
+                    } else {
+                      navigate('/Nodownload');
+                    }
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </Box>
+          )
+        ) : (
+         
           <Box>
-            {isDownloading ? (
-              <CircularProgress size={24} color="secondary" />
-            ) : (
-              <FaDownload
-                color="#0294D3"
-                size={30}
-                onClick={() => {
-                  if (isAuthenticated) {
-                    onDownloadClick();
-                  } else {
-                    navigate('/Nodownload');
-                  }
-                }}
-                style={{ cursor: "pointer" }}
-              />
-            )}
+            <FaDownload
+              color="#ccc" 
+              size={30}
+              style={{ cursor: "not-allowed" }}
+            />
           </Box>
         )}
+        
+        
       </Box>
     </Card>
   );

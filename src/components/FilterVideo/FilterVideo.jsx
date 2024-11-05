@@ -6,7 +6,7 @@ import {
   InputBase,
   Switch,
   Typography,
-  InputAdornment, // Import InputAdornment
+  InputAdornment,
 } from "@mui/material";
 import { Search, ArrowDropDown, Close } from "@mui/icons-material";
 import { FilterList, BarChart, Public, Person, Label, Mic } from "@mui/icons-material";
@@ -24,7 +24,6 @@ const FilterVideo = () => {
 
   return (
     <Box>
- 
       {showSearchBar && (
         <Box
           sx={{
@@ -34,6 +33,7 @@ const FilterVideo = () => {
             right: 0,
             bottom: 0,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(5px)", // Add blur effect
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-start", // Align to the top
@@ -50,7 +50,8 @@ const FilterVideo = () => {
               padding: "12px",
               backgroundColor: "white",
               borderRadius: "16px",
-              marginTop:'23px'
+              marginTop: '23px',
+              boxShadow: 3, // Optional: adds shadow to the search box
             }}
           >
             <InputBase
@@ -66,15 +67,14 @@ const FilterVideo = () => {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton onClick={handleCloseSearch} sx={{ color: "text.primary" }}>
-                  <Close />
+                    <Close />
                   </IconButton>
                 </InputAdornment>
               }
             />
 
             <IconButton onClick={handleSearchClick} sx={{ color: "text.primary" }}>
-             
-              <Search  sx={{fontSize:"33px"}}/>
+              <Search sx={{ fontSize: "33px" }} />
             </IconButton>
           </Box>
         </Box>
@@ -90,9 +90,8 @@ const FilterVideo = () => {
           borderRadius: "16px",
         }}
       >
-    
         {[
-          { label: "Sort by", icon: <FilterList /> },
+          { label: "Sort", icon: <FilterList /> },
           { label: "Levels", icon: <BarChart /> },
           { label: "Countries", icon: <Public /> },
           { label: "Guides", icon: <Person /> },

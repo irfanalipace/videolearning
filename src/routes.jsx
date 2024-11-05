@@ -30,6 +30,8 @@ import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 import Price from "./Views/Payment/Price";
 import Nodownload from "./layout/RootLayout/components/Nodownload";
 import WelcomePopup from "./components/WellcomPopup/WelcomePopup";
+import UnauthenticatedMessage from "./components/unauthenticatedMessage/AnauthenticatedMessage";
+import Primuim from "./components/Primuim/Primuim";
 
 export default function Router() {
   const [showWelcomePopup, setShowWelcomePopup] = useState(true);
@@ -64,12 +66,14 @@ export default function Router() {
         { path: "progress", element: <Progress /> },
         { path: "bignners", element: <Bignner /> },
         { path: "settings", element: <Settings /> },
-        { path: "/Nodownload", element: <Nodownload /> },
-
+        { path: "Nodownload", element: <Nodownload /> },
+        { path: "un-authentic", element: <UnauthenticatedMessage /> },
+        { path: "primum", element: <Primuim /> },
       ]
     },
     { path: "verify-email", element: <VerifyEmail /> },
     { path: "auth-success", element: <AuthticationSuccess /> },
+    
   ]);
 
   return (

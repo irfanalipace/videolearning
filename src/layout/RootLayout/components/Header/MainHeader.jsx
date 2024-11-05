@@ -1,9 +1,11 @@
-import React from 'react'
+import { useSelector } from "react-redux";
+import NewHeader from "./NewHeader"; 
+import AuthenticatedHeader from "./AuthenticatedHeader"; 
 
 const MainHeader = () => {
-  return (
-    <div>MainHeader</div>
-  )
-}
+    const isAuthenticated = localStorage.getItem("isAuthenticated"); 
+  
+  return isAuthenticated ? <AuthenticatedHeader /> : <NewHeader />;
+};
 
-export default MainHeader
+export default MainHeader;

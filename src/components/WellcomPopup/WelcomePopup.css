@@ -52,6 +52,7 @@
 }
 .heading-head{
     font-weight: bold;
+    margin: 0px;
 }
 .option-button.highlighted {
   background-color: #28a745;

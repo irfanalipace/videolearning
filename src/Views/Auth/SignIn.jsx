@@ -57,6 +57,9 @@ const SignIn = () => {
         if (response.data.payload.user.is_verified === 1) {
        
           localStorage.setItem("isAuthenticated", response.data.payload.user.is_verified); 
+          const premiumVideo = "premium";
+          localStorage.setItem("videoType", premiumVideo);
+          
           navigate("/watch-videos");
         } else {
           navigate("/otp-authentication");

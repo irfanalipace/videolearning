@@ -34,7 +34,7 @@ const WelcomePopup = () => {
         <div className="overlay" onClick={handleSkip}></div> 
         <div className="welcome-popup">
           <h1 className='heading-head'>Ahlan, Habibi! 👋</h1>
-          <h2 className='heading-head'>Welcome to Arabic All The Time!</h2>
+          <h2 className='heading-head'>"How Familiar Are You with Comprehensible Input?"</h2>
           <h3 className='heading-head'>Experience the Easiest and Most Effective Way to Learn Arabic.</h3>
           <p>Just a quick question before you dive in—let us know your familiarity with the Comprehensible Input method.</p>
           

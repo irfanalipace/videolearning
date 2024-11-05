@@ -4,6 +4,7 @@ import TopBar from "./components/Header/TopBar";
 import { Outlet } from "react-router";
 import NewHeader from "./components/Header/NewHeader";
 import Navbar from "./components/NavBar";
+import MainHeader from "./components/Header/MainHeader";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -36,7 +37,7 @@ const RootLayout = () => {
   return (
     <div className="relative flex  h-screen overflow-hidden min-w-screen">
       {/* <TopBar onOpenNav={() => setOpen(true)} /> */}
-      <NewHeader open={open} toggleOpen={toggleOpen} />
+      <MainHeader open={open} toggleOpen={toggleOpen} />
 <div className="hidden md:block">
       <Navbar open={open} onCloseNav={() => setOpen(false)} />
 </div>
