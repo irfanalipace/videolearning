@@ -13,6 +13,7 @@ import YoutubeCard from "./YoutubeCard";
 import { useNavigate } from "react-router-dom";
 import { request } from "../../services/axios";
 import { useTheme } from "@mui/material";
+import FilterVideo from "../../components/FilterVideo/FilterVideo";
 
 const WatchVideos = () => {
   const theme = useTheme();
@@ -112,6 +113,9 @@ const WatchVideos = () => {
         justifyContent="space-between"
         sx={{ padding: "7px" }}
       >
+      {/*
+
+
         <Grid item xs={6}>
           <Box
             sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
@@ -127,7 +131,7 @@ const WatchVideos = () => {
             </Typography>
           </Box>
         </Grid>
-
+*
         <Grid item xs={6}>
           <Box display="flex" justifyContent="flex-end">
             <Box
@@ -154,6 +158,14 @@ const WatchVideos = () => {
               </IconButton>
             </Box>
           </Box>
+        </Grid>
+        */}
+
+        <Grid item xs={12}>
+        <Box>
+        <FilterVideo />
+        </Box>
+
         </Grid>
 
         <Grid container sx={{ my: "12px", mb: 3 }}>

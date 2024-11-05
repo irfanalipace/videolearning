@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from "react-router-dom"; // Import Navigate
+import { Navigate, useRoutes } from "react-router-dom"; 
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
