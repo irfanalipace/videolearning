@@ -48,65 +48,65 @@ const ContinueWatching = ({ series }) => {
   return (
     <div className="flex flex-col gap-4">
       <ContinueSelect />
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-6 gap-4">
-  {data?.map((watch, index) => (
-    <div
-      key={index}
-      className="rounded-xl lg:col-span-3 cursor-pointer transition-all duration-300 bg-a-800"
-    >
-      {/* Embed the iframe for the video */}
-      <iframe
-        src={`https://www.youtube.com/embed/${watch.video}`} // Ensure 'watch.video' contains the correct YouTube video ID
-        title={watch.title}
-        className="h-[100px] w-full rounded-t-xl"
-        frameBorder="0"
-        allowFullScreen
-        style={{
-          minWidth: "200px",
-          minHeight: "200px",
-          width: "100%",
-          height: "300px",
-        }}
-      />
-      {/* Card content */}
-      <div className="py-4 px-4 bg-black rounded-b-xl flex flex-col justify-end h-auto text-white z-0">
-        <div>
-          <h1 className="font-bold text-sm font-poppins">{watch.title}</h1>
-          <h1 className="font-normal text-xs font-poppins mt-1">{watch.description}</h1>
-          <div className="grid grid-cols-3 gap-4 text-gray-300 mt-2">
-            <span className="text-[11px] font-poppins font-thin">{watch.episodes} Episodes</span>
-            <span className="text-[11px] font-poppins font-thin">{watch.duration} Minutes</span>
-            <span className="text-[11px] font-poppins font-thin">Actions</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+        {data?.map((watch, index) => (
+          <div
+            key={index}
+            className="rounded-xl md:col-span-3 cursor-pointer transition-all duration-300 bg-a-800"
+          >
+            {/* Embed the iframe for the video */}
+            <iframe
+              src={`https://www.youtube.com/embed/${watch.video}`} // Ensure 'watch.video' contains the correct YouTube video ID
+              title={watch.title}
+              className="h-[100px] w-full rounded-t-xl"
+              frameBorder="0"
+              allowFullScreen
+              style={{
+                minWidth: "250px",
+                minHeight: "250px",
+                width: "100%",
+                height: "300px",
+              }}
+            />
+            
+            {/* Card content */}
+            <div className="py-4 px-4 bg-black rounded-b-xl flex flex-col justify-end h-auto text-white z-0">
+              <div>
+                <h1 className="font-bold text-sm font-poppins">{watch.title}</h1>
+                <h1 className="font-normal text-xs font-poppins mt-1">{watch.description}</h1>
+                <div className="grid grid-cols-3 gap-4 text-gray-300 mt-2">
+                  <span className="text-[11px] font-poppins font-thin">{watch.episodes} Episodes</span>
+                  <span className="text-[11px] font-poppins font-thin">{watch.duration} Minutes</span>
+                  <span className="text-[11px] font-poppins font-thin">Actions</span>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex items-center justify-between mt-3">
+                <button
+                  className="bg-blue-500 rounded-3xl px-4 py-1 text-white hover:bg-blue-600 transition-all"
+                  onClick={() => handleWatchNowClick(watch)}
+                >
+                  Watch Now
+                </button>
+
+                <button
+                  onClick={() => handleDownloadClick(watch.id)}
+                  className={`${downloadingVideo === watch.id ? "bg-gray-400" : "bg-white/40"
+                    } rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center`}
+                  disabled={downloadingVideo === watch.id}
+                >
+                  {downloadingVideo === watch.id ? (
+                    <FaSpinner className="animate-spin" />
+                  ) : (
+                    <FaDownload />
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Buttons */}
-        <div className="flex items-center justify-between mt-3">
-          <button
-            className="bg-blue-500 rounded-3xl px-4 py-1 text-white hover:bg-blue-600 transition-all"
-            onClick={() => handleWatchNowClick(watch)}
-          >
-            Watch Now
-          </button>
-
-          <button
-            onClick={() => handleDownloadClick(watch.id)}
-            className={`${
-              downloadingVideo === watch.id ? "bg-gray-400" : "bg-white/40"
-            } rounded-full w-10 h-10 text-[20px] font-semibold text-white flex items-center justify-center`}
-            disabled={downloadingVideo === watch.id}
-          >
-            {downloadingVideo === watch.id ? (
-              <FaSpinner className="animate-spin" />
-            ) : (
-              <FaDownload />
-            )}
-          </button>
-        </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
 
 
       <div className="flex items-end justify-end">

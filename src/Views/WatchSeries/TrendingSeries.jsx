@@ -40,20 +40,20 @@ const TrendingSeries = () => {
 
   return (
     <div className="grid grid-cols-12 gap-3">
-      <div className="col-span-9 p-5">
+      <div className=" col-span-12 sm:col-span-11 lg:col-span-9 md:p-3 p-2 sm:px-10">
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
             <CircularProgress color="secondary" />
           </Box>
         ) : (
-          <div className="flex flex-col gap-6 w-full">
+          <div className="flex flex-col gap-6 ">
             <CookingColombian series={series} />
             <ContinueWatching series={series} />
           </div>
         )}
       </div>
       <div className="col-span-3">
-        <div>
+        <div className="hidden lg:block">
           <RecentDownloadWatch series={series} />
         </div>
       </div>
