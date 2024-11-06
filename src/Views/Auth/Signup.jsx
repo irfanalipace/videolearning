@@ -97,19 +97,17 @@ const Signup = () => {
   const isButtonDisabled = !email || !password || loading || emailError || passwordError || !isCheckboxChecked;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 w-full lg:w-full px-6 lg:px-20 py-12">
-      {/* Left Section - Form */}
-      <div className="flex flex-col justify-start gap-8 w-full lg:w-1/2">
-        <h1 className="text-black font-bold text-lg lg:text-3xl">
+    <div className="grid grid-cols-1 lg:grid-cols-12">
+      <div className="flex flex-col justify-start gap-8 w-full px-6 py-8 md:px-12 lg:px-20 lg:py-12 lg:col-span-6">
+        <h1 className="text-black font-bold text-xl md:text-2xl lg:text-[36px]">
           Create your account!
         </h1>
-        <p className="text-signText font-medium text-md">
+        <p className="text-signText font-medium text-sm md:text-md">
           Please input your information below to enter your Journey platform.
         </p>
 
-        {/* Email Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-black text-md font-semibold">Email</label>
+          <label className="text-black text-sm md:text-md font-semibold">Email</label>
           <input
             type="email"
             value={email}
@@ -117,7 +115,7 @@ const Signup = () => {
               setEmail(e.target.value);
               validateEmail(e.target.value);
             }}
-            className="px-4 py-2 border rounded focus:outline-none w-full"
+            className="px-4 py-2 border rounded focus:outline-none"
             placeholder="e.g. hamzayasin499@gmail.com"
             required
           />
@@ -126,9 +124,8 @@ const Signup = () => {
           )}
         </div>
 
-        {/* Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-black text-md font-semibold">Password</label>
+          <label className="text-black text-sm md:text-md font-semibold">Password</label>
           <input
             type="password"
             value={password}
@@ -136,7 +133,7 @@ const Signup = () => {
               setPassword(e.target.value);
               validatePassword(e.target.value);
             }}
-            className="px-4 py-2 border rounded focus:outline-none w-full"
+            className="px-4 py-2 border rounded focus:outline-none"
             placeholder="********"
             required
           />
@@ -145,7 +142,6 @@ const Signup = () => {
           )}
         </div>
 
-        {/* Terms and Conditions */}
         <div className="flex gap-2">
           <input
             type="checkbox"
@@ -153,7 +149,7 @@ const Signup = () => {
             onChange={(e) => setIsCheckboxChecked(e.target.checked)}
             required
           />
-          <span className="text-black text-sm md:text-lg font-semibold">
+          <span className="text-black text-xs md:text-sm font-semibold">
             I agree to{" "}
             <span
               onClick={() => setPolicyOpen(true)}
@@ -164,10 +160,9 @@ const Signup = () => {
           </span>
         </div>
 
-        {/* Sign Up Button */}
         <button
           onClick={handleOpenModal}
-          className={`text-white font-bold py-3 rounded text-md ${
+          className={`text-white font-bold py-3 rounded text-sm md:text-md ${
             isButtonDisabled ? "bg-gray-400" : "bg-bluePrimary"
           }`}
           disabled={isButtonDisabled}
@@ -175,8 +170,7 @@ const Signup = () => {
           {loading ? <CircularProgress size={24} color="inherit" /> : "Sign Up"}
         </button>
 
-        {/* Login Link */}
-        <p className="text-gray-600 text-center mt-4">
+        <p className="text-gray-600 text-center mt-0 text-sm md:text-md">
           Already have an account?{" "}
           <strong onClick={goToLogin} className="text-blue-500 cursor-pointer">
             Login
@@ -184,16 +178,14 @@ const Signup = () => {
         </p>
       </div>
 
-      {/* Right Section - Image */}
-      <div className="w-full lg:w-1/2 flex justify-center">
+      <div className="hidden lg:block lg:col-span-6">
         <img
           src="/image 35.png"
           alt="Sign In"
-          className="object-cover h-full w-full rounded-lg"
+          className="object-cover h-full w-full"
         />
       </div>
 
-      {/* Snackbar for Error Messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
@@ -208,7 +200,6 @@ const Signup = () => {
         </Alert>
       </Snackbar>
 
-      {/* Privacy Policy Modal */}
       <Dialog open={modalOpen} onClose={handleCloseModal}>
         <DialogTitle>Privacy Policy</DialogTitle>
         <DialogContent dividers className="no-scrollbar">

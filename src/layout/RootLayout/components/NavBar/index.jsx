@@ -414,6 +414,7 @@ const Navbar = ({ open, onCloseNav }) => {
       to: "/",
       subItems: [
         { id: 241, title: "FAQ", to: "/resources/faq" },
+        { id: 242, title: "Contact Us", to: "" },
         { id: 242, title: "About Us", to: "/resources/about-us" },
         { id: 243, title: "Teaching Method", to: "/resources/teaching-method" },
       ],
