@@ -639,6 +639,7 @@ import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icon
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import { useSelector } from "react-redux";
 const AUTH_KEY = "isAuthenticated"; 
 
 const Navbar = ({ open, onCloseNav }) => {
@@ -646,6 +647,8 @@ const Navbar = ({ open, onCloseNav }) => {
   const [selectedSubItem, setSelectedSubItem] = useState(0);
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
   const primumData = localStorage.getItem("videoType");
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
+
   const isAuthenticatedUser = localStorage.getItem(AUTH_KEY); 
   const location = useLocation();
 

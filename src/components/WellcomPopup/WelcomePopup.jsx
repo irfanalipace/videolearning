@@ -17,7 +17,11 @@ const WelcomePopup = () => {
   };
 
   const handleNext = () => {
-    setStep((prevStep) => (prevStep < 5 ? prevStep + 1 : prevStep));
+    if (step < 5) {
+      setStep((prevStep) => prevStep + 1);
+    } else {
+      setShowPopup(false); // Close popup on "Finish"
+    }
   };
 
   const handlePrevious = () => {
@@ -109,7 +113,9 @@ const WelcomePopup = () => {
               </div>
               <div className="navigation-buttons">
                 <button onClick={handlePrevious} disabled={step === 1}>Previous</button>
-                <button onClick={handleNext} disabled={step === 5}>Next</button>
+                <button onClick={handleNext}>
+                  {step === 5 ? 'Finish' : 'Next'}
+                </button>
               </div>
               <div className="progress-indicator">
                 <div style={{ width: `${(step / 5) * 100}%` }} className="progress-bar"></div>

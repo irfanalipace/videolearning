@@ -131,7 +131,7 @@ const SignIn = () => {
               required
             />
           </div>
-
+{/*  
           <div className="flex gap-2">
             <input
               type="checkbox"
@@ -143,12 +143,12 @@ const SignIn = () => {
               I agree to <span onClick={() => setPolicyOpen(true)} className="text-blue-600 underline cursor-pointer"> Terms And Conditions </span>
             </span>
           </div>
-
+*/}
           <Button
             variant="contained"
             className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center"
             onClick={handleSignIn}
-            disabled={loading || isButtonDisabled}
+          //  disabled={loading || isButtonDisabled}
             sx={{ position: "relative" }}
           >
             {loading ? (

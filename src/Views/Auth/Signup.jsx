@@ -24,6 +24,7 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const contentRef = useRef(null);
   const dispatch = useDispatch();
@@ -93,7 +94,8 @@ const Signup = () => {
     navigate("/sign-in");
   };
 
-  const isButtonDisabled = !email || !password || loading || emailError || passwordError
+  const isButtonDisabled = !email || !password || loading || emailError || passwordError || !isCheckboxChecked;
+
   return (
     <div className="grid grid-cols-12">
       <div className="flex flex-col justify-start gap-8 w-full lg:w-full px-20 py-12 col-span-6">
@@ -139,27 +141,31 @@ const Signup = () => {
             <span className="text-red-500 text-sm">{passwordError}</span>
           )}
         </div>
+
         <div className="flex gap-2">
-        <input
-          type="checkbox"
-          id="termsCheckbox"
-          onChange={(e) => setCheckbox(e.target.checked)}
-          required
-        />
-        <span className="text-black text-sm md:text-[16px] font-semibold">
-          I agree to <span onClick={() => setPolicyOpen(true)} className="text-blue-600 underline cursor-pointer"> Terms And Conditions </span>
-        </span>
-      </div>
+          <input
+            type="checkbox"
+            id="termsCheckbox"
+            onChange={(e) => setIsCheckboxChecked(e.target.checked)}
+            required
+          />
+          <span className="text-black text-sm md:text-[16px] font-semibold">
+            I agree to{" "}
+            <span
+              onClick={() => setPolicyOpen(true)}
+              className="text-blue-600 underline cursor-pointer"
+            >
+              Terms And Conditions
+            </span>
+          </span>
+        </div>
 
         <button
           onClick={handleOpenModal}
-          
           className={`text-white font-bold py-3 rounded text-md ${
-            !email || !password || emailError || passwordError
-              ? "bg-gray-400"
-              : "bg-bluePrimary"
+            isButtonDisabled ? "bg-gray-400" : "bg-bluePrimary"
           }`}
-          disabled={loading || isButtonDisabled}
+          disabled={isButtonDisabled}
         >
           {loading ? <CircularProgress size={24} color="inherit" /> : "Sign Up"}
         </button>

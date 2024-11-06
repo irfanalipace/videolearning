@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid2, LinearProgress, Typography,Paper } from '@mui/material';
+import { Box, Grid, LinearProgress, Typography, Paper } from '@mui/material';
 import StreakIcon from '@mui/icons-material/Stars';
 import WeeksIcon from '@mui/icons-material/CalendarToday';
 import TimeIcon from '@mui/icons-material/AccessTime';
@@ -24,94 +24,91 @@ const ProgressClinder = () => {
 
   return (
     <Box sx={{ padding: 0, backgroundColor: '#f5f5f5', marginTop: "26px" }}>
-      <Grid2 container spacing={2}>
-        {/* Adjust each Grid2 item to take equal width for 3 cards per row */}
-        <Grid2 item xs={12} sm={4}>
+      <Grid container spacing={2}>
+      <Paper sx={{ width: '100%', padding: 2, marginTop: 3 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item xs={12} marginTop={5}>
+              <DataCard title="Daily Streak" value={dailyStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9">
+                <Typography variant="body2" color="textSecondary">
+                  Days of consecutive viewing.
+                </Typography>
+              </DataCard>
+            </Grid>
+            <Grid item xs={12}>
+              <DataCard title="Current Streak" value={currentStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9">
+                <Typography variant="body2" color="textSecondary">
+                  Reach a max streak of {maxStreak} by practicing every day.
+                </Typography>
+                <LinearProgress variant="determinate" value={(currentStreak / maxStreak) * 100} sx={{ marginTop: 1 }} />
+                <Typography variant="caption" sx={{ marginTop: 1 }}>
+                  {currentStreak}/{maxStreak}
+                </Typography>
+              </DataCard>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <CalendarCard />
+        </Grid>
+      </Grid>
+    </Paper>
+        <Grid item xs={12} sm={4}>
           <DataCard title="Minute Progress Circle" value={`${(totalMinutes / 60).toFixed(2)} hrs`} icon={<TimeIcon />}>
             <LinearProgress variant="determinate" value={(totalMinutes % 60) * (100 / 60)} sx={{ marginTop: 1 }} />
             <Typography variant="caption" sx={{ marginTop: 1 }}>
               {totalMinutes} minutes watched
             </Typography>
           </DataCard>
-        </Grid2>
-        <Grid2 item xs={12} sm={4}>
-        <DataCard title="Weeks in a Row" value={weeksInARow} icon={<WeeksIcon />} />
-      </Grid2>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <DataCard title="Weeks in a Row" value={weeksInARow} icon={<WeeksIcon />} />
+        </Grid>
 
-      <Grid2 item xs={12} sm={4}>
-        <DataCard title="Hours Watched" value={hoursWatched} icon={<TimeIcon />} />
-      </Grid2>
+        <Grid item xs={12} sm={4}>
+          <DataCard title="Hours Watched" value={hoursWatched} icon={<TimeIcon />} />
+        </Grid>
 
-      <Grid2 item xs={12} sm={4}>
-        <DataCard title="Videos Watched" value={videosWatched} icon={<VideoIcon />} />
-      </Grid2>
+        <Grid item xs={12} sm={4}>
+          <DataCard title="Videos Watched" value={videosWatched} icon={<VideoIcon />} />
+        </Grid>
 
-      <Grid2 item xs={12} sm={4}>
-        <DataCard title="Outside Hours" value={outsideHours} icon={<TimeIcon />} />
-      </Grid2>
-        <Paper>
-        <Grid2 container spacing={2} marginTop={7}>
-          <Grid2 item xs={12} sm={8}>
-            <Grid2 container direction="column" spacing={2}>
-              <Grid2 item xs={12}>
-                <DataCard title="Daily Streak" value={dailyStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9" Paper="none">
-                  <Typography variant="body2" color="textSecondary">
-                    Days of consecutive viewing.
-                  </Typography>
-                </DataCard>
-              </Grid2>
-              <Grid2 item xs={12}>
-                <DataCard title="Current Streak" value={currentStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9" >
-                  <Typography variant="body2" color="textSecondary">
-                    Reach a max streak of {maxStreak} by practicing every day.
-                  </Typography>
-                  <LinearProgress variant="determinate" value={(currentStreak / maxStreak) * 100} sx={{ marginTop: 1 }} />
-                  <Typography variant="caption" sx={{ marginTop: 1 }}>
-                    {currentStreak}/{maxStreak}
-                  </Typography>
-                </DataCard>
-              </Grid2>
-            </Grid2>
-          </Grid2>
-          <Grid2 item xs={12} sm={4}>
-            <CalendarCard />
-          </Grid2>
-        </Grid2>
-      </Paper>
-      
-      
+        <Grid item xs={12} sm={4}>
+          <DataCard title="Outside Hours" value={outsideHours} icon={<TimeIcon />} />
+        </Grid>
 
      
 
-        <Grid2 item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
           <DataCard title="Current Level" value={currentLevel} icon={<LevelIcon />} />
-        </Grid2>
+        </Grid>
 
-        <Grid2 item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
           <DataCard title="Hours till Next Level" value={hoursTillNextLevel} icon={<LevelIcon />}>
             <LinearProgress variant="determinate" value={(hoursTillNextLevel / 100) * 100} sx={{ marginTop: 1 }} />
             <Typography variant="caption" sx={{ marginTop: 1 }}>
               {hoursTillNextLevel} hours remaining
             </Typography>
           </DataCard>
-        </Grid2>
+        </Grid>
 
-        <Grid2 item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
           <DataCard title="Level Description" value="Current Level" icon={<LevelIcon />}>
             <Typography variant="body2" color="textSecondary">
               {levelDescription}
             </Typography>
           </DataCard>
-        </Grid2>
+        </Grid>
 
-        <Grid2 item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}>
           <DataCard title="Badges" value="Coming Soon" icon={<BadgeIcon />}>
             <Typography variant="body2" color="textSecondary">
               Badges will be provided later.
             </Typography>
           </DataCard>
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

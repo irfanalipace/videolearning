@@ -3,7 +3,7 @@ import { Paper, Box, Typography } from '@mui/material';
 
 const DataCard = ({ title, value, icon, children,backgroundColor }) => {
   return (
-    <Paper sx={{ padding: 2, backgroundColor: backgroundColor ? backgroundColor : "white" , boxShadow: 1 }}>
+    <Paper sx={{ padding: 2, backgroundColor: backgroundColor ? backgroundColor : "white" , boxShadow: 1 , height:"136px", padding:"10px"}}>
       <Box display="flex" alignItems="center">
         {icon}
         <Typography sx={{ marginLeft: 1, fontSize:'13px' }}>

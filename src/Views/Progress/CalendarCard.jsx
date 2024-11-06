@@ -8,6 +8,7 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { Box, Card, CardContent, Typography, LinearProgress } from '@mui/material';
+import { Height } from '@mui/icons-material';
 export default function CalendarCard() {
   return (
     <Box>
