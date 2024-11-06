@@ -40,7 +40,7 @@ const TrendingSeries = () => {
 
   return (
     <div className="grid grid-cols-12 gap-3">
-      <div className="col-span-9">
+      <div className="col-span-9 p-5">
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "300px" }}>
             <CircularProgress color="secondary" />
