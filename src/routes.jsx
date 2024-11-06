@@ -1,7 +1,8 @@
-import { Navigate, useRoutes } from "react-router-dom"; // Import Navigate
+import { Navigate, useRoutes } from "react-router-dom"; 
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
+import { useState, useEffect } from "react";
 import WatchSeries from "./Views/WatchSeries/WatchSeries";
 import WatchLibrary from "./Views/WatchLibrary/WatchLibrary";
 import Library from "./Views/Library/Library";
@@ -28,9 +29,14 @@ import VedioPlateform from "./Views/Resources/VedioPlateform";
 import PreSubscriptions from "./Views/Resources/PreSubscriptions";
 import Price from "./Views/Payment/Price";
 import Nodownload from "./layout/RootLayout/components/Nodownload";
+import WelcomePopup from "./components/WellcomPopup/WelcomePopup";
+import UnauthenticatedMessage from "./components/unauthenticatedMessage/AnauthenticatedMessage";
+import Primuim from "./components/Primuim/Primuim";
 
 export default function Router() {
+  const [showWelcomePopup, setShowWelcomePopup] = useState(true);
   let element = useRoutes([
+    
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
@@ -60,13 +66,21 @@ export default function Router() {
         { path: "progress", element: <Progress /> },
         { path: "bignners", element: <Bignner /> },
         { path: "settings", element: <Settings /> },
-        { path: "/Nodownload", element: <Nodownload /> },
-
+        { path: "Nodownload", element: <Nodownload /> },
+        { path: "un-authentic", element: <UnauthenticatedMessage /> },
+        { path: "primum", element: <Primuim /> },
       ]
     },
     { path: "verify-email", element: <VerifyEmail /> },
     { path: "auth-success", element: <AuthticationSuccess /> },
+    
   ]);
 
-  return element;
+  return (
+    <>
+      {showWelcomePopup && <WelcomePopup />}
+      {element}
+    </>
+  )
 }
+

@@ -17,6 +17,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircularProgressWithLabel from "./CircularProgressWithLabel"; // Assuming this is your custom component
 import { MdDiamond } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import ProgressClinder from "./ProgressClinder";
 const data = [
   { level: "Level 1", inputHours: 150, knownWords: 400 },
   { level: "Level 2", inputHours: 50, knownWords: 300 },
@@ -255,6 +256,12 @@ const Progress = () => {
           </DialogActions>
         </Dialog>
       </Grid>
+
+   
+     
+          <ProgressClinder />
+       
+
     </Box>
   );
 };

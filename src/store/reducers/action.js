@@ -47,7 +47,8 @@ export const loginUser = (userData) => {
         type: LOGIN_SUCCESS,
         payload: response.data,
       });
-      localStorage.setItem("token", response.data.token); // Store token
+      localStorage.setItem("token", response.data.token); 
+    
       return response;
     } catch (error) {
       dispatch({
