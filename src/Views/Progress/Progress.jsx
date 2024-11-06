@@ -18,6 +18,7 @@ import CircularProgressWithLabel from "./CircularProgressWithLabel"; // Assuming
 import { MdDiamond } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import ProgressClinder from "./ProgressClinder";
+import CalendarCard from "./CalendarCard";
 const data = [
   { level: "Level 1", inputHours: 150, knownWords: 400 },
   { level: "Level 2", inputHours: 50, knownWords: 300 },
@@ -260,7 +261,7 @@ const Progress = () => {
    
      
           <ProgressClinder />
-       
+        
 
     </Box>
   );

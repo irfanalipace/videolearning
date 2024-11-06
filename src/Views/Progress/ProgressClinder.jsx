@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid2, LinearProgress, Typography } from '@mui/material';
+import { Box, Grid2, LinearProgress, Typography,Paper } from '@mui/material';
 import StreakIcon from '@mui/icons-material/Stars';
 import WeeksIcon from '@mui/icons-material/CalendarToday';
 import TimeIcon from '@mui/icons-material/AccessTime';
@@ -7,6 +7,7 @@ import VideoIcon from '@mui/icons-material/PlayCircleFilled';
 import BadgeIcon from '@mui/icons-material/EmojiEvents';
 import LevelIcon from '@mui/icons-material/StarRate';
 import DataCard from './DataCard';
+import CalendarCard from './CalendarCard';
 
 const ProgressClinder = () => {
   const currentStreak = 3;
@@ -33,42 +34,54 @@ const ProgressClinder = () => {
             </Typography>
           </DataCard>
         </Grid2>
-
         <Grid2 item xs={12} sm={4}>
-          <DataCard title="Daily Streak" value={dailyStreak} icon={<StreakIcon />}>
-            <Typography variant="body2" color="textSecondary">
-              Days of consecutive viewing.
-            </Typography>
-          </DataCard>
-        </Grid2>
+        <DataCard title="Weeks in a Row" value={weeksInARow} icon={<WeeksIcon />} />
+      </Grid2>
 
-        <Grid2 item xs={12} sm={4}>
-          <DataCard title="Current Streak" value={currentStreak} icon={<StreakIcon />}>
-            <Typography variant="body2" color="textSecondary">
-              Reach a max streak of {maxStreak} by practicing every day.
-            </Typography>
-            <LinearProgress variant="determinate" value={(currentStreak / maxStreak) * 100} sx={{ marginTop: 1 }} />
-            <Typography variant="caption" sx={{ marginTop: 1 }}>
-              {currentStreak}/{maxStreak}
-            </Typography>
-          </DataCard>
-        </Grid2>
+      <Grid2 item xs={12} sm={4}>
+        <DataCard title="Hours Watched" value={hoursWatched} icon={<TimeIcon />} />
+      </Grid2>
 
-        <Grid2 item xs={12} sm={4}>
-          <DataCard title="Weeks in a Row" value={weeksInARow} icon={<WeeksIcon />} />
-        </Grid2>
+      <Grid2 item xs={12} sm={4}>
+        <DataCard title="Videos Watched" value={videosWatched} icon={<VideoIcon />} />
+      </Grid2>
 
-        <Grid2 item xs={12} sm={4}>
-          <DataCard title="Hours Watched" value={hoursWatched} icon={<TimeIcon />} />
+      <Grid2 item xs={12} sm={4}>
+        <DataCard title="Outside Hours" value={outsideHours} icon={<TimeIcon />} />
+      </Grid2>
+        <Paper>
+        <Grid2 container spacing={2} marginTop={7}>
+          <Grid2 item xs={12} sm={8}>
+            <Grid2 container direction="column" spacing={2}>
+              <Grid2 item xs={12}>
+                <DataCard title="Daily Streak" value={dailyStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9" Paper="none">
+                  <Typography variant="body2" color="textSecondary">
+                    Days of consecutive viewing.
+                  </Typography>
+                </DataCard>
+              </Grid2>
+              <Grid2 item xs={12}>
+                <DataCard title="Current Streak" value={currentStreak} icon={<StreakIcon />} backgroundColor="#f3f2f9" >
+                  <Typography variant="body2" color="textSecondary">
+                    Reach a max streak of {maxStreak} by practicing every day.
+                  </Typography>
+                  <LinearProgress variant="determinate" value={(currentStreak / maxStreak) * 100} sx={{ marginTop: 1 }} />
+                  <Typography variant="caption" sx={{ marginTop: 1 }}>
+                    {currentStreak}/{maxStreak}
+                  </Typography>
+                </DataCard>
+              </Grid2>
+            </Grid2>
+          </Grid2>
+          <Grid2 item xs={12} sm={4}>
+            <CalendarCard />
+          </Grid2>
         </Grid2>
+      </Paper>
+      
+      
 
-        <Grid2 item xs={12} sm={4}>
-          <DataCard title="Videos Watched" value={videosWatched} icon={<VideoIcon />} />
-        </Grid2>
-
-        <Grid2 item xs={12} sm={4}>
-          <DataCard title="Outside Hours" value={outsideHours} icon={<TimeIcon />} />
-        </Grid2>
+     
 
         <Grid2 item xs={12} sm={4}>
           <DataCard title="Current Level" value={currentLevel} icon={<LevelIcon />} />
