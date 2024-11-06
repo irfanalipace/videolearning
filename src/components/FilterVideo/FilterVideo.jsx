@@ -9,7 +9,14 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Search, ArrowDropDown, Close } from "@mui/icons-material";
-import { FilterList, BarChart, Public, Person, Label, Mic } from "@mui/icons-material";
+import {
+  FilterList,
+  BarChart,
+  Public,
+  Person,
+  Label,
+  Mic,
+} from "@mui/icons-material";
 
 const FilterVideo = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -33,10 +40,10 @@ const FilterVideo = () => {
             right: 0,
             bottom: 0,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
-            backdropFilter: "blur(5px)", // Add blur effect
+            backdropFilter: "blur(5px)",
             display: "flex",
             justifyContent: "center",
-            alignItems: "flex-start", // Align to the top
+            alignItems: "flex-start",
             paddingTop: "30px",
             zIndex: 1000,
           }}
@@ -46,12 +53,12 @@ const FilterVideo = () => {
               display: "flex",
               alignItems: "center",
               width: "100%",
-              maxWidth: "1000px", // Max width for the overlay
+              maxWidth: "1000px",
               padding: "12px",
               backgroundColor: "white",
               borderRadius: "16px",
-              marginTop: '23px',
-              boxShadow: 3, // Optional: adds shadow to the search box
+              marginTop: "23px",
+              boxShadow: 3,
             }}
           >
             <InputBase
@@ -66,16 +73,15 @@ const FilterVideo = () => {
               }}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={handleCloseSearch} sx={{ color: "text.primary" }}>
+                  <IconButton
+                    onClick={handleCloseSearch}
+                    sx={{ color: "text.primary" }}
+                  >
                     <Close />
                   </IconButton>
                 </InputAdornment>
               }
             />
-
-            <IconButton onClick={handleSearchClick} sx={{ color: "text.primary" }}>
-              <Search sx={{ fontSize: "33px" }} />
-            </IconButton>
           </Box>
         </Box>
       )}
@@ -88,6 +94,8 @@ const FilterVideo = () => {
           gap: "8px",
           backgroundColor: "white",
           borderRadius: "16px",
+          flexWrap: { xs: "wrap", sm: "nowrap" },
+          justifyContent: { xs: "center", sm: "flex-start" },
         }}
       >
         {[
@@ -110,19 +118,19 @@ const FilterVideo = () => {
               textTransform: "none",
               borderRadius: "16px",
               padding: "6px 16px",
+              fontSize: { xs: "12px", sm: "14px" },
+              minWidth: "120px",
             }}
           >
             {item.label}
           </Button>
         ))}
 
-        {/* Hide Watched Switch */}
         <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <Switch />
           <Typography variant="body2">Hide watched</Typography>
         </Box>
 
-        {/* Search Icon */}
         <IconButton onClick={handleSearchClick} sx={{ color: "text.primary" }}>
           <Search />
         </IconButton>

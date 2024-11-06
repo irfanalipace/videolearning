@@ -61,17 +61,18 @@ const Nodownload = () => {
 
   return (
     <>
-      <div>
+      <div className="p-4">
         <div>
-          <h1 className="text-4xl flex flex-col gap-1 font-bold items-center justify-center">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold flex flex-col gap-1 items-center justify-center">
             Get instant access to our
-            <span className="text-5xl font-bold text-[#005687]">
+            <span className="text-3xl sm:text-4xl text-[#005687] font-bold">
               premium membership
             </span>
           </h1>
         </div>
 
-        <div className="flex items-center gap-4 mt-10 justify-center bg-gray-100">
+        {/* Cards Grid with responsive layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 justify-center">
           {cardsData.map((card, index) => (
             <Nodownloadcard
               key={index}
@@ -84,18 +85,18 @@ const Nodownload = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-4 mt-8">
-          <h1 className="text-xl">
+          <h1 className="text-lg sm:text-xl md:text-2xl">
             All this for only <span className="text-blue-800"> $8</span> a month
           </h1>
           <button
             onClick={gosignup}
-            className="py-2 px-7 rounded-lg text-white text-xl bg-[#005687]"
+            className="py-2 px-7 rounded-lg text-white text-lg sm:text-xl bg-[#005687] hover:bg-[#003f56]"
           >
             Sign up to upgrade
           </button>
           <h1
             onClick={handleOpenModal}
-            className="text-lg font-bold text-[#005687] cursor-pointer"
+            className="text-sm sm:text-lg font-bold text-[#005687] cursor-pointer"
           >
             Terms and Conditions
           </h1>
@@ -109,24 +110,22 @@ const Nodownload = () => {
           onClick={handleBackdropClick}
         >
           <div
-            className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg"
+            className="max-w-xs sm:max-w-md mx-auto p-6 bg-white shadow-md rounded-lg w-11/12"
             style={{ maxHeight: "80vh", overflowY: "auto" }}
           >
-            <h1 className="text-2xl font-bold mb-4">
+            <h1 className="text-xl sm:text-2xl font-bold mb-4">
               Privacy Policy for Arabic All The Time
             </h1>
             <p className="mb-4">Effective Date: 22/10/2024</p>
 
-            <h2 className="text-xl font-semibold mb-2">1. Introduction</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">1. Introduction</h2>
             <p className="mb-4">
               Your privacy is crucial to us. This Privacy Policy explains how we
               collect, use, disclose, and safeguard your information when you
               use our services, including our API Client.
             </p>
 
-            <h2 className="text-xl font-semibold mb-2">
-              2. Information We Collect
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">2. Information We Collect</h2>
             <p className="mb-4">
               We may collect the following types of information:
             </p>
@@ -149,9 +148,7 @@ const Nodownload = () => {
               </li>
             </ul>
 
-            <h2 className="text-xl font-semibold mb-2">
-              3. How We Use Your Information
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">3. How We Use Your Information</h2>
             <p className="mb-4">
               We use your information for the following purposes:
             </p>
@@ -171,7 +168,7 @@ const Nodownload = () => {
               <li>To detect, prevent, and address technical issues.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold mb-2">4. User Rights</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">4. User Rights</h2>
             <p className="mb-4">
               You have the following rights regarding your personal information:
             </p>
@@ -183,9 +180,7 @@ const Nodownload = () => {
               <li>The right to request the transfer of your data.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold mb-2">
-              5. Sharing Your Information
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">5. Sharing Your Information</h2>
             <p className="mb-4">
               We do not sell or rent your personal information to third parties.
               We may share your information with:
@@ -201,9 +196,7 @@ const Nodownload = () => {
               <li>Other parties in accordance with your consent.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold mb-2">
-              6. Cookies and Tracking Technologies
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">6. Cookies and Tracking Technologies</h2>
             <p className="mb-4">
               We use cookies and similar tracking technologies to monitor
               activity on our services and store certain information. You can
@@ -211,7 +204,7 @@ const Nodownload = () => {
               cookie is being sent.
             </p>
 
-            <h2 className="text-xl font-semibold mb-2">7. Data Security</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">7. Data Security</h2>
             <p className="mb-4">
               The security of your data is important to us, but remember that no
               method of transmission over the Internet or method of electronic
@@ -220,9 +213,7 @@ const Nodownload = () => {
               guarantee its absolute security.
             </p>
 
-            <h2 className="text-xl font-semibold mb-2">
-              8. Changes to This Privacy Policy
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">8. Changes to This Privacy Policy</h2>
             <p className="mb-4">
               We may update our Privacy Policy from time to time. We will notify
               you of any changes by posting the new Privacy Policy on this page.
@@ -230,12 +221,24 @@ const Nodownload = () => {
               changes.
             </p>
 
-            <h2 className="text-xl font-semibold mb-2">9. Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please
-              contact us:
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">9. Contact Us</h2>
+            <p className="mb-4">
+              If you have any questions about this Privacy Policy, please contact
+              us:
             </p>
-            <p>Email: support@example.com</p>
+            <ul className="list-disc pl-5 mb-4">
+              <li>By email: example@email.com</li>
+              <li>By visiting this page on our website: example.com</li>
+            </ul>
+
+            <div className="flex justify-end">
+              <button
+                onClick={handleCloseModal}
+                className="py-2 px-4 bg-red-600 text-white rounded-md"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -32,7 +32,7 @@ const UnderlinedTypography = styled(Typography)(({ theme }) => ({
 
 const AboutUs = () => {
   return (
-    <Box maxWidth="lg">
+    <Box maxWidth="lg" padding={3}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
         Contact Us
       </Typography>

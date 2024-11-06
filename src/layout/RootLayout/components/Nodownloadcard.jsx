@@ -2,7 +2,7 @@ import React from 'react';
 
 const Nodownloadcard = ({ imageUrl, title, description,title2 }) => {
   return (
-    <div className=" mx-auto h-80 w-80 bg-white shadow-lg rounded-lg overflow-hidden relative">
+    <div className=" mx-auto h-80 w-50 bg-white shadow-lg rounded-lg overflow-hidden relative">
       {/* Circular Image */}
       <div className="">
         <img

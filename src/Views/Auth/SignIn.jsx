@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/reducers/action";
-import { Alert, Snackbar, Button, CircularProgress, Dialog } from "@mui/material";
+import {
+  Alert,
+  Snackbar,
+  Button,
+  CircularProgress,
+  Dialog,
+} from "@mui/material";
 import Policy from "./Policy";
 
 const SignIn = () => {
@@ -55,11 +61,13 @@ const SignIn = () => {
         }
 
         if (response.data.payload.user.is_verified === 1) {
-       
-          localStorage.setItem("isAuthenticated", response.data.payload.user.is_verified); 
+          localStorage.setItem(
+            "isAuthenticated",
+            response.data.payload.user.is_verified
+          );
           const premiumVideo = "premium";
           localStorage.setItem("videoType", premiumVideo);
-          
+
           navigate("/watch-videos");
         } else {
           navigate("/otp-authentication");
@@ -131,7 +139,7 @@ const SignIn = () => {
               required
             />
           </div>
-{/*  
+          {/*  
           <div className="flex gap-2">
             <input
               type="checkbox"
@@ -148,11 +156,15 @@ const SignIn = () => {
             variant="contained"
             className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center"
             onClick={handleSignIn}
-          //  disabled={loading || isButtonDisabled}
+            //  disabled={loading || isButtonDisabled}
             sx={{ position: "relative" }}
           >
             {loading ? (
-              <CircularProgress size={24} color="inherit" sx={{ marginRight: 1 }} />
+              <CircularProgress
+                size={24}
+                color="inherit"
+                sx={{ marginRight: 1 }}
+              />
             ) : (
               "Sign In"
             )}
@@ -189,7 +201,12 @@ const SignIn = () => {
         </Alert>
       </Snackbar>
 
-      <Dialog open={policyOpen} onClose={() => setPolicyOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog
+        open={policyOpen}
+        onClose={() => setPolicyOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
         <Policy contentRef={null} handleScroll={null} />
       </Dialog>
     </div>

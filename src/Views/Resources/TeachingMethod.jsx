@@ -20,7 +20,7 @@ const navigate=useNavigate();
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" padding={3}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <UnderlinedTypography>Teaching Methods</UnderlinedTypography>
