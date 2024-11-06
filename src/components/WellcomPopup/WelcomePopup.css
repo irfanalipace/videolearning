@@ -1,5 +1,3 @@
-
-
 .overlay {
   position: fixed;
   top: 0;
@@ -33,10 +31,10 @@
 .options {
   margin: 20px 0;
 }
-.options p{
-    margin: 6px;
+.options p {
+  margin: 6px;
 }
-.navigation-buttons button{
+.navigation-buttons button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -47,12 +45,12 @@
   width: 40%;
   transition: background-color 0.3s;
 }
-.radio-option input{
-    margin-right: 10px;
+.radio-option input {
+  margin-right: 10px;
 }
-.heading-head{
-    font-weight: bold;
-    margin: 0px;
+.heading-head {
+  font-weight: bold;
+  margin: 0px;
 }
 .option-button.highlighted {
   background-color: #28a745;
@@ -97,4 +95,11 @@
   background: #007bff;
   height: 100%;
   border-radius: 5px;
+}
+@media (max-width: 500px) {
+  .welcome-popup {
+    width: 280px;
+    padding: 15px;
+    margin: 0 auto;
+  }
 }

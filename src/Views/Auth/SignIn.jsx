@@ -94,7 +94,7 @@ const SignIn = () => {
   const isButtonDisabled = !email || !password || !checkbox;
 
   return (
-    <div>
+    <div className="p-4">
       <div className="flex h-screen items-center gap-7 justify-center">
         <div className="flex flex-col justify-center gap-8 w-full lg:w-[40%]">
           <div className="flex flex-col gap-4">
@@ -131,7 +131,7 @@ const SignIn = () => {
               required
             />
           </div>
-
+{/*  
           <div className="flex gap-2">
             <input
               type="checkbox"
@@ -143,12 +143,12 @@ const SignIn = () => {
               I agree to <span onClick={() => setPolicyOpen(true)} className="text-blue-600 underline cursor-pointer"> Terms And Conditions </span>
             </span>
           </div>
-
+*/}
           <Button
             variant="contained"
             className="font-bold py-3 rounded-[7px] bg-bluePrimary text-sm md:text-[16px] flex items-center justify-center"
             onClick={handleSignIn}
-            disabled={loading || isButtonDisabled}
+          //  disabled={loading || isButtonDisabled}
             sx={{ position: "relative" }}
           >
             {loading ? (
