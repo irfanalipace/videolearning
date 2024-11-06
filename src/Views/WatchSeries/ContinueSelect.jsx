@@ -2,7 +2,7 @@ import ContinueSlider from "../../components/ContinueSlider/ContinueSlider";
 
 const ContinueSelect = () => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex md:sm:flex-row flex-col items-center justify-around">
       <div className="flex items-center gap-3">
         <h1 className="text-black font-bold text-[20px] font-poppins">
           Continue Watching
