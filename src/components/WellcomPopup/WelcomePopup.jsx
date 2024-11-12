@@ -14,6 +14,7 @@ const WelcomePopup = () => {
     if (option === 'new') {
       setStep(1);
     } else {
+      navigate("/")
       setShowPopup(false);
     }
   };
