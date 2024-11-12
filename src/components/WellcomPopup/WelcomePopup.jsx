@@ -141,41 +141,34 @@ const WelcomePopup = () => {
                 )}
               </div>
 
-              <div className="navigation-buttons" style={{ marginTop: "40px" }}>
-                {/* Hide the Previous button on the last slide */}
-                {step !== 5 && (
-                  <button
-                    onClick={handlePrevious}
-                    disabled={step === 1}
-                    className="nav-button previous-button"
-                  >
-                    &#8592; Previous
-                  </button>
-                )}
+   <div className="navigation-buttons" style={{ display: "flex", justifyContent: "space-between" }}>
 
-                {/* On the last step (step 5), show these new buttons */}
-                {step === 5 ? (
-                  <>
-                  
-                      <button className="start-button" onClick={handleNavigateToMethodPage}>
-                        Start Watching Now
-                      </button>
-                  
-                   
-                      <button className="learn-more-button" onClick={handleNavigateToTeachingMethod}>
-                        Learn More About Method
-                      </button>
-                  
-                  </>
-                ) : (
-                  <button
-                    onClick={handleNext}
-                    className="nav-button next-button"
-                  >
-                    Next
-                  </button>
-                )}
-              </div>
+  {step !== 5 && (
+    <button
+      onClick={handlePrevious}
+      disabled={step === 1}
+      className="nav-button previous-button"
+    >
+      Previous
+    </button>
+  )}
+
+  {step === 5 ? (
+    <>
+      <button className="start-button" onClick={handleNavigateToMethodPage} style={{width:"34%", padding:"0px",height:"40px"}}>
+        Start Watching Now
+      </button>
+      <button className="learn-more-button" onClick={handleNavigateToTeachingMethod} style={{width:"34%", padding:"0px",height:"40px"}}>
+        Learn More About Method
+      </button>
+    </>
+  ) : (
+    <button onClick={handleNext} className="nav-button next-button">
+      Next
+    </button>
+  )}
+</div>
+
             </div>
           )}
 
