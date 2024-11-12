@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from "react-router-dom"; 
+import { Navigate, useRoutes } from "react-router-dom";
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
@@ -36,7 +36,6 @@ import Primuim from "./components/Primuim/Primuim";
 export default function Router() {
   const [showWelcomePopup, setShowWelcomePopup] = useState(true);
   let element = useRoutes([
-    
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
     { path: "/sign-up", element: <Signup /> },
@@ -46,8 +45,8 @@ export default function Router() {
       path: "/",
       element: <RootLayout />,
       children: [
-        { path: "/", element: <Navigate to="/watch-videos" replace /> }, // Redirect to /watch-videos
-        { path: "watch-videos", element: <WatchVideos /> }, // Ensure this route is defined
+        { path: "/", element: <Navigate to="/watch-videos" replace /> },
+        { path: "watch-videos", element: <WatchVideos /> },
         { path: "watch-series", element: <WatchSeries /> },
         { path: "no-vedio", element: <NoVideo /> },
         { path: "vedio-list", element: <VideoList /> },
@@ -56,7 +55,10 @@ export default function Router() {
         { path: "watch-history", element: <WatchHistory /> },
         { path: "notifications", element: <Notification /> },
         { path: "resources/about-us", element: <AboutUs /> },
-        { path: "watch-series-phase-two", element: <WatchSeriesSecondScreen /> },
+        {
+          path: "watch-series-phase-two",
+          element: <WatchSeriesSecondScreen />,
+        },
         { path: "resources/faq", element: <FAQ /> },
         { path: "resources/teaching-method", element: <TeachingMethod /> },
         { path: "resources/vedio-plateform", element: <VedioPlateform /> },
@@ -69,11 +71,10 @@ export default function Router() {
         { path: "Nodownload", element: <Nodownload /> },
         { path: "un-authentic", element: <UnauthenticatedMessage /> },
         { path: "primum", element: <Primuim /> },
-      ]
+      ],
     },
     { path: "verify-email", element: <VerifyEmail /> },
     { path: "auth-success", element: <AuthticationSuccess /> },
-    
   ]);
 
   return (
@@ -81,6 +82,5 @@ export default function Router() {
       {showWelcomePopup && <WelcomePopup />}
       {element}
     </>
-  )
+  );
 }
-
