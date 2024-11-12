@@ -87,25 +87,20 @@ const FilterVideo = () => {
       )}
 
       <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          padding: "8px",
-          gap: "8px",
-          backgroundColor: "white",
-          borderRadius: "16px",
-          flexWrap: { xs: "wrap", sm: "nowrap" },
-          justifyContent: { xs: "center", sm: "flex-start" },
-        }}
-      >
-        {[
-          { label: "Sort", icon: <FilterList /> },
-          { label: "Levels", icon: <BarChart /> },
-          { label: "Countries", icon: <Public /> },
-          { label: "Guides", icon: <Person /> },
-          { label: "Topics", icon: <Label /> },
-          { label: "Sound", icon: <Mic /> },
-        ].map((item, index) => (
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        padding: "8px",
+        gap: "46px",
+        backgroundColor: "white",
+        borderRadius: "16px",
+        marginTop: "4.4rem",
+        flexWrap: { xs: "wrap", sm: "nowrap" },
+        justifyContent: "space-between",
+      }}
+    >
+      {[{ label: "Levels", icon: <BarChart /> }, { label: "Guides", icon: <Person /> }, { label: "Topics", icon: <Label /> }]
+        .map((item, index) => (
           <Button
             key={index}
             variant="outlined"
@@ -119,22 +114,32 @@ const FilterVideo = () => {
               borderRadius: "16px",
               padding: "6px 16px",
               fontSize: { xs: "12px", sm: "14px" },
-              minWidth: "120px",
+              minWidth: { xs: "100%", sm: "200px" },
             }}
           >
             {item.label}
           </Button>
         ))}
-
-        <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
-          <Switch />
-          <Typography variant="body2">Hide watched</Typography>
-        </Box>
-
-        <IconButton onClick={handleSearchClick} sx={{ color: "text.primary" }}>
-          <Search />
-        </IconButton>
+    
+      <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
+        <Switch />
+        <Typography variant="body2">Hide watched</Typography>
       </Box>
+    
+      <IconButton
+        onClick={handleSearchClick}
+        sx={{
+          color: "text.primary",
+          "&:hover": {
+            backgroundColor: "inherit",
+          },
+        }}
+      >
+        <Search />
+        <Typography variant="body2">Search</Typography>
+      </IconButton>
+    </Box>
+    
     </Box>
   );
 };

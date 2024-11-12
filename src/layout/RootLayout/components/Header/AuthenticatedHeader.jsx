@@ -22,7 +22,7 @@ const AuthenticatedHeader = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isAuthenticated");
-    navigate("/sign-in");
+    navigate("/");
     console.log("User logged out successfully");
   };
 
