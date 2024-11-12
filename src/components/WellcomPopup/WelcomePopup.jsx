@@ -35,12 +35,12 @@ const WelcomePopup = () => {
   };
   const handleNavigateToTeachingMethod = () => {
     navigate("/resources/teaching-method");
-    setShowPopup(false); // Close the popup after navigation
+    setShowPopup(false); 
   };
 
   const handleNavigateToMethodPage = () => {
     navigate("/watch-videos");
-    setShowPopup(false); // Close the popup after navigation
+    setShowPopup(false); 
   };
 
 

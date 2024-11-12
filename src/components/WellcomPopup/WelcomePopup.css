@@ -1,4 +1,3 @@
-/* Overlay for the popup background */
 .overlay {
   position: fixed;
   top: 0;
@@ -9,8 +8,6 @@
   z-index: 999;
 }
 
-/* Main popup container */
-/* Ensure the popup is flexible in height */
 .welcome-popup {
   position: fixed;
   top: 50%;
@@ -20,9 +17,9 @@
   border-radius: 8px;
   padding: 30px;
   width: 700px;
-  
-  max-width: 90%; /* Prevents overflowing on smaller screens */
-  height: auto; /* Adjust max-height for better scrolling */
+
+  max-width: 90%;
+  height: auto;
   overflow-y: auto;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -30,17 +27,16 @@
   display: flex;
   flex-direction: column;
 
-  justify-content: space-between; /* Allows content spacing */
+  justify-content: space-between;
 }
 
-/* Progress bar styling to ensure correct visibility */
 .progress-indicator {
   background: #e9ecef;
   border-radius: 5px;
   height: 5px;
   width: 100%;
   margin-top: 15px;
-  margin-bottom: 20px; /* Adds space between progress bar and content */
+  margin-bottom: 20px;
 }
 
 .progress-bar {
@@ -50,7 +46,6 @@
   transition: width 0.3s ease-in-out;
 }
 
-/* Title styling for headings */
 .heading-title {
   margin: 15px 0;
   font-weight: 700;
@@ -58,16 +53,13 @@
   color: #343a40;
 }
 
-/* Heading for each section */
 .heading-head {
   font-weight: bold;
   font-size: 1.2rem;
   color: #495057;
   margin-top: 10px;
-
 }
 
-/* Styling for options in the first step */
 .options {
   margin: 20px 0;
 }
@@ -76,9 +68,8 @@
   font-size: 1rem;
   color: #6c757d;
 }
-.familiar-option{
+.familiar-option {
   width: 100%;
-  
 }
 .radio-option label {
   width: 570px;
@@ -89,9 +80,8 @@
   transition: all 0.3s;
 }
 .radio-option {
- 
   display: flex;
-  align-items: center; /* Align radio button and text on the same line */
+  align-items: center;
   margin: 15px 0;
 }
 .radio-option input {
@@ -108,7 +98,6 @@
   background-color: #f1f3f5;
 }
 
-/* Highlighted option styling */
 .option-button.highlighted {
   background-color: #28a745;
 }
@@ -117,17 +106,16 @@
   opacity: 0.8;
 }
 
-/* Navigation buttons at the bottom */
 .navigation-buttons button {
   background-color: #007bff;
   color: white;
   border: none;
- 
+
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
   margin: 10px 10px;
-  width: 20%; 
+  width: 20%;
   font-size: 1rem;
   transition: background-color 0.3s;
 }
@@ -140,20 +128,16 @@
   cursor: not-allowed;
 }
 
-/* Skip button styling */
-
-
-/* Styling for the slide content */
 .slide-sequence {
   margin: 20px 0;
 }
 .start-button,
 .learn-more-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border: none;
- 
+
   cursor: pointer;
   font-size: 16px;
   margin: 10px;
@@ -165,16 +149,18 @@
   background-color: #45a049;
 }
 
-/* Progress indicator at the top */
 .progress-indicator {
   background: #e9ecef;
   border-radius: 5px;
   height: 5px;
   width: 100%;
-  margin-top: 15px; /* Positioned at the top */
+  margin-top: 15px;
 }
 
-.nav-button, .skip-button, .start-button, .learn-more-button {
+.nav-button,
+.skip-button,
+.start-button,
+.learn-more-button {
   background-color: #3498db;
   color: white;
   padding: 10px;
@@ -186,30 +172,28 @@
   font-size: 12px;
 }
 
-
-
-.nav-button:disabled, .skip-button:disabled {
+.nav-button:disabled,
+.skip-button:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
 }
 
-.skip-button:hover{
+.skip-button:hover {
   background-color: #fcba03;
 }
 
-/* Responsive layout for smaller screens */
 @media (max-width: 500px) {
   .welcome-popup {
     width: 280px;
     padding: 15px;
     margin: 0 auto;
   }
-  
+
   .navigation-buttons button {
     font-size: 0.9rem;
-    width: 48%; /* Adjusted button width for mobile */
+    width: 48%;
   }
-  
+
   .skip-button {
     font-size: 0.9rem;
   }
