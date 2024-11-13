@@ -13,6 +13,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Menu as MenuIcon, Person } from "@mui/icons-material";
 import logo from "../../../../assets/picture/video-based.jpg";
 import { useNavigate } from "react-router-dom";
@@ -176,8 +177,8 @@ const handleSetting = () => {
           >
             <Avatar
               sx={{
-                width: 40,
-                height: 40,
+                width: 30,
+                height: 30,
                 backgroundColor: "#ff9301",
                 "&:hover": { backgroundColor: "#ff7c01" },
               }}
@@ -185,7 +186,7 @@ const handleSetting = () => {
               <Person />
             </Avatar>
             <Typography sx={{ marginLeft: 1, fontWeight: "bold", color: "#333" }}>
-              Joy
+              Joy <KeyboardArrowDownIcon />
             </Typography>
           </Box>
 

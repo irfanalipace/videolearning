@@ -20,7 +20,7 @@ const navigate=useNavigate();
   }
 
   return (
-    <Container maxWidth="lg" padding={4}>
+    <Container maxWidth="lg" padding={4} sx={{marginTop:"10px"}}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <UnderlinedTypography>Teaching Methods</UnderlinedTypography>

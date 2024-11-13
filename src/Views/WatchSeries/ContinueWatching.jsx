@@ -42,7 +42,7 @@ const ContinueWatching = ({ series }) => {
   };
 
   const handleWatchNowClick = (watch) => {
-    navigate("/watch-series-phase-two", { state: { video: watch } });
+    navigate("/series-phase-two", { state: { video: watch } });
   };
 
   return (

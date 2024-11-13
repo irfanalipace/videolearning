@@ -11,9 +11,31 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { Search, ArrowDropDown, Close } from "@mui/icons-material";
 import { BarChart, Person, Label } from "@mui/icons-material";
-
+const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+  backgroundColor: "inherit", // Base background
+  "&:hover": {
+    backgroundColor: "inherit !important", // Remove hover background
+  },
+  "&:focus": {
+    backgroundColor: "inherit !important", // Remove focus background
+    outline: "none !important",            // Remove focus outline
+  },
+  "&:active": {
+    backgroundColor: "inherit !important", // Remove active background
+  },
+  "&.Mui-selected": {
+    backgroundColor: "inherit !important", // Remove selected state background
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: "inherit !important", // Remove visible focus background
+  },
+}));
 const FilterVideo = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -226,74 +248,62 @@ const FilterVideo = () => {
         {/* Filter Menu Items */}
         {selectedFilter === "Levels" &&
           levels.map((item, index) => (
-            <MenuItem
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
-                <Checkbox
-                  checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
-                  onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
-                />
-                <Typography variant="body2">{item.label}</Typography>
-              </Box>
-
-              <Typography variant="body2" sx={{ marginLeft: "auto" }}>
-                {item.count}
-              </Typography>
-            </MenuItem>
+            <CustomMenuItem
+            key={index}
+            disableRipple // Disable ripple effect
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+              <Checkbox
+                checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
+                onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
+              />
+              <Typography variant="body2">{item.label}</Typography>
+            </Box>
+    
+            <Typography variant="body2" sx={{ marginLeft: "auto" }}>
+              {item.count}
+            </Typography>
+          </CustomMenuItem>
           ))}
 
         {selectedFilter === "Guides" &&
           guides.map((item, index) => (
-            <MenuItem
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
-                <Checkbox
-                  checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
-                  onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
-                />
-                <Typography variant="body2">{item.label}</Typography>
-              </Box>
-
-              <Typography variant="body2" sx={{ marginLeft: "auto" }}>
-                {item.count}
-              </Typography>
-            </MenuItem>
+              <CustomMenuItem
+            key={index}
+            disableRipple // Disable ripple effect
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+              <Checkbox
+                checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
+                onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
+              />
+              <Typography variant="body2">{item.label}</Typography>
+            </Box>
+    
+            <Typography variant="body2" sx={{ marginLeft: "auto" }}>
+              {item.count}
+            </Typography>
+          </CustomMenuItem>
           ))}
 
         {selectedFilter === "Topics" &&
           topics.map((item, index) => (
-            <MenuItem
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
-                <Checkbox
-                  checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
-                  onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
-                />
-                <Typography variant="body2">{item.label}</Typography>
-              </Box>
-
-              <Typography variant="body2" sx={{ marginLeft: "auto" }}>
-                {item.count}
-              </Typography>
-            </MenuItem>
+           <CustomMenuItem
+            key={index}
+            disableRipple // Disable ripple effect
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+              <Checkbox
+                checked={selectedFilters[selectedFilter.toLowerCase()]?.includes(item.label) || false}
+                onChange={() => handleCheckboxChange(selectedFilter.toLowerCase(), item.label)}
+              />
+              <Typography variant="body2">{item.label}</Typography>
+            </Box>
+    
+            <Typography variant="body2" sx={{ marginLeft: "auto" }}>
+              {item.count}
+            </Typography>
+          </CustomMenuItem>
           ))}
       </Menu>
     </Box>

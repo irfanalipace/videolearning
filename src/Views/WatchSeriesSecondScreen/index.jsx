@@ -9,7 +9,7 @@ const WatchSeriesSecondScreen = () => {
   const { video } = location.state || {};
   console.log(video, 'hhhhh')
   return (
-    <div className="grid grid-cols-12 gap-7">
+    <div className="grid grid-cols-12 gap-7 ml-4 mr-4 py-4">
       <div className="col-span-9">
         <div className="flex flex-col gap-6 w-full">
           <ColombianImage video={video} />

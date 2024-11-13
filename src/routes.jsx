@@ -1,8 +1,10 @@
+
+
 import { Navigate, useRoutes } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Landing from "./Views/Landing/Landing";
 import RootLayout from "./layout/RootLayout/RootLayout";
 import WatchVideos from "./Views/WatchVideos/WatchVideos";
-import { useState, useEffect } from "react";
 import WatchSeries from "./Views/WatchSeries/WatchSeries";
 import WatchLibrary from "./Views/WatchLibrary/WatchLibrary";
 import Library from "./Views/Library/Library";
@@ -34,7 +36,19 @@ import UnauthenticatedMessage from "./components/unauthenticatedMessage/Anauthen
 import Primuim from "./components/Primuim/Primuim";
 
 export default function Router() {
-  const [showWelcomePopup, setShowWelcomePopup] = useState(true);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+
+  useEffect(() => {
+
+    const isWelcomePopupShown = localStorage.getItem("welcomePopupShown");
+
+    if (!isWelcomePopupShown) {
+      setShowWelcomePopup(true);
+     
+      localStorage.setItem("welcomePopupShown", "true");
+    }
+  }, []);
+
   let element = useRoutes([
     { path: "/subscriptions", element: <PremiumMembership /> },
     { path: "/sign-in", element: <SignIn /> },
@@ -56,7 +70,7 @@ export default function Router() {
         { path: "notifications", element: <Notification /> },
         { path: "resources/about-us", element: <AboutUs /> },
         {
-          path: "watch-series-phase-two",
+          path: "series-phase-two",
           element: <WatchSeriesSecondScreen />,
         },
         { path: "resources/faq", element: <FAQ /> },
@@ -76,6 +90,7 @@ export default function Router() {
     { path: "verify-email", element: <VerifyEmail /> },
     { path: "auth-success", element: <AuthticationSuccess /> },
   ]);
+
 
   return (
     <>
