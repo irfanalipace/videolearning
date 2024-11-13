@@ -3,7 +3,7 @@ import "./WelcomePopup.css";
 import { BiFontSize } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const WelcomePopup = () => {
+const WelcomePopup = ({ onClose }) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [showPopup, setShowPopup] = useState(true);
@@ -63,9 +63,7 @@ const WelcomePopup = () => {
                 Just a quick question before you dive in—let us know your
                 familiarity with the Comprehensible Input method.
               </p>
-              <h2 className="heading-head" style={{ marginTop: "12px" }}>
-                "How Familiar Are You with Comprehensible Input?"
-              </h2>
+            
             </>
           )}
 
@@ -192,19 +190,21 @@ const WelcomePopup = () => {
 
                 {step === 5 ? (
                   <>
-                    <button
-                      className="start-button"
-                      onClick={handleNavigateToMethodPage}
-                      style={{ width: "34%", padding: "0px", height: "40px" }}
-                    >
-                      Start Watching Now
-                    </button>
+                 
                     <button
                       className="learn-more-button"
                       onClick={handleNavigateToTeachingMethod}
                       style={{ width: "34%", padding: "0px", height: "40px" }}
                     >
                       Learn More About Method
+                    </button>
+
+                       <button
+                      className="start-button"
+                      onClick={handleNavigateToMethodPage}
+                      style={{ width: "34%", padding: "0px", height: "40px" }}
+                    >
+                      Start Watching Now 
                     </button>
                   </>
                 ) : (

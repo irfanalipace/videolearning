@@ -60,7 +60,7 @@ const SignIn = () => {
           const premiumVideo = "premium";
           localStorage.setItem("videoType", premiumVideo);
           
-          navigate("/watch-videos");
+          navigate("/videos");
         } else {
           navigate("/otp-authentication");
         }

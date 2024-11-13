@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 9999;
 }
 
 .welcome-popup {
@@ -21,7 +21,7 @@
   max-width: 90%;
   height: auto;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 9999;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   text-align: left;
   display: flex;
