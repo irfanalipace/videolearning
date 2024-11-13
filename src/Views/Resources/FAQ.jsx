@@ -25,7 +25,7 @@ const FAQ = () => {
         container
         alignItems="center"
         justifyContent="space-between"
-        sx={{ padding: "20px" }}
+        sx={{ padding: "12px" }}
       >
         <Grid item xs={12}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>

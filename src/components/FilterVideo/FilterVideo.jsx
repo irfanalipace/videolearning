@@ -94,7 +94,7 @@ const FilterVideo = () => {
         gap: "46px",
         backgroundColor: "white",
         borderRadius: "16px",
-        marginTop: "4.4rem",
+        marginTop: "-3px",
         flexWrap: { xs: "wrap", sm: "nowrap" },
         justifyContent: "space-between",
       }}

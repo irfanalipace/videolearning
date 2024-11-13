@@ -42,7 +42,7 @@ const RootLayout = () => {
       <Navbar open={open} onCloseNav={() => setOpen(false)} />
 </div>
 
-      <div className="w-screen md:w-h-[calc(100vh-280px)] overflow-y-auto overflow-x-hidden h-[calc(100vh-12px)]  bg-[#F3F6FB]">
+      <div className="w-screen md:w-h-[calc(100vh-280px)] overflow-y-auto overflow-x-hidden h-[calc(100vh-12px)] py-20  bg-[#F3F6FB]">
         <Outlet />
       </div>
     </div>

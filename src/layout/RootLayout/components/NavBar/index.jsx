@@ -122,10 +122,10 @@ const Navbar = ({ open, onCloseNav }) => {
       icon: <AssessmentIcon />,
       to: "/",
       subItems: [
-        { id: 241, title: "FAQ", to: "/resources/faq" },
+        { id: 241, title: "FAQ", to: "/primum" },
         { id: 242, title: "Contact Us", to: "/un-authentic" },
-        { id: 243, title: "About Us", to: "/resources/about-us" },
-        { id: 244, title: "Teaching Method", to: "/resources/teaching-method" },
+        { id: 243, title: "About Us", to: "/primum" },
+        { id: 244, title: "Teaching Method", to: "/primum" },
       ],
     },
     {
