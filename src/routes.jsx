@@ -1,5 +1,3 @@
-
-
 import { Navigate, useRoutes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Landing from "./Views/Landing/Landing";
@@ -39,12 +37,11 @@ export default function Router() {
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
 
   useEffect(() => {
-
     const isWelcomePopupShown = localStorage.getItem("welcomePopupShown");
 
     if (!isWelcomePopupShown) {
       setShowWelcomePopup(true);
-     
+
       localStorage.setItem("welcomePopupShown", "true");
     }
   }, []);
@@ -90,7 +87,6 @@ export default function Router() {
     { path: "verify-email", element: <VerifyEmail /> },
     { path: "auth-success", element: <AuthticationSuccess /> },
   ]);
-
 
   return (
     <>
